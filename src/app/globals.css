@@ -1,26 +1,594 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
+@theme {
+  --color-primary: #FF6B35;
+  --color-primary-hover: #E85A2A;
+  --color-secondary: #243447;
+  --color-kraft: #C4A57B;
+  --color-eco: #4CAF50;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Inter Tight", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", "Space Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FAFAFA;
+    /* Clean Industrial White */
+    --background-alt: #F4F4F4;
+    /* Muted Grey for accents */
+    --background-dark: #0B0F14;
+    /* Engineering Black */
+    --foreground: #101214;
+    /* Ink Black */
+    --foreground-muted: #575757;
+    /* Medium Grey */
+    --primary: #FF6B35;
+    /* Vibrant Innovative Orange */
+    --primary-hover: #E85A2A;
+    --primary-light: #FF8C61;
+    --secondary: #243447;
+    --kraft: #C4A57B;
+    /* Natural Paper Brown */
+    --eco: #4CAF50;
+    /* Sustainability Green */
+    --glass-bg: rgba(250, 250, 250, 0.85);
+    --glass-border: rgba(16, 18, 20, 0.08);
+    --card-shadow: 0 4px 30px -10px rgba(0, 0, 0, 0.04);
+  }
+
+  .dark {
+    --background: #0B0F14;
+    --foreground: #F1F3F5;
+    --primary: #FF6B35;
+    --secondary: #0056B3;
+    --glass-bg: rgba(11, 15, 20, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --card-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.6);
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/20;
+    font-family: var(--font-sans);
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  :root {
+    --pattern-opacity: 0.1;
+    /* Surgical Baseline Visibility */
+    --pattern-size: 40px;
+    --pattern-color-rgb: 255, 107, 53;
+    /* Vibrant Orange */
+  }
+
+  /* Tech Grid - Sharper Industrial Lines */
+  .technical-grid {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .technical-grid::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(var(--pattern-color-rgb), 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--pattern-color-rgb), 0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.12;
+  }
+
+  /* Dark Section Overrides for Grids */
+  .industrial-dark-section .technical-grid::after,
+  .industrial-dark-section.technical-grid::after {
+    opacity: 0.35;
+  }
+
+  .bubble-pattern {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Bubble Wrap - Clear Circular Cells */
+  .bubble-pattern::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: var(--pattern-opacity);
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle, rgba(var(--pattern-color-rgb), 0.2) 35%, transparent 40%),
+      radial-gradient(circle, rgba(var(--pattern-color-rgb), 0.2) 35%, transparent 40%);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+  }
+
+  .hexa-pattern {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Hexagon Pattern - Defined Geometric Grid */
+  .hexa-pattern::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: var(--pattern-opacity);
+    pointer-events: none;
+    background-image:
+      linear-gradient(30deg, transparent 40%, rgba(var(--pattern-color-rgb), 0.2) 40%, rgba(var(--pattern-color-rgb), 0.2) 60%, transparent 60%),
+      linear-gradient(90deg, transparent 40%, rgba(var(--pattern-color-rgb), 0.2) 40%, rgba(var(--pattern-color-rgb), 0.2) 60%, transparent 60%);
+    background-size: 80px 140px;
+  }
+
+  .kraft-texture {
+    position: relative;
+    isolation: isolate;
+    background-color: #FDF9F3;
+  }
+
+  /* Kraft Paper Texture - Distinct Diagonal Industrial Stripes */
+  .kraft-texture::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.15;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(45deg,
+        transparent,
+        transparent 12px,
+        rgba(var(--pattern-color-rgb), 0.1) 12px,
+        rgba(var(--pattern-color-rgb), 0.1) 13.5px);
+  }
+
+  .dots-pattern {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Dot Matrix Pattern - Visible Engineering Output */
+  .dots-pattern::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.2;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(var(--pattern-color-rgb), 0.18) 2px, transparent 2px);
+    background-size: 30px 30px;
+  }
+
+  .torn-edge-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 98% 97%, 95% 94%, 92% 98%, 88% 95%, 85% 97%, 80% 94%, 75% 98%, 70% 95%, 65% 97%, 60% 94%, 55% 98%, 50% 95%, 45% 97%, 40% 94%, 35% 98%, 30% 95%, 25% 97%, 20% 94%, 15% 98%, 10% 95%, 5% 97%, 0 94%);
+  }
+
+  .paper-grain {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Paper Grain - Tactile Crossed Texture */
+  .paper-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.15;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(135deg, rgba(var(--pattern-color-rgb), 0.08) 0px, rgba(var(--pattern-color-rgb), 0.08) 1.5px, transparent 1.5px, transparent 8px),
+      repeating-linear-gradient(45deg, rgba(var(--pattern-color-rgb), 0.06) 0px, rgba(var(--pattern-color-rgb), 0.06) 1px, transparent 1px, transparent 12px);
+  }
+
+  /* Dark Section Overrides for Grain */
+  .industrial-dark-section .paper-grain::before,
+  .industrial-dark-section.paper-grain::before {
+    opacity: 0.35;
+  }
+
+  .glass {
+    @apply backdrop-blur-2xl;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Network Pattern - Honeycomb Hexagon Connections */
+  .network-pattern {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .network-pattern::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 17.32V51.96L30 69.28L0 51.96V17.32L30 0Z' fill='none' stroke='%23FF6B35' stroke-width='1.5'/%3E%3Cpath d='M30 52L60 69.32V103.96L30 121.28L0 103.96V69.32L30 52Z' fill='none' stroke='%23FF6B35' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 50px 87px;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .animate-marquee {
+    animation: marquee 120s linear infinite;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-reverse 120s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 8s ease infinite;
+}
+
+/* Leaflet Map Popup Styling */
+.leaflet-popup-content-wrapper {
+  border-radius: 1rem !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1) !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  font-family: inherit !important;
+}
+
+.leaflet-popup-tip {
+  border-top-color: white !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: #1A1C1E !important;
+  font-size: 24px !important;
+  padding: 8px 12px !important;
+  opacity: 0.4 !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover {
+  opacity: 1 !important;
+  color: #FF6B35 !important;
+}
+
+/* Dark Theme Leaflet Popup Styling */
+.dark-popup .leaflet-popup-content-wrapper {
+  background: #1A1C1E !important;
+  border-radius: 1rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.5) !important;
+  padding: 0 !important;
+  color: white !important;
+}
+
+.dark-popup .leaflet-popup-content {
+  margin: 0 !important;
+  font-family: inherit !important;
+}
+
+.dark-popup .leaflet-popup-tip {
+  background: #1A1C1E !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-popup .leaflet-container a.leaflet-popup-close-button {
+  color: white !important;
+  font-size: 24px !important;
+  padding: 8px 12px !important;
+  opacity: 0.4 !important;
+}
+
+.dark-popup .leaflet-container a.leaflet-popup-close-button:hover {
+  opacity: 1 !important;
+  color: #FF6B35 !important;
+}
+
+/* Hide zoom controls for cleaner look */
+.leaflet-control-zoom {
+  display: none !important;
+}
+
+/* Pulse Animation for Nearest Marker */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+}
+
+.pulse-ring {
+  animation: pulse-ring 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.nearest-marker {
+  z-index: 1000 !important;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Light Theme Popup Styling */
+.light-popup .leaflet-popup-content-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+.light-popup .leaflet-popup-tip {
+  background: white !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.light-popup .leaflet-popup-content {
+  margin: 0 !important;
+  width: auto !important;
+}
+
+/* Light Popup Arrow Fix */
+.light-popup .leaflet-popup-tip {
+  background: white !important;
+  box-shadow: none !important;
+}
+
+/* Google Maps Style Popup */
+.google-popup .leaflet-popup-content-wrapper {
+  padding: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 7px 1px rgba(0, 0, 0, 0.3) !important;
+}
+
+.google-popup .leaflet-popup-content {
+  margin: 16px 20px !important;
+  line-height: normal !important;
+}
+
+.google-popup .leaflet-popup-scale {
+  display: none !important;
+}
+
+.google-popup a {
+  text-decoration: none;
+}
+
+.google-popup a:hover {
+  text-decoration: underline;
+}
+
+/* Exact Google Maps Popup Match */
+.google-popup .leaflet-popup-content-wrapper {
+  padding: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+.google-popup .leaflet-popup-content {
+  margin: 20px 24px !important;
+  line-height: normal !important;
+}
+
+.google-popup .leaflet-popup-tip-container {
+  width: 20px;
+  height: 10px;
+}
+
+.google-popup .leaflet-popup-tip {
+  background: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.google-popup .leaflet-popup-close-button {
+  color: #70757a !important;
+  font-size: 18px !important;
+  padding: 8px 8px 0 0 !important;
+  font-weight: 300 !important;
+}
+
+/* Brand Theme Popup */
+.brand-popup .leaflet-popup-content-wrapper {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+  border-left: 4px solid #FF6B35 !important;
+}
+
+.brand-popup .leaflet-popup-content {
+  margin: 24px !important;
+  line-height: normal !important;
+}
+
+.brand-popup .leaflet-popup-tip {
+  background: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.brand-popup .leaflet-popup-close-button {
+  color: #9ca3af !important;
+  font-size: 20px !important;
+  padding: 12px 12px 0 0 !important;
+  font-weight: 300 !important;
+}
+
+/* Dark Glass Popup */
+.dark-glass-popup .leaflet-popup-content-wrapper {
+  background: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-left: 2px solid #FF6B35 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+  padding: 0 !important;
+}
+
+.dark-glass-popup .leaflet-popup-content {
+  margin: 24px !important;
+  line-height: normal !important;
+}
+
+.dark-glass-popup .leaflet-popup-tip {
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 0;
+  border-left: 0;
+}
+
+/* Marker Pulse */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.33);
+    opacity: 0.8;
+  }
+
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+.pulse-ring {
+  transform-origin: center;
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Replicate Screenshot Popup Styling */
+.replicate-popup .leaflet-popup-content-wrapper {
+  background: white;
+  color: #1A1C1E;
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+}
+
+.replicate-popup .leaflet-popup-content {
+  margin: 0 !important;
+  line-height: normal !important;
+}
+
+.replicate-popup .leaflet-popup-tip-container {
+  width: 24px;
+  height: 12px;
+}
+
+.replicate-popup .leaflet-popup-content-wrapper {
+  background: white !important;
+  color: #1A1C1E !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.replicate-popup .leaflet-popup-content {
+  margin: 0 !important;
+  width: 280px !important;
+  /* Fixed width to match card proportions */
+}
+
+.replicate-popup .leaflet-popup-close-button {
+  position: absolute !important;
+  right: 12px !important;
+  top: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #1A1C1E !important;
+  font-size: 20px !important;
+  font-weight: 300 !important;
+  z-index: 500 !important;
+  background: white/50 !important;
+  backdrop-filter: blur(4px) !important;
+  border-radius: 50% !important;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+.replicate-popup .leaflet-popup-close-button:hover {
+  color: #FF6B35 !important;
+  background: white !important;
+}
+
+.replicate-popup .leaflet-popup-tip {
+  display: none !important;
+  /* Cleaner look for overlay cards */
 }
