@@ -13,15 +13,26 @@ const config: Config = {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: "var(--primary)",
-                    foreground: "var(--color-primary-foreground)",
+                    DEFAULT: "#FF6B35",
+                    hover: "#E85A2A",
+                    light: "#FF8C61",
+                    foreground: "#FFFFFF",
                 },
                 secondary: {
-                    DEFAULT: "var(--secondary)",
-                    foreground: "var(--color-secondary-foreground)",
+                    DEFAULT: "#243447",
+                    foreground: "#FFFFFF",
                 },
-                background: "var(--background)",
-                foreground: "var(--foreground)",
+                background: {
+                    DEFAULT: "#FAFAFA",
+                    alt: "#F4F4F4",
+                    dark: "#0B0F14",
+                },
+                foreground: {
+                    DEFAULT: "#101214",
+                    muted: "#575757",
+                },
+                kraft: "#C4A57B",
+                eco: "#4CAF50",
             },
             fontFamily: {
                 sans: ["var(--font-inter)", "sans-serif"],
