@@ -46,7 +46,7 @@ export default function WhyFillezy() {
     };
 
     return (
-        <section className="py-20 bg-[#0B0F14] relative overflow-hidden technical-grid industrial-dark-section">
+        <section className="py-4 md:py-8 bg-[#0B0F14] relative overflow-hidden technical-grid industrial-dark-section">
             {/* Blueprint Grid Accents */}
             <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.1]">
                 <div className="absolute top-1/2 left-0 w-full h-px bg-primary" />
@@ -55,16 +55,16 @@ export default function WhyFillezy() {
                 <div className="absolute bottom-20 right-20 w-4 h-4 border border-white/40" />
             </div>
 
-            <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-stretch">
+            <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
+                <div className="grid grid-cols-1 2xl:grid-cols-12 gap-6 2xl:gap-16 items-stretch">
 
                     {/* Left: Industrial Value Proposition */}
-                    <div className="lg:col-span-5 pt-8 flex flex-col">
+                    <div className="2xl:col-span-5 pt-0 md:pt-4 flex flex-col">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="text-[11px] font-mono text-white/40 font-black uppercase tracking-[0.5em] mb-8"
+                            className="text-[9px] md:text-[11px] font-mono text-white/40 font-black uppercase tracking-[0.1em] md:tracking-[0.5em] mb-2 md:mb-8 whitespace-nowrap"
                         >
                             [ WHY_ENTERPRISES_CHOOSE_FILLEZY ]
                         </motion.div>
@@ -73,20 +73,20 @@ export default function WhyFillezy() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-4xl font-black tracking-tight text-white sm:text-7xl mb-10 uppercase leading-[0.85]"
+                            className="text-4xl md:text-6xl font-black tracking-tight text-white mb-2 md:mb-10 uppercase leading-none md:leading-[0.85]"
                         >
                             Knowledge <br />
                             Engineered<br />
                             <span className="text-primary italic font-serif font-light lowercase">Protection.</span>
                         </motion.h2>
-                        <p className="text-xl text-white/70 font-bold leading-relaxed mb-12 max-w-md">
-                            Led by a core team of scientists and engineers, Fillezy provides application-specific protective solutions from our 9 global plants, serving 45+ countries with 100% damage prevention.
+                        <p className="text-lg md:text-xl text-white/70 font-medium leading-relaxed mb-4 md:mb-12 w-full">
+                            Led by a core team of scientists and engineers, Fillezy provides application-specific protective solutions from our 9+ global plants, serving 45+ countries with 100% damage prevention.
                         </p>
 
                         <div className="flex flex-col gap-6 mb-12">
                             {[
                                 "Custom engineered by Scientists & Engineers",
-                                "9 Manufacturing Plants / 45+ Countries",
+                                "9+ Manufacturing Plants / 45+ Countries",
                                 "REACH, RoHS & Biodegradable Compliance"
                             ].map((text, i) => (
                                 <motion.div
@@ -113,14 +113,14 @@ export default function WhyFillezy() {
                     </div>
 
                     {/* Right: Metrics Grid */}
-                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-rows-2 gap-px bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden">
+                    <div className="2xl:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-rows-2 gap-px bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden">
                         {stats.map((stat, index) => (
                             <motion.div
                                 key={stat.id}
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="group p-12 bg-[#0B0F14] hover:bg-white/[0.02] transition-colors relative flex flex-col justify-center"
+                                className="group p-6 md:p-12 bg-[#0B0F14] hover:bg-white/[0.02] transition-colors relative flex flex-col justify-center"
                             >
                                 {/* Metric Glow Corner */}
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity" />

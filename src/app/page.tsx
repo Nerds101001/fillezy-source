@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
     return (
-        <div className="bg-background">
+        <div className="bg-background" suppressHydrationWarning>
             <Header />
             <main>
                 <Hero />

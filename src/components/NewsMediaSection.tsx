@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ArrowRight, Newspaper, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { newsItems } from "@/data/news";
@@ -8,26 +9,26 @@ import NewsCard from "@/components/NewsCard";
 
 export default function NewsMediaSection() {
     return (
-        <section className="py-24 bg-[#FAFAFA] relative overflow-hidden border-y border-black/5">
+        <section className="py-6 md:py-24 bg-[#FAFAFA] relative overflow-hidden border-y border-black/5">
             {/* Background Grid */}
             <div className="absolute inset-0 technical-grid opacity-[0.03] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                 {/* [ HEADER: News & Media Feed - NEW INDUSTRIAL LIGHT STYLE ] */}
-                <div className="mb-20">
-                    <div className="text-[10px] font-mono text-black/30 font-black uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
+                <div className="mb-10 md:mb-20">
+                    <div className="text-[9px] md:text-[10px] font-mono text-black/30 font-black uppercase tracking-[0.1em] md:tracking-[0.5em] mb-8 flex items-center gap-2 md:gap-4 whitespace-nowrap">
                         <span className="h-px w-8 bg-primary" />
                         MEDIA_COMMUNICATIONS_FEED
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
                         <div className="max-w-xl">
-                            <h2 className="text-4xl font-black tracking-tight text-black sm:text-6xl uppercase leading-[0.9] mb-4">
+                            <h2 className="text-4xl md:text-6xl font-black tracking-tight text-black uppercase leading-[0.9] mb-4">
                                 Media Presence <br />
                                 <span className="text-primary italic font-serif font-light lowercase">In global markets.</span>
                             </h2>
                         </div>
                         <div className="max-w-md pb-2">
-                            <p className="text-lg text-black/60 font-bold leading-[1.3] mb-2">
+                            <p className="text-lg md:text-xl text-black/60 font-medium leading-[1.3] mb-2">
                                 Discover the latest innovations, expansion news, and industrial insights from Fillezy's global operations.
                             </p>
                             <Link href="/news" className="inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-primary hover:gap-5 transition-all">
@@ -38,7 +39,7 @@ export default function NewsMediaSection() {
                 </div>
 
                 {/* [ CONTENT: Using NewsCard Component - 3 Standard Cards ] */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                     {newsItems.slice(1, 4).map((item, i) => (
                         <NewsCard key={item.id} news={item} index={i + 1} />
                     ))}
@@ -83,11 +84,12 @@ export default function NewsMediaSection() {
                                 { name: "Bio Spectrum", logo: "/new-logo/Bio-Spectrum.png" },
                                 { name: "The Business Line", logo: "/new-logo/The-Business-Line.jpg" }
                             ]).map((agency, idx) => (
-                                <div key={`${agency.name}-${idx}`} className="flex items-center justify-center w-[240px] h-32 grayscale hover:grayscale-0 transition-all duration-700 opacity-40 hover:opacity-100">
-                                    <img
+                                <div key={`${agency.name}-${idx}`} className="flex items-center justify-center w-[240px] h-32 grayscale hover:grayscale-0 transition-all duration-700 opacity-40 hover:opacity-100 relative">
+                                    <Image
                                         src={agency.logo}
                                         alt={agency.name}
-                                        className="max-h-20 max-w-[200px] w-auto h-auto object-contain"
+                                        fill
+                                        className="p-6 object-contain"
                                     />
                                 </div>
                             ))}

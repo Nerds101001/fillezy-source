@@ -14,35 +14,55 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.fillezy.com"),
   title: {
-    template: "%s | Fillezy - Smart Packaging Systems",
-    default: "Fillezy - Smart. Sustainable. Industrial-Grade Packaging.",
+    template: "%s | Fillezy - Smart Industrial Packaging",
+    default: "Fillezy - Leading Sustainable Void Fill Automation",
   },
-  description: "Next-generation void fill automation and sustainable packaging materials. Engineered for high-velocity fulfillment centers and global supply chains.",
-  keywords: ["void fill", "air cushion machine", "sustainable packaging", "biodegradable film", "packaging automation"],
+  description: "Advanced industrial void fill solutions and sustainable packaging automation. Engineered for high-velocity fulfillment centers with 100% house-compostable Bio-Aer materials.",
+  keywords: ["void fill automation", "sustainable packaging India", "air cushion machine", "compostable air pillows", "industrial fulfillment solutions"],
+  alternates: {
+    canonical: "https://www.fillezy.com",
+  },
+  icons: {
+    icon: '/logo/favicon.webp',
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://www.fillezy.com",
-    siteName: "Fillezy",
+    siteName: "Fillezy Industrial Packaging",
+    title: "Fillezy - The Future of Sustainable Industrial Packaging",
+    description: "Engineering smarter fulfillment protocols. Switch to Bio-Aer compostable solutions and high-velocity automation.",
     images: [
       {
-        url: "/og-image.jpg", // Needs to be added or referenced
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Fillezy Industrial Packaging",
+        alt: "Fillezy Industrial Packaging Solutions",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    title: "Fillezy - Sustainable Packaging Automation",
+    description: "Next-gen void fill systems and plant-based packaging resins.",
     site: "@fillezy",
     creator: "@fillezy",
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
+
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 export default function RootLayout({
   children,
@@ -65,6 +85,7 @@ export default function RootLayout({
             {children}
             <BackToTop />
           </SmoothScroll>
+          <WhatsAppWidget />
           <JsonLd />
         </ThemeProvider>
       </body>

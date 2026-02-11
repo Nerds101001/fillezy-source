@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, MessageSquare, Download } from "lucide-react";
 import BrandName from "./BrandName";
 import ContactModal, { ModalMode } from "./ContactModal";
@@ -43,12 +44,13 @@ export default function ProductCard({ id, title, description, imageSrc, href, te
             <div className="absolute bottom-0 right-0 w-2 h-2 border-r-2 border-b-2 border-black/20 group-hover:border-primary transition-colors z-10" />
 
             {/* Visual Section */}
-            <div className={`relative h-64 bg-[#F4F4F5] flex items-center justify-center transition-colors group-hover:bg-[#F0F0F0] ${isShark ? 'p-20' : (isMachine ? 'p-12' : 'p-8')}`}>
+            <div className={`relative h-48 md:h-64 bg-[#F4F4F5] flex items-center justify-center transition-colors group-hover:bg-[#F0F0F0] ${isShark ? 'p-12 md:p-20' : (isMachine ? 'p-8 md:p-12' : 'p-6 md:p-8')}`}>
                 <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:1rem_1rem]" />
-                <img
+                <Image
                     src={imageSrc}
                     alt={title}
-                    className="h-full w-full object-contain mix-blend-multiply filter contrast-125 transition-transform duration-700 group-hover:scale-110"
+                    fill
+                    className="object-contain mix-blend-multiply filter contrast-125 transition-transform duration-700 group-hover:scale-110"
                 />
 
                 {/* Fillezy Brand Tag - Right Side */}
@@ -75,7 +77,7 @@ export default function ProductCard({ id, title, description, imageSrc, href, te
             </div>
 
             {/* Content Section */}
-            <div className="p-8 flex flex-col flex-1 relative border-t border-black/5 bg-white">
+            <div className="p-6 md:p-8 flex flex-col flex-1 relative border-t border-black/5 bg-white">
                 <div className="mb-6">
                     {category && (
                         <div className="flex items-center gap-3 mb-3">
@@ -85,7 +87,7 @@ export default function ProductCard({ id, title, description, imageSrc, href, te
                             <div className="flex-1 h-[1px] border-t border-dashed border-black/10" />
                         </div>
                     )}
-                    <h3 className="text-2xl font-black text-[#1A1C1E] uppercase leading-none group-hover:text-primary transition-colors mb-4">
+                    <h3 className="text-xl md:text-2xl font-black text-[#1A1C1E] uppercase leading-none group-hover:text-primary transition-colors mb-3 md:mb-4">
                         <BrandName name={title} />
                     </h3>
                     <p className="text-[#1A1C1E]/60 text-sm font-medium leading-relaxed line-clamp-2">

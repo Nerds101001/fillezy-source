@@ -1,5 +1,3 @@
-import { MegamenuCategory } from "./megamenu";
-
 export interface TechnicalSpec {
     label: string;
     value: string;

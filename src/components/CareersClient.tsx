@@ -3,11 +3,8 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
-    Briefcase,
-    ChevronRight,
     Users,
     Zap,
-    Target,
     ShieldCheck,
     HeartPulse,
     TrendingUp,
@@ -17,36 +14,12 @@ import {
     MapPin,
     Building2
 } from 'lucide-react';
+import Image from 'next/image';
 import Header from './Header';
 import Footer from './Footer';
 import CareerModal from './CareerModal';
 
-const jobs = [
-    {
-        title: "Vice President",
-        dept: "Executive Leadership",
-        location: "Pan India / HQ",
-        link: "https://www.fillezy.com/wp-content/uploads/2021/12/JD-FE-VP.pdf",
-        type: "Full-Time",
-        description: "Driving strategic growth and operational excellence across global markets."
-    },
-    {
-        title: "Regional Sales Manager",
-        dept: "Sales & Marketing",
-        location: "Pan India",
-        link: "https://www.fillezy.com/wp-content/uploads/2021/12/JD-FE-RSM-.pdf",
-        type: "Full-Time",
-        description: "Leading regional teams to scale our industrial automation footprint."
-    },
-    {
-        title: "Sales Executive / Manager",
-        dept: "Sales & Marketing",
-        location: "Pan India",
-        link: "https://www.fillezy.com/wp-content/uploads/2021/12/JD-FE-MGR-KAM.pdf",
-        type: "Full-Time",
-        description: "Building high-value partnerships and driving Fillezy machinery adoption."
-    }
-];
+import { careerJobs } from '@/data/career_jobs';
 
 const benefits = [
     {
@@ -89,16 +62,18 @@ export default function CareersPageClient() {
     const opacityHero = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
     return (
-        <main className="bg-white min-h-screen selection:bg-primary selection:text-white">
+        <main className="bg-white min-h-screen selection:bg-primary selection:text-white" suppressHydrationWarning>
             <Header />
 
             {/* Cinematic Industrial Hero */}
             <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
                 <div className="absolute inset-0 z-0">
-                    <img
+                    <Image
                         src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"
                         alt="Join Fillezy"
-                        className="w-full h-full object-cover opacity-40 grayscale"
+                        fill
+                        priority
+                        className="object-cover opacity-40 grayscale"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                 </div>
@@ -119,21 +94,21 @@ export default function CareersPageClient() {
                         <div className="h-px w-8 bg-primary" />
                     </motion.div>
 
-                    <h1 className="text-7xl md:text-9xl font-black uppercase tracking-tighter text-white leading-[0.85] mb-8">
+                    <h1 className="text-5xl md:text-9xl font-black uppercase tracking-tighter text-white leading-[0.9] md:leading-[0.85] mb-6 md:mb-8">
                         Architects Of <br />
                         <span className="text-primary italic font-serif font-light lowercase">Automation.</span>
                     </h1>
 
-                    <p className="max-w-xl mx-auto text-white/50 text-base font-medium leading-relaxed tracking-wide">
+                    <p className="max-w-xl mx-auto text-white/50 text-sm md:text-base font-medium leading-relaxed tracking-wide mb-8 md:mb-0">
                         Fillezy is the core of industrial innovation. Join our mission to re-engineer global efficiency through high-fidelity machinery and chemical automation.
                     </p>
 
-                    <div className="mt-12">
+                    <div className="mt-8 md:mt-12">
                         <motion.button
                             onClick={() => openModal()}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-primary text-white px-10 py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.3em] inline-flex items-center gap-4 transition-all shadow-2xl shadow-primary/20"
+                            className="bg-primary text-white px-8 py-4 md:px-10 md:py-5 rounded-2xl font-black text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] inline-flex items-center gap-3 md:gap-4 transition-all shadow-2xl shadow-primary/20"
                         >
                             VIEW_VACANCIES <ArrowUpRight size={14} />
                         </motion.button>
@@ -147,16 +122,16 @@ export default function CareersPageClient() {
             </section>
 
             {/* Culture: The Pulse Section */}
-            <section className="py-24 px-6 relative overflow-hidden bg-white">
+            <section className="py-16 md:py-24 px-4 md:px-6 relative overflow-hidden bg-white">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-center">
                         <div>
-                            <div className="h-px w-10 bg-primary mb-8" />
-                            <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter text-black mb-8 leading-none">
+                            <div className="h-px w-10 bg-primary mb-6 md:mb-8" />
+                            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black mb-6 md:mb-8 leading-none">
                                 We Are Looking For <br />
                                 <span className="text-primary italic font-serif font-light lowercase underline decoration-black/5">Individuals.</span>
                             </h2>
-                            <p className="text-xl text-black/60 leading-relaxed font-medium mb-8">
+                            <p className="text-lg md:text-xl text-black/60 leading-relaxed font-medium mb-8">
                                 People with the courage to take chances. Who understand that making a difference takes passion, patience, and persistence.
                             </p>
                             <div className="grid grid-cols-2 gap-8">
@@ -174,9 +149,10 @@ export default function CareersPageClient() {
                         </div>
                         <div className="relative group">
                             <div className="aspect-square rounded-[4rem] overflow-hidden shadow-2xl relative">
-                                <img
+                                <Image
                                     src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
-                                    className="w-full h-full object-cover grayscale brightness-90 group-hover:scale-105 transition-transform duration-1000"
+                                    fill
+                                    className="object-cover grayscale brightness-90 group-hover:scale-105 transition-transform duration-1000"
                                     alt="Our Team"
                                 />
                                 <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
@@ -219,15 +195,15 @@ export default function CareersPageClient() {
                     </div>
 
                     {/* Internship Program Callout */}
-                    <div className="mt-12 p-12 rounded-[3.5rem] bg-gradient-to-r from-primary to-orange-600 relative overflow-hidden group">
-                        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
+                    <div className="mt-12 p-6 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] bg-gradient-to-r from-primary to-orange-600 relative overflow-hidden group">
+                        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12 text-center lg:text-left">
                             <div>
-                                <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-4">Internship Program</h3>
-                                <p className="text-white/80 max-w-xl font-medium">Are you a student looking for real-world impact? Join our internship program and solve actual industrial challenges alongside veteran engineers.</p>
+                                <h3 className="text-2xl md:text-4xl font-black text-white uppercase tracking-tighter mb-4">Internship Program</h3>
+                                <p className="text-white/80 max-w-xl font-medium text-sm md:text-base">Are you a student looking for real-world impact? Join our internship program and solve actual industrial challenges alongside veteran engineers.</p>
                             </div>
                             <button
                                 onClick={() => openModal('Internship Program')}
-                                className="px-12 py-5 bg-black text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-colors whitespace-nowrap"
+                                className="px-8 py-4 md:px-12 md:py-5 bg-black text-white rounded-2xl font-black text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] hover:bg-white hover:text-black transition-colors whitespace-nowrap w-full md:w-auto"
                             >
                                 START_JOURNEY
                             </button>
@@ -239,69 +215,69 @@ export default function CareersPageClient() {
             </section>
 
             {/* Openings: Technical Datasheets */}
-            <section id="openings" className="py-24 px-6 bg-white relative overflow-hidden">
+            <section id="openings" className="py-16 md:py-24 px-4 md:px-6 bg-white relative overflow-hidden">
                 <div className="max-w-7xl mx-auto">
-                    <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-12">
+                    <div className="mb-12 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-12">
                         <div>
-                            <div className="h-px w-10 bg-primary mb-8" />
-                            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-black mb-6 leading-none">Open <br />Opportunities.</h2>
-                            <p className="text-black/40 text-lg">Select a component to view the role datasheet.</p>
+                            <div className="h-px w-10 bg-primary mb-6 md:mb-8" />
+                            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-black mb-4 md:mb-6 leading-none">Open <br />Opportunities.</h2>
+                            <p className="text-black/40 text-base md:text-lg">Select a component to view the role datasheet.</p>
                         </div>
                         <div className="flex gap-4">
-                            <div className="px-6 py-3 rounded-full bg-black text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                            <div className="px-5 py-2.5 md:px-6 md:py-3 rounded-full bg-black text-white text-[9px] md:text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
                                 <MapPin size={12} /> PAN_INDIA
                             </div>
                         </div>
                     </div>
 
                     <div className="space-y-4">
-                        {jobs.map((job, i) => (
+                        {careerJobs.map((job, i) => (
                             <motion.div
                                 key={job.title}
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ delay: i * 0.1 }}
-                                className="group relative p-12 rounded-[3rem] border border-black/[0.05] bg-white hover:bg-[#FAFAFA] hover:border-black/10 transition-all duration-500 overflow-hidden"
+                                className="group relative p-6 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-black/[0.05] bg-white hover:bg-[#FAFAFA] hover:border-black/10 transition-all duration-500 overflow-hidden"
                             >
-                                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 relative z-10">
+                                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 md:gap-12 relative z-10">
                                     <div className="max-w-2xl">
-                                        <div className="flex items-center gap-4 mb-6">
-                                            <span className="px-4 py-1.5 rounded-full bg-black/5 border border-black/5 text-[9px] font-black uppercase tracking-widest text-black/40">
+                                        <div className="flex items-center gap-4 mb-4 md:mb-6">
+                                            <span className="px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-black/5 border border-black/5 text-[8px] md:text-[9px] font-black uppercase tracking-widest text-black/40">
                                                 {job.dept}
                                             </span>
-                                            <span className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-primary">
+                                            <span className="flex items-center gap-1.5 text-[8px] md:text-[9px] font-black uppercase tracking-widest text-primary">
                                                 <TrendingUp size={10} /> HIGH_GROWTH
                                             </span>
                                         </div>
-                                        <h3 className="text-3xl md:text-4xl font-black text-black uppercase tracking-tighter mb-4 group-hover:text-primary transition-colors">
+                                        <h3 className="text-2xl md:text-4xl font-black text-black uppercase tracking-tighter mb-3 md:mb-4 group-hover:text-primary transition-colors">
                                             {job.title}
                                         </h3>
-                                        <p className="text-black/50 text-base font-medium leading-relaxed mb-6 italic">
-                                            "{job.description}"
+                                        <p className="text-black/50 text-sm md:text-base font-medium leading-relaxed mb-6 italic">
+                                            &quot;{job.description}&quot;
                                         </p>
-                                        <div className="flex flex-wrap items-center gap-6">
-                                            <div className="flex items-center gap-2 text-black/30 font-mono text-[10px] font-bold uppercase tracking-widest">
+                                        <div className="flex flex-wrap items-center gap-4 md:gap-6">
+                                            <div className="flex items-center gap-2 text-black/30 font-mono text-[9px] md:text-[10px] font-bold uppercase tracking-widest">
                                                 <MapPin size={12} className="text-black/20" /> {job.location}
                                             </div>
-                                            <div className="flex items-center gap-2 text-black/30 font-mono text-[10px] font-bold uppercase tracking-widest">
+                                            <div className="flex items-center gap-2 text-black/30 font-mono text-[9px] md:text-[10px] font-bold uppercase tracking-widest">
                                                 <Building2 size={12} className="text-black/20" /> {job.type}
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-4">
+                                    <div className="flex items-center gap-3 md:gap-4 w-full md:w-auto">
                                         <a
                                             href={job.link}
                                             target="_blank"
-                                            className="p-6 rounded-2xl bg-black text-white hover:bg-primary transition-all shadow-xl group/btn"
+                                            className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-black text-white hover:bg-primary transition-all shadow-xl group/btn flex-shrink-0"
                                         >
-                                            <FileText size={24} className="group-hover/btn:scale-110 transition-transform" />
+                                            <FileText size={20} className="md:w-6 md:h-6 group-hover/btn:scale-110 transition-transform" />
                                         </a>
                                         <button
                                             onClick={() => openModal(job.title)}
-                                            className="px-10 py-6 bg-primary text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-black transition-all shadow-2xl shadow-primary/20"
+                                            className="flex-1 md:flex-none px-6 py-4 md:px-10 md:py-6 bg-primary text-white rounded-xl md:rounded-2xl font-black text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] hover:bg-black transition-all shadow-2xl shadow-primary/20 whitespace-nowrap"
                                         >
-                                            APPLY_FOR_ROLE
+                                            APPLY_NOW
                                         </button>
                                     </div>
                                 </div>

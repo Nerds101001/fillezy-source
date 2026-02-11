@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { Icon } from "leaflet";
 import { locations, Location } from "@/data/locations";
 import { Phone, Mail, Globe, Building2, Factory, Users, ArrowUpRight, MapPin } from "lucide-react";
+import Image from "next/image";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -117,11 +118,69 @@ function MapController({
     return null;
 }
 
+// [NEW] Auto-Zoom Component that handles "Nearest Location" logic
+function AutoZoomHandler({
+    userLocation,
+    locations,
+    markerRefs
+}: {
+    userLocation: [number, number] | null,
+    locations: Location[],
+    markerRefs: React.MutableRefObject<{ [key: string]: L.Marker | null }>
+}) {
+    const map = useMap();
+    const [hasZoomed, setHasZoomed] = useState(false);
+
+    useEffect(() => {
+        if (userLocation && locations.length > 0 && !hasZoomed) {
+            // Find nearest location
+            let nearest = locations[0];
+            let minDist = Infinity;
+
+            locations.forEach(loc => {
+                const dist = calculateDistance(userLocation[0], userLocation[1], loc.coordinates[0], loc.coordinates[1]);
+                if (dist < minDist) {
+                    minDist = dist;
+                    nearest = loc;
+                }
+            });
+
+            if (nearest) {
+                // Fly to nearest with OFFSET (using padding)
+                // This forces the marker to be in the bottom half of the screen
+                // leaving room for the popup above it relative to the filters.
+                const offsetPadding = window.innerWidth < 768 ? [0, 350] : [0, 100]; // Increased mobile top padding
+
+                map.flyToBounds(L.latLngBounds([nearest.coordinates[0], nearest.coordinates[1]], [nearest.coordinates[0], nearest.coordinates[1]]), {
+                    paddingTopLeft: offsetPadding as [number, number],
+                    maxZoom: 11,
+                    duration: 2
+                });
+
+                // Open Popup (needs slight delay for map to start moving)
+                setTimeout(() => {
+                    const marker = markerRefs.current[nearest.id];
+                    if (marker) {
+                        marker.openPopup();
+                    }
+                }, 1000);
+
+                setHasZoomed(true);
+            }
+        }
+    }, [userLocation, locations, map, hasZoomed, markerRefs]);
+
+    return null;
+}
+
 export default function InteractiveMap() {
     const [activeFilter, setActiveFilter] = useState<FilterType>('all');
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
     const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
     const [isMounted, setIsMounted] = useState(false);
+
+    // [NEW] Refs for programmatic access to markers
+    const markerRefs = useRef<{ [key: string]: L.Marker | null }>({});
 
     useEffect(() => {
         setIsMounted(true);
@@ -152,13 +211,13 @@ export default function InteractiveMap() {
     return (
         <div className="relative w-full">
             {/* Architectural Wrapper for Map & Overlays */}
-            <div className="relative overflow-hidden bg-white rounded-3xl border border-black/5 shadow-2xl h-[700px] group">
+            <div className="relative overflow-hidden bg-white rounded-3xl border border-black/5 shadow-2xl h-[500px] md:h-[700px] group">
 
                 {/* PERSISTENT FILTERS: Positioned overlay on top of map tiles */}
-                <div className="absolute top-6 left-6 right-6 z-[1000] flex flex-col md:flex-row gap-4 justify-between pointer-events-none">
+                <div className="absolute top-4 md:top-6 left-4 md:left-6 right-4 md:right-6 z-[1000] flex flex-col md:flex-row gap-4 justify-between pointer-events-none">
 
-                    {/* Filter Pills - Black & Brand Orange Aesthetic */}
-                    <div className="flex flex-wrap gap-2 pointer-events-auto">
+                    {/* Filter Pills - Black & Brand Orange Aesthetic (Horizontal Scroll on Mobile) */}
+                    <div className="flex gap-2 pointer-events-auto overflow-x-auto pb-2 md:pb-0 whitespace-nowrap scrollbar-hide">
                         {[
                             { type: 'all', label: 'All', icon: null },
                             { type: 'headquarters', label: 'Corporate Office', icon: <Building2 size={13} /> },
@@ -168,7 +227,7 @@ export default function InteractiveMap() {
                             <button
                                 key={filter.type}
                                 onClick={() => setActiveFilter(filter.type as FilterType)}
-                                className={`flex items-center gap-2 px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.1em] transition-all border ${activeFilter === filter.type
+                                className={`flex items-center gap-2 px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.1em] transition-all border flex-shrink-0 ${activeFilter === filter.type
                                     ? 'bg-[#FF6B35] text-white border-[#FF6B35] shadow-[0_4px_15px_rgba(255,107,53,0.3)]'
                                     : 'bg-black text-white border-white/10 hover:border-[#FF6B35] shadow-lg'
                                     }`}
@@ -214,6 +273,13 @@ export default function InteractiveMap() {
 
                         <MapController locations={filteredLocations} selectedCountry={selectedCountry} />
 
+                        {/* [NEW] Auto-Zoom Handler */}
+                        <AutoZoomHandler
+                            userLocation={userLocation}
+                            locations={locations}
+                            markerRefs={markerRefs}
+                        />
+
                         {filteredLocations.map((location) => {
                             const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${location.coordinates[0]},${location.coordinates[1]}`;
                             const distance = userLocation
@@ -231,8 +297,19 @@ export default function InteractiveMap() {
                                     key={location.id}
                                     position={location.coordinates as L.LatLngExpression}
                                     icon={createCustomIcon(location.type, selectedCountry === location.country)}
+                                    ref={(element) => {
+                                        if (element) {
+                                            markerRefs.current[location.id] = element;
+                                        }
+                                    }}
                                 >
-                                    <Popup className="replicate-popup" maxWidth={360} minWidth={320}>
+                                    <Popup
+                                        className="replicate-popup"
+                                        maxWidth={360}
+                                        minWidth={250}
+                                        autoPanPaddingTopLeft={[0, 150]}
+                                        autoPanPaddingBottomRight={[0, 20]}
+                                    >
                                         <div className="relative flex flex-col bg-white overflow-hidden rounded-xl border border-black/10 shadow-sm h-full group/popup">
                                             {/* Architectural Corner Accents */}
                                             <div className="absolute top-0 left-0 w-2 h-2 border-l-2 border-t-2 border-black/20 z-50 transition-colors" />
@@ -240,82 +317,84 @@ export default function InteractiveMap() {
                                             <div className="absolute bottom-0 left-0 w-2 h-2 border-l-2 border-b-2 border-black/20 z-50 transition-colors" />
                                             <div className="absolute bottom-0 right-0 w-2 h-2 border-r-2 border-b-2 border-black/20 z-50 transition-colors" />
 
-                                            {/* Technical Grid Header Area */}
-                                            <div className="relative h-44 bg-[#F4F4F5] flex items-center justify-center p-8 border-b border-black/5">
+                                            {/* Technical Grid Header Area - Ultra Compact on Mobile */}
+                                            <div className="relative h-24 md:h-44 bg-[#F4F4F5] flex items-center justify-center p-4 md:p-8 border-b border-black/5">
                                                 <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:1rem_1rem]" />
 
-                                                {/* Centered Logo Overlay */}
-                                                <img
+                                                {/* Centered Logo Overlay - Smaller on Mobile */}
+                                                <Image
                                                     src="/fillezey logo.png"
                                                     alt="Fillezy"
-                                                    className="h-12 w-auto object-contain relative z-20"
+                                                    width={100}
+                                                    height={48}
+                                                    className="object-contain relative z-20"
                                                 />
 
                                                 {/* Floating Category Tag */}
-                                                <div className="absolute top-4 left-4 z-40">
-                                                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white border border-black/5 shadow-sm">
-                                                        <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                                                        <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-black/70">
-                                                            {location.type.map(t => t === 'headquarters' ? 'Corporate Operations' : t === 'manufacturing' ? 'FACTORY' : 'PARTNER').join(' & ')}
+                                                <div className="absolute top-2 left-2 md:top-4 md:left-4 z-40">
+                                                    <span className="inline-flex items-center gap-1.5 px-1.5 py-0.5 md:px-3 md:py-1.5 rounded-md bg-white border border-black/5 shadow-sm">
+                                                        <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-primary animate-pulse" />
+                                                        <span className="text-[6px] md:text-[9px] font-mono font-bold uppercase tracking-widest text-black/70">
+                                                            {location.type.map(t => t === 'headquarters' ? 'HQ' : t === 'manufacturing' ? 'FACTORY' : 'PARTNER').join(' & ')}
                                                         </span>
                                                     </span>
                                                 </div>
 
                                                 {/* Country Badge */}
-                                                <div className="absolute top-4 right-10 z-40">
-                                                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white border border-black/5 shadow-sm text-[10px] font-mono font-bold uppercase tracking-widest text-black/60">
-                                                        <Globe size={10} className="text-primary" />
+                                                <div className="absolute top-2 right-2 md:top-4 md:right-10 z-40">
+                                                    <span className="inline-flex items-center gap-1.5 px-1.5 py-0.5 md:px-3 md:py-1.5 rounded-md bg-white border border-black/5 shadow-sm text-[7px] md:text-[10px] font-mono font-bold uppercase tracking-widest text-black/60">
+                                                        <Globe size={8} className="md:w-[10px] md:h-[10px] text-primary" />
                                                         {location.country}
                                                     </span>
                                                 </div>
                                             </div>
 
-                                            {/* Content Area (Matched to NewsCard Standard Layout) */}
-                                            <div className="p-6 flex flex-col flex-grow relative bg-white">
-                                                <div className="mb-4">
-                                                    <h3 className="font-black text-primary uppercase leading-[0.9] font-sans text-xl mb-1.5">
+                                            {/* Content Area - Ultra Compact Padding on Mobile */}
+                                            <div className="p-3 md:p-6 flex flex-col flex-grow relative bg-white">
+                                                <div className="mb-2 md:mb-4">
+                                                    <h3 className="font-black text-primary uppercase leading-[0.9] font-sans text-base md:text-xl mb-1 md:mb-1.5">
                                                         {location.name}
                                                     </h3>
-                                                    <p className="text-[9px] font-mono font-bold text-black/40 uppercase tracking-[0.2em]">
+                                                    <p className="text-[7px] md:text-[9px] font-mono font-bold text-black/40 uppercase tracking-[0.2em]">
                                                         {operationalDetail} — {location.country}
                                                     </p>
                                                 </div>
 
-                                                <div className="mb-6">
-                                                    <p className="text-[#1A1C1E]/60 font-medium text-xs leading-relaxed mb-2 uppercase tracking-wide">
+                                                <div className="mb-3 md:mb-6">
+                                                    <p className="text-[#1A1C1E]/60 font-medium text-[9px] md:text-xs leading-relaxed mb-1.5 md:mb-2 uppercase tracking-wide line-clamp-2">
                                                         {location.address}
                                                     </p>
                                                     {distance !== null && (
-                                                        <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-black/30 uppercase tracking-widest">
-                                                            <MapPin size={10} className="text-primary" />
-                                                            Distance from you: {Math.round(distance)} km
+                                                        <div className="flex items-center gap-1.5 text-[8px] md:text-[10px] font-mono font-bold text-black/30 uppercase tracking-widest">
+                                                            <MapPin size={8} className="md:w-[10px] md:h-[10px] text-primary" />
+                                                            {Math.round(distance)} km away
                                                         </div>
                                                     )}
                                                 </div>
 
                                                 {/* Interactive Footer */}
-                                                <div className="mt-auto pt-4 border-t border-dashed border-black/10 flex items-center justify-between pointer-events-auto">
-                                                    <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-[#1A1C1E]/40">
+                                                <div className="mt-auto pt-2 md:pt-4 border-t border-dashed border-black/10 flex items-center justify-between pointer-events-auto">
+                                                    <span className="text-[7px] md:text-[9px] font-mono font-bold uppercase tracking-widest text-[#1A1C1E]/40">
                                                         GET DIRECTION
                                                     </span>
 
-                                                    <div className="flex items-center gap-3">
-                                                        {/* Contact Icons (Circular Parity with Palette Enforcement) */}
-                                                        <div className="flex gap-2.5 mr-1 text-black">
+                                                    <div className="flex items-center gap-2 md:gap-3">
+                                                        {/* Contact Icons */}
+                                                        <div className="flex gap-1.5 md:gap-2 mr-1 text-black">
                                                             {location.phone && (
                                                                 <a
                                                                     href={`tel:${location.phone}`}
-                                                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-[#f4f4f5] !text-black shadow-sm hover:!bg-primary hover:!text-white hover:shadow-lg hover:shadow-primary/20 hover:scale-110 active:scale-95 transition-all outline-none no-underline"
+                                                                    className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-[#f4f4f5] !text-black shadow-sm hover:!bg-primary hover:!text-white hover:shadow-lg hover:shadow-primary/20 hover:scale-110 active:scale-95 transition-all outline-none no-underline"
                                                                 >
-                                                                    <Phone size={14} className="!text-current" strokeWidth={2.5} />
+                                                                    <Phone size={10} className="md:w-[14px] md:h-[14px] !text-current" strokeWidth={2.5} />
                                                                 </a>
                                                             )}
                                                             {location.email && (
                                                                 <a
                                                                     href={`mailto:${location.email}`}
-                                                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-[#f4f4f5] !text-black shadow-sm hover:!bg-primary hover:!text-white hover:shadow-lg hover:shadow-primary/20 hover:scale-110 active:scale-95 transition-all outline-none no-underline"
+                                                                    className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-[#f4f4f5] !text-black shadow-sm hover:!bg-primary hover:!text-white hover:shadow-lg hover:shadow-primary/20 hover:scale-110 active:scale-95 transition-all outline-none no-underline"
                                                                 >
-                                                                    <Mail size={14} className="!text-current" strokeWidth={2.5} />
+                                                                    <Mail size={10} className="md:w-[14px] md:h-[14px] !text-current" strokeWidth={2.5} />
                                                                 </a>
                                                             )}
                                                         </div>
@@ -325,9 +404,9 @@ export default function InteractiveMap() {
                                                             href={googleMapsUrl}
                                                             target="_blank"
                                                             rel="noreferrer"
-                                                            className="w-10 h-10 flex items-center justify-center rounded-full bg-[#f4f4f5] !text-black shadow-sm hover:!bg-primary hover:!text-white hover:shadow-lg hover:shadow-primary/20 hover:scale-110 active:scale-95 transition-all outline-none no-underline"
+                                                            className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-[#f4f4f5] !text-black shadow-sm hover:!bg-primary hover:!text-white hover:shadow-lg hover:shadow-primary/20 hover:scale-110 active:scale-95 transition-all outline-none no-underline"
                                                         >
-                                                            <ArrowUpRight size={18} className="!text-current" strokeWidth={2.5} />
+                                                            <ArrowUpRight size={12} className="md:w-[18px] md:h-[18px] !text-current" strokeWidth={2.5} />
                                                         </a>
                                                     </div>
                                                 </div>
@@ -345,7 +424,7 @@ export default function InteractiveMap() {
             <div className="mt-6 flex justify-between items-center px-2 opacity-60 hover:opacity-100 transition-opacity">
                 <div className="text-[10px] uppercase tracking-widest text-[#FF6B35] font-black flex items-center gap-3">
                     <span className="w-8 h-[1px] bg-[#FF6B35]/30"></span>
-                    Interactive Global Network
+                    Interactive Global Network // 9+ Manufacturing Plants
                 </div>
                 <div className="flex gap-6">
                     <div className="flex items-center gap-3">

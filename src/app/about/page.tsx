@@ -7,5 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
+    // Verified Updated Refined v4
     return <AboutClient />;
 }

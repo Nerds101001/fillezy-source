@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 import { Mail, Phone, MapPin, Send, ArrowUpRight, MessageSquare, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import Captcha from "@/components/Captcha";
@@ -173,7 +174,7 @@ export default function Contact() {
 
             <main className="isolate min-h-screen">
                 {/* [CRAZY CONTACT HERO SECTION] */}
-                <section className="relative h-[75vh] pt-40 pb-16 bg-primary overflow-hidden flex items-center justify-center">
+                <section className="relative min-h-[60vh] md:h-[75vh] pt-24 pb-12 md:pt-40 md:pb-16 bg-primary overflow-hidden flex items-center justify-center">
                     {/* 1. Background Pattern - Tilted Grid */}
                     <div className="absolute inset-0 opacity-10 bg-[linear-gradient(45deg,#000_1px,transparent_1px)] bg-[size:40px_40px]" />
 
@@ -211,12 +212,13 @@ export default function Contact() {
                         <div className="flex gap-8 animate-marquee whitespace-nowrap">
                             {[...Array(5)].map((_, repeatIndex) => (
                                 <div key={repeatIndex} className="flex gap-8">
-                                    {['/fillezey logo.png', '/fillezey logo.png', '/fillezey logo.png'].map((img, i) => (
-                                        <div key={`${repeatIndex}-${i}`} className="w-64 h-24 bg-white/10 backdrop-blur-sm p-6 shadow-xl rotate-3 flex items-center justify-center border-2 border-white/20 transform hover:scale-110 transition-transform">
-                                            <img
-                                                src={img}
+                                    {['/fillezey logo.png', '/fillezey logo.png', '/fillezey logo.png'].map((imgSrc, i) => (
+                                        <div key={`${repeatIndex}-${i}`} className="relative w-64 h-24 bg-white/10 backdrop-blur-sm p-6 shadow-xl rotate-3 flex items-center justify-center border-2 border-white/20 transform hover:scale-110 transition-transform overflow-hidden">
+                                            <Image
+                                                src={imgSrc}
                                                 alt="Fillezy"
-                                                className="max-w-full max-h-full object-contain invert opacity-40"
+                                                fill
+                                                className="object-contain invert opacity-40 p-6"
                                             />
                                         </div>
                                     ))}
@@ -227,12 +229,13 @@ export default function Contact() {
                         <div className="flex gap-8 animate-marquee-reverse whitespace-nowrap">
                             {[...Array(5)].map((_, repeatIndex) => (
                                 <div key={repeatIndex} className="flex gap-8">
-                                    {['/fillezey logo.png', '/fillezey logo.png', '/fillezey logo.png'].map((img, i) => (
-                                        <div key={`${repeatIndex}-${i}`} className="w-64 h-24 bg-black/10 backdrop-blur-sm p-6 shadow-xl -rotate-2 flex items-center justify-center border-2 border-black/20 transform hover:scale-110 transition-transform">
-                                            <img
-                                                src={img}
+                                    {['/fillezey logo.png', '/fillezey logo.png', '/fillezey logo.png'].map((imgSrc, i) => (
+                                        <div key={`${repeatIndex}-${i}`} className="relative w-64 h-24 bg-black/10 backdrop-blur-sm p-6 shadow-xl -rotate-2 flex items-center justify-center border-2 border-black/20 transform hover:scale-110 transition-transform overflow-hidden">
+                                            <Image
+                                                src={imgSrc}
                                                 alt="Fillezy"
-                                                className="max-w-full max-h-full object-contain opacity-40"
+                                                fill
+                                                className="object-contain opacity-40 p-6"
                                             />
                                         </div>
                                     ))}
@@ -257,7 +260,7 @@ export default function Contact() {
                             <motion.h1
                                 initial={{ y: 50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
-                                className="text-7xl md:text-9xl font-black text-white drop-shadow-[4px_4px_0px_rgba(0,0,0,0.5)] leading-[0.85] uppercase"
+                                className="text-4xl md:text-9xl font-black text-white drop-shadow-[4px_4px_0px_rgba(0,0,0,0.5)] leading-[0.85] uppercase"
                             >
                                 CONTACT <span className="text-black">&</span><br /> SUPPORT
                             </motion.h1>
@@ -290,14 +293,14 @@ export default function Contact() {
                 </section>
 
                 {/* [PREMIUM CONTACT BENTO INTERFACE] */}
-                <section className="relative py-32 bg-background overflow-hidden">
+                <section className="relative py-12 md:py-32 bg-background overflow-hidden">
                     {/* Subtle Background Elements */}
                     <div className="absolute top-0 left-0 w-full h-px bg-black/[0.03]" />
                     <div className="absolute bottom-0 left-0 w-full h-px bg-black/[0.03]" />
 
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 items-start">
                             {/* Left Column: Industrial Info Bento */}
                             <div className="lg:col-span-5 space-y-12">
                                 {/* Section Header: Relocated for natural balance */}
@@ -313,10 +316,10 @@ export default function Contact() {
                                     <motion.h2
                                         initial={{ opacity: 0, y: 30 }}
                                         whileInView={{ opacity: 1, y: 0 }}
-                                        className="text-5xl md:text-6xl font-black text-black uppercase leading-[0.85] tracking-tighter"
+                                        className="text-3xl md:text-6xl font-black text-black uppercase leading-[0.85] tracking-tighter"
                                     >
                                         Guard Your <br />
-                                        <span className="text-primary italic font-serif font-light lowercase text-6xl md:text-7xl">Value.</span>
+                                        <span className="text-primary italic font-serif font-light lowercase text-4xl md:text-7xl">Value.</span>
                                     </motion.h2>
                                 </div>
                                 {/* Global HQ Card */}
@@ -422,11 +425,11 @@ export default function Contact() {
                             </div>
 
                             {/* Right Column: Premium Interactive Form */}
-                            <div className="lg:col-span-7 pt-16 md:pt-28">
+                            <div className="lg:col-span-7 pt-0 md:pt-28">
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.98 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
-                                    className="relative bg-white border border-black/10 p-10 md:p-14 rounded-[2rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.05)]"
+                                    className="relative bg-white border border-black/10 p-5 md:p-14 rounded-[2rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.05)]"
                                 >
                                     {/* Technical Markers */}
                                     <div className="absolute top-8 right-8 text-[8px] font-mono font-black text-black/10 tracking-[0.5em] hidden md:block">
@@ -596,16 +599,16 @@ export default function Contact() {
                 </section>
 
                 {/* Global Network Map Section - Dark Minimalist Theme */}
-                <section className="relative py-24 sm:py-32 bg-black border-t border-white/5">
+                <section className="relative py-12 md:py-32 bg-black border-t border-white/5">
                     <div className="absolute inset-0 bg-[#FF6B35]/5 blur-[200px] opacity-20 pointer-events-none" />
 
                     <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-                        <div className="mb-16">
-                            <div className="text-[10px] font-mono text-[#FF6B35] font-black uppercase tracking-[0.5em] mb-6 flex items-center gap-4">
+                        <div className="mb-8 md:mb-16">
+                            <div className="text-[10px] font-mono text-[#FF6B35] font-black uppercase tracking-[0.5em] mb-4 md:mb-6 flex items-center gap-4">
                                 <span className="h-px w-8 bg-[#FF6B35]" />
                                 GLOBAL_NETWORK
                             </div>
-                            <h2 className="text-4xl font-black tracking-tight text-white uppercase mb-4 leading-tight">
+                            <h2 className="text-2xl md:text-4xl font-black tracking-tight text-white uppercase mb-4 leading-tight">
                                 Our Worldwide <span className="text-[#FF6B35] italic font-serif font-light lowercase">Presence</span>
                             </h2>
                             <p className="text-lg text-white/50 font-medium max-w-2xl">

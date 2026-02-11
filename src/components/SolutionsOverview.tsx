@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ArrowRight, Box, Settings, Layers, Download, FileText } from "lucide-react";
 import ContactModal, { ModalMode } from "./ContactModal";
 
@@ -15,7 +16,7 @@ const solutions = [
         cta: "Explore Machines",
         icon: Settings,
         href: "/solutions#machines",
-        image: "/product/Paper Smart machine.webp"
+        image: "/product/Machines.webp"
     },
     {
         id: "MAT-C02",
@@ -35,7 +36,7 @@ const solutions = [
         cta: "View Integrations",
         icon: Box,
         href: "/integrations",
-        image: "/product/Paper Shark.webp"
+        image: "/product/Integrations.webp"
     }
 ];
 
@@ -49,7 +50,7 @@ export default function SolutionsOverview() {
     };
 
     return (
-        <section className="py-20 sm:py-24 bg-[#FAFAFA] relative overflow-hidden technical-grid hexa-pattern paper-grain">
+        <section className="py-6 sm:py-24 bg-[#FAFAFA] relative overflow-hidden technical-grid hexa-pattern paper-grain">
             <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
                     <div className="max-w-2xl">
@@ -57,16 +58,16 @@ export default function SolutionsOverview() {
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="text-[11px] font-mono text-black/40 font-black uppercase tracking-[0.5em] mb-4"
+                            className="text-[9px] md:text-[11px] font-mono text-black/40 font-black uppercase tracking-[0.1em] md:tracking-[0.5em] mb-2 md:mb-4 whitespace-nowrap"
                         >
                             [ ECOSYSTEM_ENGINEERING ]
                         </motion.div>
-                        <h2 className="text-4xl font-black tracking-tight text-black sm:text-6xl uppercase leading-[0.9]">
+                        <h2 className="text-4xl md:text-6xl font-black tracking-tight text-black uppercase leading-[0.9]">
                             End-to-End <br />
                             <span className="text-primary italic font-serif font-light lowercase">Packaging Ecosystem.</span>
                         </h2>
                     </div>
-                    <p className="text-lg text-black/80 font-bold max-w-md">
+                    <p className="text-lg md:text-xl text-black/80 font-medium max-w-md">
                         Machines, materials, and integrations designed to work together.
                     </p>
                 </div>
@@ -88,7 +89,7 @@ export default function SolutionsOverview() {
                 >
                     <div className="absolute inset-0 opacity-[0.03] technical-grid pointer-events-none" />
                     <div className="relative z-10 max-w-2xl text-center lg:text-left">
-                        <div className="text-[10px] font-mono text-primary font-black uppercase tracking-[0.5em] mb-4">
+                        <div className="text-[9px] md:text-[10px] font-mono text-primary font-black uppercase tracking-[0.1em] md:tracking-[0.5em] mb-2 md:mb-4 whitespace-nowrap">
                             [ CATALOGUE_V2024_RELEASE ]
                         </div>
                         <h3 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight mb-4">
@@ -171,9 +172,10 @@ function SolutionCard({ solution, index }: { solution: any, index: number }) {
             <div className="relative h-2/3 w-full overflow-hidden p-4">
                 <div className="h-full w-full rounded-[2rem] overflow-hidden bg-black/5 relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent z-10" />
-                    <img
+                    <Image
                         src={solution.image}
                         alt={solution.title}
+                        fill
                         className="h-full w-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 shadow-inner"
                     />
                 </div>

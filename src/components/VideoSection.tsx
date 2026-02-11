@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import ContactModal, { ModalMode } from "./ContactModal";
@@ -9,7 +10,7 @@ import ContactModal, { ModalMode } from "./ContactModal";
 declare global {
     interface Window {
         onYouTubeIframeAPIReady: () => void;
-        YT: any;
+        YT: any; // eslint-disable-line @typescript-eslint/no-explicit-any
     }
 }
 
@@ -84,7 +85,7 @@ export default function VideoSection() {
     const [activeVideo, setActiveVideo] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
-    const playerRef = useRef<any>(null);
+    const playerRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
 
@@ -98,7 +99,7 @@ export default function VideoSection() {
             firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
         }
 
-        (window as any).onYouTubeIframeAPIReady = () => {
+        (window as any).onYouTubeIframeAPIReady = () => { // eslint-disable-line @typescript-eslint/no-explicit-any
             console.log("YouTube API Ready");
         };
     }, []);
@@ -118,7 +119,7 @@ export default function VideoSection() {
                     modestbranding: 1,
                 },
                 events: {
-                    onStateChange: (event: any) => {
+                    onStateChange: (event: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
                         // YT.PlayerState.ENDED is 0
                         if (event.data === 0) {
                             handleNextVideo();
@@ -179,7 +180,7 @@ export default function VideoSection() {
     };
 
     return (
-        <section className="relative py-24 bg-[#0B0F14] technical-grid paper-grain overflow-hidden border-t border-white/5 industrial-dark-section">
+        <section className="relative py-6 md:py-24 bg-[#0B0F14] technical-grid paper-grain overflow-hidden border-t border-white/5 industrial-dark-section">
             {/* Architectural Grid Line */}
             <div className="absolute top-0 left-1/2 w-px h-full bg-white/5 pointer-events-none" />
 
@@ -192,7 +193,7 @@ export default function VideoSection() {
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                className="flex items-center gap-4 text-[11px] font-mono text-white/40 font-black uppercase tracking-[0.5em] mb-4"
+                                className="flex items-center gap-2 md:gap-4 text-[9px] md:text-[11px] font-mono text-white/40 font-black uppercase tracking-[0.1em] md:tracking-[0.5em] mb-2 md:mb-4 whitespace-nowrap"
                             >
                                 <span className="h-px w-10 bg-primary" />
                                 FACTORY_OPERATIONS_FEED
@@ -243,15 +244,20 @@ export default function VideoSection() {
                                 <div id="youtube-player" className="w-full h-full" />
                             </div>
                         ) : (
-                            <motion.img
+                            <motion.div
                                 key={`thumb-${activeVideo}`}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.5 }}
-                                src={videos[activeVideo].thumbnail}
-                                alt={videos[activeVideo].title}
-                                className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105"
-                            />
+                                className="absolute inset-0"
+                            >
+                                <Image
+                                    src={videos[activeVideo].thumbnail}
+                                    alt={videos[activeVideo].title}
+                                    fill
+                                    className="object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-105"
+                                />
+                            </motion.div>
                         )}
 
                         {!isPlaying && (
@@ -360,10 +366,11 @@ export default function VideoSection() {
                                     }`}
                             >
                                 <div className="relative aspect-video bg-black">
-                                    <img
+                                    <Image
                                         src={video.thumbnail}
                                         alt={video.title}
-                                        className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
+                                        fill
+                                        className="object-cover opacity-60 group-hover:opacity-100 transition-opacity"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 

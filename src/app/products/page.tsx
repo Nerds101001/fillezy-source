@@ -124,7 +124,7 @@ export default function Products() {
                     </div>
 
                     {/* Product Grid Area */}
-                    <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-8 sm:gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                         <AnimatePresence mode="popLayout">
                             {filteredProducts.map((product) => (
                                 <motion.div

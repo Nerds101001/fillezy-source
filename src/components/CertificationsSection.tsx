@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Shield, CheckCircle2, Leaf, Award, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const certifications = [
@@ -51,12 +52,12 @@ const certifications = [
 
 export default function CertificationsSection() {
     return (
-        <section className="py-24 bg-[#FAFAFA] relative overflow-hidden technical-grid dots-pattern">
+        <section className="py-6 md:py-24 bg-[#FAFAFA] relative overflow-hidden technical-grid dots-pattern">
             {/* Architectural Grid Line */}
             <div className="absolute top-0 left-1/2 w-px h-full bg-black/5 pointer-events-none" />
 
-            <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-                <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10 mb-20">
+            <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
+                <div className="flex flex-col 2xl:flex-row 2xl:items-start justify-between gap-8 md:gap-10 mb-8 md:mb-20">
                     <div className="text-left max-w-3xl">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -98,7 +99,7 @@ export default function CertificationsSection() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 }}
-                        className="shrink-0 pt-12 lg:pt-16"
+                        className="shrink-0 pt-4 2xl:pt-16"
                     >
                         <Link
                             href="/certifications"
@@ -123,19 +124,11 @@ export default function CertificationsSection() {
                             className="relative z-10 flex flex-col items-center gap-6 group/item w-full"
                         >
                             <div className="relative w-24 h-24 flex items-center justify-center p-3 rounded-xl bg-white shadow-sm transition-all group-hover/item:shadow-md ring-1 ring-black/5 overflow-hidden">
-                                <img
+                                <Image
                                     src={cert.logo}
                                     alt={cert.name}
-                                    loading="lazy"
-                                    className={`w-full h-full object-contain grayscale transition-all duration-500 group-hover/item:grayscale-0 group-hover/item:scale-110 mix-blend-multiply ${cert.visualScale}`}
-                                    onError={(e) => {
-                                        e.currentTarget.style.display = 'none';
-                                        e.currentTarget.parentElement?.classList.add('flex-col');
-                                        const fallback = document.createElement('div');
-                                        fallback.className = 'text-[10px] font-black text-center text-black/40 uppercase tracking-tighter bg-black/5 p-2 rounded';
-                                        fallback.innerText = cert.name;
-                                        e.currentTarget.parentElement?.appendChild(fallback);
-                                    }}
+                                    fill
+                                    className={`p-3 object-contain grayscale transition-all duration-500 group-hover/item:grayscale-0 group-hover/item:scale-110 mix-blend-multiply ${cert.visualScale}`}
                                 />
                                 {/* Detail Tooltip/Reveal */}
                                 <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-44 text-center opacity-0 group-hover/item:opacity-100 transition-opacity pointer-events-none z-20">

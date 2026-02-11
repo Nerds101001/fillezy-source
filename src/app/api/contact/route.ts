@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { allProducts } from "@/data/allProducts";
-import path from "path";
 
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || "smtp.gmail.com",
@@ -16,7 +15,7 @@ const transporter = nodemailer.createTransport({
 export async function POST(req: Request) {
     try {
         const contentType = req.headers.get("content-type") || "";
-        let name, email, phone, productId, message, mode, targetEmail, cvFile;
+        let name, email, phone, productId, message, mode, cvFile, fileUrl;
 
         if (contentType.includes("multipart/form-data")) {
             const formData = await req.formData();
@@ -25,8 +24,9 @@ export async function POST(req: Request) {
             productId = formData.get("role") as string;
             message = formData.get("skills") as string;
             mode = formData.get("type") as string;
-            targetEmail = formData.get("target") as string;
+            // targetEmail = formData.get("target") as string;
             cvFile = formData.get("cv") as File;
+            fileUrl = formData.get("fileUrl") as string;
         } else {
             const body = await req.json();
             name = body.name;
@@ -35,7 +35,8 @@ export async function POST(req: Request) {
             productId = body.product;
             message = body.message;
             mode = body.mode;
-            targetEmail = process.env.ADMIN_EMAIL || "sales@fillezy.com";
+            // targetEmail = process.env.ADMIN_EMAIL || "sales@fillezy.com";
+            fileUrl = body.fileUrl;
         }
 
         const product = allProducts.find(p => p.id === productId);
@@ -73,24 +74,53 @@ export async function POST(req: Request) {
 
         await transporter.sendMail(adminMailOptions);
 
-        if (mode === "SPEC_SHEET" || mode === "CATALOGUE") {
+        if (mode === "SPEC_SHEET" || mode === "CATALOGUE" || mode === "CERTIFICATE") {
             const isCatalogue = mode === "CATALOGUE";
-            const downloadUrl = isCatalogue
-                ? "https://fillezy.com/Fillezy-Catalogue-Final.pdf"
-                : `https://fillezy.com/product-specs/${productId}.pdf`; // Hypothetical for now, using main for demo
+            const isCertificate = mode === "CERTIFICATE";
+
+            let downloadUrl = "";
+            let emailSubject = "";
+            let emailHeader = "";
+            let buttonText = "";
+
+            if (isCatalogue) {
+                downloadUrl = "https://fillezy.com/Fillezy-Catalogue-Final.pdf";
+                emailSubject = "Fillezy Full Product Catalogue";
+                emailHeader = "Full Catalogue Access";
+                buttonText = "DOWNLOAD FULL CATALOGUE (PDF)";
+            } else if (isCertificate) {
+                // If it's a certificate, the fileUrl should be passed from the frontend, 
+                // but we can fallback or ensure it's absolute. 
+                // Since actual file is local public, we construct full URL.
+                // However, for local dev it's localhost, for prod it's domain.
+                // For now, we trust the relative path or construct it.
+                // Ideally, we just link to the file.
+                // But the user receives this email.
+                const baseUrl = "https://fillezy.com"; // Hardcoded for production email
+                const cleanFileUrl = fileUrl || "";
+                downloadUrl = cleanFileUrl.startsWith("http") ? cleanFileUrl : `${baseUrl}${cleanFileUrl}`;
+                emailSubject = "Fillezy Compliance Documentation";
+                emailHeader = "Certificate Access Granted";
+                buttonText = "DOWNLOAD CERTIFICATE";
+            } else {
+                downloadUrl = `https://fillezy.com/product-specs/${productId}.pdf`;
+                emailSubject = `Technical Specifications: ${productName}`;
+                emailHeader = "Technical Specs Ready";
+                buttonText = "DOWNLOAD SPEC SHEET (PDF)";
+            }
 
             const userMailOptions = {
                 from: `"Fillezy Support" <${process.env.SMTP_USER}>`,
                 to: email,
-                subject: isCatalogue ? "Fillezy Full Product Catalogue" : `Technical Specifications: ${productName}`,
+                subject: emailSubject,
                 html: `
                     <div style="font-family: Arial, sans-serif; padding: 20px; color: #333; max-width: 600px; line-height: 1.6;">
-                        <h2 style="color: #FF6B35;">${isCatalogue ? "Full Catalogue Access" : "Technical Specs Ready"}</h2>
+                        <h2 style="color: #FF6B35;">${emailHeader}</h2>
                         <p>Dear ${name},</p>
                         <p>Thank you for your interest in <strong>Fillezy Protective Packaging</strong>.</p>
                         <div style="margin: 30px 0;">
                             <a href="${downloadUrl}" style="background-color: #000; color: #fff; padding: 15px 25px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px; display: inline-block;">
-                                ${isCatalogue ? "DOWNLOAD FULL CATALOGUE (PDF)" : "DOWNLOAD SPEC SHEET (PDF)"}
+                                ${buttonText}
                             </a>
                         </div>
                         <p>Our engineering team is ready to assist you with any custom workflow requirements.</p>
@@ -104,7 +134,7 @@ export async function POST(req: Request) {
         }
 
         return NextResponse.json({ success: true });
-    } catch (error: any) {
+    } catch (error) {
         console.error("Contact API Error:", error);
         return NextResponse.json({ error: "Failed to process request." }, { status: 500 });
     }

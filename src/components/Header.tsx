@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, Phone, Mail, Box, ShieldCheck, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { Menu, X, ChevronDown, Phone, Mail, Box, ShieldCheck, ArrowUpRight, MessageSquare, ShoppingBag, Sprout, Factory, Scroll, Blocks } from "lucide-react";
 import ContactModal, { ModalMode } from "./ContactModal";
 import BrandName from "./BrandName";
 import { megamenuData, MegamenuCategory, MegamenuProduct } from "../data/megamenu";
@@ -22,6 +23,7 @@ const navigation = [
             { name: "Global Presence", href: "/about#global" },
         ]
     },
+    { name: "Careers", href: "/careers" },
     { name: "News", href: "/news" },
 ];
 
@@ -101,30 +103,40 @@ export default function Header() {
     }, []);
 
     return (
-        <header className={`fixed w-full z-50 px-4 sm:px-6 transition-all duration-700 ${scrolled ? 'pt-4' : 'pt-8'}`}>
+        <header
+            suppressHydrationWarning
+            className={`fixed w-full z-50 px-2 sm:px-6 transition-all duration-700 ${scrolled ? 'pt-2 md:pt-4' : 'pt-2 md:pt-8'}`}>
             <nav
+                suppressHydrationWarning
                 className={`mx-auto max-w-7xl px-2 rounded-2xl flex items-center justify-between transition-all duration-700 border relative ${scrolled
-                    ? "h-20 bg-white backdrop-blur-2xl border-black/5 shadow-2xl"
-                    : "h-24 bg-white backdrop-blur-md border-black/5 shadow-sm"
-                    }`}
+                    ? "h-14 md:h-20 bg-white shadow-2xl"
+                    : "h-16 md:h-24 bg-white shadow-sm"
+                    } border-black/5`}
             >
                 {/* Visual Foundation */}
                 <div className="absolute inset-0 paper-grain rounded-2xl opacity-5 pointer-events-none" />
                 <div className="absolute inset-0 technical-grid rounded-2xl opacity-[0.03] pointer-events-none" />
 
-                {/* Left Section: Logo & Mega Menu Toggle */}
-                <div className="flex items-center gap-6 lg:flex-1 pl-6 relative z-10">
-                    <Link href="/" className="flex-shrink-0 group">
-                        <img
+                {/* Left Section: Logo */}
+                <div className="flex items-center mr-auto pl-0 lg:pl-6 relative z-10">
+                    <Link href="/" className="flex-shrink-0 group relative">
+                        <div className="absolute -inset-2 bg-primary/0 group-hover:bg-primary/5 rounded-xl transition-all duration-500 blur-xl" />
+                        <Image
                             src="/fillezey logo.png"
                             alt="Fillezy"
-                            className={`w-auto object-contain transition-all duration-700 group-hover:scale-105 contrast-125 mr-8 ${scrolled ? "h-10" : "h-12"
+                            width={160}
+                            height={64}
+                            priority
+                            className={`w-auto object-contain transition-all duration-500 group-hover:scale-105 group-hover:-rotate-1 filter group-hover:contrast-125 relative z-10 ${scrolled ? "h-7 md:h-10" : "h-8 md:h-12"
                                 }`}
                         />
                     </Link>
+                </div>
 
+                {/* Center Section: Products & Navigation */}
+                <div className="hidden lg:flex flex-1 items-center gap-x-6 px-4 relative z-10 justify-start">
                     <div
-                        className="relative hidden lg:block"
+                        className="relative"
                         onMouseEnter={() => setMegaMenuOpen(true)}
                         onMouseLeave={() => setMegaMenuOpen(false)}
                     >
@@ -145,7 +157,7 @@ export default function Header() {
                                     className="absolute left-0 top-full pt-4 z-50"
                                 >
                                     {/* Precision Pointer (Architectural Nose) */}
-                                    <div className="absolute top-[10px] left-10 w-4 h-4 bg-white rotate-45 border-l border-t border-black/5 z-0" />
+                                    <div className="absolute top-[10px] left-14 w-4 h-4 bg-white rotate-45 border-l border-t border-black/5 z-0" />
 
                                     <div className="bg-white rounded-b-[3rem] rounded-t-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] border border-black/5 border-t-primary/30 border-t-2 w-[1100px] flex paper-grain relative z-10 max-h-[85vh] overflow-hidden">
                                         {/* Left: Component Matrix */}
@@ -174,7 +186,7 @@ export default function Header() {
                                         </div>
 
                                         {/* Right: Product Navigator */}
-                                        <div className="flex-1 bg-white p-10 flex flex-col min-w-0">
+                                        <div className="flex-1 bg-white p-10 flex flex-col min-w-0 text-left">
                                             {/* Category Header */}
                                             <div className="flex justify-between items-start mb-4 border-b border-black/5 pb-4">
                                                 <AnimatePresence mode="wait">
@@ -229,10 +241,11 @@ export default function Header() {
                                                                     {/* Image Section */}
                                                                     <div className={`relative h-32 w-full bg-[#F4F4F5] flex items-center justify-center group-hover/item:bg-[#F0F0F0] transition-colors ${paddingClass}`}>
                                                                         <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:0.75rem_0.75rem]" />
-                                                                        <img
+                                                                        <Image
                                                                             src={product.image}
                                                                             alt={product.name}
-                                                                            className="h-full w-full object-contain mix-blend-multiply filter contrast-125 transition-transform duration-700 group-hover/item:scale-110"
+                                                                            fill
+                                                                            className="object-contain mix-blend-multiply filter contrast-125 transition-transform duration-700 group-hover/item:scale-110"
                                                                         />
                                                                         {/* Floating ID Tag */}
                                                                         <div className="absolute top-3 left-3">
@@ -246,7 +259,7 @@ export default function Header() {
                                                                     </div>
 
                                                                     {/* Content Section */}
-                                                                    <div className="p-4 flex flex-col flex-1">
+                                                                    <div className="p-4 flex flex-col flex-1 text-left">
                                                                         <div className="text-[10px] font-black uppercase text-foreground mb-3 leading-tight group-hover/item:text-primary transition-colors line-clamp-2 min-h-[1.5rem]">
                                                                             <BrandName name={product.name} />
                                                                         </div>
@@ -275,46 +288,43 @@ export default function Header() {
                             )}
                         </AnimatePresence>
                     </div>
-                </div>
 
-                {/* Center Section: Navigation */}
-                <div className="hidden lg:flex items-center gap-x-10 px-8 relative z-10">
-                    {navigation.map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40 hover:text-primary transition-colors relative group"
-                        >
-                            {item.name}
-                            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full" />
-                        </Link>
-                    ))}
+                    <div className="flex items-center gap-x-8">
+                        {navigation.map((item) => (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40 hover:text-primary transition-colors relative group whitespace-nowrap"
+                            >
+                                {item.name}
+                                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full" />
+                            </Link>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Right Section: Communication CTAs */}
-                <div className="flex items-center justify-end gap-3 lg:flex-1 pr-4 relative z-10">
+                <div className="flex items-center justify-end gap-2 pr-2 lg:pr-4 relative z-10 text-right">
                     <div className="hidden lg:flex items-center gap-3 border-r border-black/5 pr-4 mr-1">
                         <a
                             href="https://wa.me/919814215000"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-2.5 rounded-full bg-black/5 text-foreground hover:bg-[#25D366] hover:text-white transition-all"
+                            className="p-2.5 rounded-full bg-black/5 text-foreground hover:bg-[#25D366] hover:text-white transition-all inline-flex items-center justify-center"
                             title="WhatsApp Support"
                         >
-                            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.067 2.875 1.215 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-                            </svg>
+                            <MessageSquare size={16} />
                         </a>
                         <a
                             href="tel:+919814215000"
-                            className="p-2.5 rounded-full bg-black/5 text-foreground hover:bg-primary hover:text-white transition-all"
+                            className="p-2.5 rounded-full bg-black/5 text-foreground hover:bg-primary hover:text-white transition-all inline-flex items-center justify-center"
                             title="Call Support"
                         >
                             <Phone size={16} />
                         </a>
                         <a
                             href="mailto:info@fillezy.com"
-                            className="p-2.5 rounded-full bg-black/5 text-foreground hover:bg-primary hover:text-white transition-all"
+                            className="p-2.5 rounded-full bg-black/5 text-foreground hover:bg-primary hover:text-white transition-all inline-flex items-center justify-center"
                             title="Email Inquiry"
                         >
                             <Mail size={16} />
@@ -325,62 +335,156 @@ export default function Header() {
                         href="https://www.purchasekart.com/collections/fillezy-protective-packaging-or-e-commerce-packaging-solutions"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hidden md:inline-flex rounded-xl bg-foreground px-8 py-3 text-[10px] font-black uppercase tracking-widest text-white shadow-2xl shadow-black/10 hover:bg-primary hover:scale-[1.02] active:scale-95 transition-all"
+                        className="hidden lg:inline-flex rounded-xl bg-foreground px-8 py-3 text-[10px] font-black uppercase tracking-widest text-white shadow-2xl shadow-black/10 hover:bg-primary hover:scale-[1.02] active:scale-95 transition-all outline-none whitespace-nowrap"
                     >
                         Buy Now
                     </Link>
 
-                    <button
-                        type="button"
-                        className="lg:hidden p-2 text-foreground"
-                        onClick={() => setMobileMenuOpen(true)}
-                    >
-                        <Menu size={20} />
-                    </button>
+                    {/* Mobile Actions: Infographic Style Icons (White Buttons + Colored Icons) */}
+                    <div className="flex items-center gap-2 lg:hidden">
+                        <Link
+                            href="https://www.purchasekart.com/collections/fillezy-protective-packaging-or-e-commerce-packaging-solutions"
+                            target="_blank"
+                            className="w-10 h-10 rounded-xl bg-white text-[#FF6B35] shadow-[0_4px_12px_rgba(255,107,53,0.15)] border border-[#FF6B35]/10 hover:bg-[#FF6B35] hover:text-white hover:border-[#FF6B35] transition-all inline-flex items-center justify-center relative overflow-hidden group active:scale-95"
+                            title="Shop Now"
+                        >
+                            <ShoppingBag size={20} strokeWidth={2.5} className="group-hover:scale-110 transition-transform" />
+                        </Link>
+                        <a
+                            href="tel:+919814215000"
+                            className="w-10 h-10 rounded-xl bg-white text-[#0EA5E9] shadow-[0_4px_12px_rgba(14,165,233,0.15)] border border-[#0EA5E9]/10 hover:bg-[#0EA5E9] hover:text-white hover:border-[#0EA5E9] transition-all inline-flex items-center justify-center group active:scale-95"
+                            title="Call"
+                        >
+                            <Phone size={20} strokeWidth={2.5} className="group-hover:rotate-12 transition-transform" />
+                        </a>
+                        <a
+                            href="mailto:info@fillezy.com"
+                            className="w-10 h-10 rounded-xl bg-white text-[#8B5CF6] shadow-[0_4px_12px_rgba(139,92,246,0.15)] border border-[#8B5CF6]/10 hover:bg-[#8B5CF6] hover:text-white hover:border-[#8B5CF6] transition-all inline-flex items-center justify-center group active:scale-95"
+                            title="Email"
+                        >
+                            <Mail size={20} strokeWidth={2.5} className="group-hover:-translate-y-0.5 transition-transform" />
+                        </a>
+                        <button
+                            type="button"
+                            className="w-10 h-10 rounded-xl bg-black text-white shadow-lg hover:bg-primary transition-colors inline-flex items-center justify-center ml-1 border border-black/10 active:scale-95"
+                            onClick={() => setMobileMenuOpen(true)}
+                        >
+                            <Menu size={24} strokeWidth={2.5} />
+                        </button>
+                    </div>
                 </div>
             </nav>
 
             {/* Mobile Menu Refined */}
+            {/* Mobile Menu Renewed: Command Center Style */}
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, x: '100%' }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: '100%' }}
-                        className="fixed inset-0 z-[60] lg:hidden"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[60] lg:hidden flex flex-col bg-white/95 backdrop-blur-3xl"
                     >
-                        <div className="absolute inset-0 bg-background/80 backdrop-blur-3xl" />
-                        <div className="absolute right-0 top-0 h-full w-[85%] bg-white shadow-2xl p-12 paper-grain flex flex-col justify-between">
-                            <div>
-                                <div className="flex justify-between items-center mb-20">
-                                    <img src="/fillezey logo.png" alt="Fillezy" className="h-7 w-auto" />
-                                    <button onClick={() => setMobileMenuOpen(false)} className="p-3 rounded-xl bg-black/5"><X size={20} /></button>
-                                </div>
+                        {/* Technical Overlays */}
+                        <div className="absolute inset-0 technical-grid opacity-[0.05] pointer-events-none" />
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-primary/50 to-transparent" />
 
-                                <div className="space-y-10">
-                                    {navigation.map((item) => (
+                        {/* Mobile Header */}
+                        <div className="flex justify-between items-center p-6 border-b border-black/5 flex-none bg-white/50 backdrop-blur-sm">
+                            <div className="flex items-center gap-3">
+                                <Link
+                                    href="/"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="flex items-center gap-2"
+                                >
+                                    <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-black text-xl">F</div>
+                                    <span className="font-black text-lg tracking-tight">FILLEZY</span>
+                                </Link>
+                            </div>
+                            <button
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="w-10 h-10 rounded-xl bg-black/5 text-black hover:bg-black hover:text-white transition-all flex items-center justify-center active:scale-95"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        {/* Scrollable Content (Main Navigation) */}
+                        <div className="flex-1 overflow-y-auto p-4 flex flex-col custom-scrollbar">
+                            <nav className="space-y-4 mb-6">
+                                {navigation.map((item, idx) => (
+                                    <motion.div
+                                        key={item.name}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: idx * 0.05 }}
+                                    >
                                         <Link
-                                            key={item.name}
                                             href={item.href}
                                             onClick={() => setMobileMenuOpen(false)}
-                                            className="text-4xl font-black text-foreground hover:text-primary transition-colors block uppercase tracking-tighter"
+                                            className="group flex items-baseline gap-4"
                                         >
-                                            {item.name}
+                                            <span className="text-xs font-mono font-bold text-primary/30 group-hover:text-primary transition-colors">
+                                                {(idx + 1).toString().padStart(2, '0')}
+                                            </span>
+                                            <span className="text-4xl font-black uppercase tracking-tighter text-foreground group-hover:text-primary transition-colors">
+                                                {item.name}
+                                            </span>
                                         </Link>
-                                    ))}
-                                </div>
-                            </div>
+                                    </motion.div>
+                                ))}
+                            </nav>
+                        </div>
 
-                            <div className="pt-10 border-t border-black/5 space-y-6">
-                                <div className="text-[10px] font-mono text-foreground/40 font-bold uppercase tracking-widest">[ GLOBAL_ACCESS ]</div>
-                                <div className="flex flex-col gap-4">
-                                    <a href="tel:+919814215000" className="flex items-center gap-4 text-xs font-black uppercase text-foreground">
-                                        <Phone size={16} className="text-primary" /> +91 98142 15000
-                                    </a>
-                                    <a href="mailto:info@fillezy.com" className="flex items-center gap-4 text-xs font-black uppercase text-foreground">
-                                        <Mail size={16} className="text-primary" /> info@fillezy.com
-                                    </a>
-                                </div>
+                        {/* Mobile Footer (Products Grid) */}
+                        <div className="p-4 border-t border-black/5 bg-white/50 backdrop-blur-sm flex-none pb-8 lg:pb-4">
+                            <div className="flex items-center gap-2 mb-3 text-[10px] font-mono font-black uppercase tracking-widest text-foreground/40">
+                                <div className="w-1 h-1 bg-primary rounded-full" />
+                                SYSTEM_CATALOGUE
+                            </div>
+                            <div className="grid grid-cols-2 gap-2">
+                                {solutionCategories.map((cat, idx) => {
+                                    // Dynamic Styling based on Category
+                                    let icon = <Box size={20} strokeWidth={2} />;
+                                    let colorClass = "text-black";
+                                    let bgClass = "bg-white";
+                                    let shadowClass = "shadow-sm";
+                                    let borderClass = "border-black/5";
+
+                                    if (cat.name === "Machines") {
+                                        icon = <Factory size={20} strokeWidth={2} />;
+                                        colorClass = "text-[#FF6B35]";
+                                        shadowClass = "shadow-[0_2px_8px_rgba(255,107,53,0.1)]";
+                                        borderClass = "border-[#FF6B35]/20";
+                                    } else if (cat.name === "Materials") {
+                                        icon = <Scroll size={20} strokeWidth={2} />;
+                                        colorClass = "text-[#0EA5E9]";
+                                        shadowClass = "shadow-[0_2px_8px_rgba(14,165,233,0.1)]";
+                                        borderClass = "border-[#0EA5E9]/20";
+                                    } else if (cat.name === "Bio Aer") {
+                                        icon = <Sprout size={20} strokeWidth={2} />;
+                                        colorClass = "text-[#22C55E]";
+                                        shadowClass = "shadow-[0_2px_8px_rgba(34,197,94,0.1)]";
+                                        borderClass = "border-[#22C55E]/20";
+                                    } else {
+                                        icon = <Blocks size={20} strokeWidth={2} />;
+                                        colorClass = "text-[#8B5CF6]";
+                                        shadowClass = "shadow-[0_2px_8px_rgba(139,92,246,0.1)]";
+                                        borderClass = "border-[#8B5CF6]/20";
+                                    }
+
+                                    return (
+                                        <Link
+                                            key={cat.id}
+                                            href={cat.href}
+                                            onClick={() => setMobileMenuOpen(false)}
+                                            className={`h-16 rounded-xl ${bgClass} border ${borderClass} ${shadowClass} ${colorClass} flex items-center justify-start px-4 gap-3 hover:scale-[1.02] active:scale-95 transition-all`}
+                                        >
+                                            <div className="shrink-0">{icon}</div>
+                                            <span className="text-[10px] font-black uppercase tracking-wider leading-tight">{cat.name}</span>
+                                        </Link>
+                                    )
+                                })}
                             </div>
                         </div>
                     </motion.div>

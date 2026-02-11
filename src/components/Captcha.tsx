@@ -41,31 +41,36 @@ export default function Captcha({ onVerify }: CaptchaProps) {
     };
 
     return (
-        <div className="space-y-3">
-            <label className="text-[10px] font-black uppercase tracking-widest text-black/30 ml-2">Human verification</label>
-            <div className="flex items-center gap-4">
-                <div className="flex items-center gap-3 px-6 py-4 rounded-xl bg-black/5 border border-black/5 font-mono text-lg font-black text-black select-none">
+        <div className="space-y-2">
+            <label className="text-[10px] font-black uppercase tracking-widest text-black/30 ml-1">Human verification</label>
+            <div className="flex items-center gap-2 lg:gap-4">
+                {/* Math Display */}
+                <div className="flex items-center justify-center gap-2 px-3 py-3 lg:px-6 lg:py-4 rounded-xl bg-black/5 border border-black/5 font-mono text-base lg:text-lg font-black text-black select-none shrink-0 min-w-[80px]">
                     <span>{num1}</span>
                     <span className="text-primary">+</span>
                     <span>{num2}</span>
                     <span className="text-primary">=</span>
                 </div>
+
+                {/* Input Field */}
                 <input
                     type="number"
                     value={userInput}
                     onChange={handleChange}
                     placeholder="?"
-                    className={`flex-1 px-6 py-4 rounded-xl border transition-all outline-none font-black text-lg ${isVerified
+                    className={`flex-1 min-w-0 w-full px-3 py-3 lg:px-6 lg:py-4 rounded-xl border transition-all outline-none font-black text-base lg:text-lg text-center ${isVerified
                         ? 'border-green-500 bg-green-500/5 text-green-600'
                         : 'border-black/5 bg-[#FAFAFA] focus:border-primary'
                         }`}
                 />
+
+                {/* Refresh Button */}
                 <button
                     type="button"
                     onClick={generateCaptcha}
-                    className="p-4 rounded-xl bg-black text-white hover:bg-primary transition-colors h-14 w-14 flex items-center justify-center shrink-0"
+                    className="p-3 lg:p-4 rounded-xl bg-black text-white hover:bg-primary transition-colors h-11 w-11 lg:h-14 lg:w-14 flex items-center justify-center shrink-0"
                 >
-                    <RefreshCw size={20} />
+                    <RefreshCw size={16} className="lg:w-5 lg:h-5" />
                 </button>
             </div>
         </div>

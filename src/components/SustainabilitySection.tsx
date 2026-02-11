@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Leaf, Recycle, Wind, Droplets, ArrowUpRight } from "lucide-react";
 import ContactModal, { ModalMode } from "./ContactModal";
 import { useState } from "react";
@@ -22,7 +23,7 @@ export default function SustainabilitySection() {
     };
 
     return (
-        <section className="relative py-32 bg-[#FAFAFA] paper-grain kraft-texture dots-pattern overflow-hidden border-t border-black/10 torn-edge-bottom">
+        <section className="relative pt-6 pb-24 md:py-24 bg-[#FAFAFA] paper-grain kraft-texture dots-pattern overflow-hidden border-t border-black/10 torn-edge-bottom">
             {/* Architectural Grid Line */}
             <div className="absolute top-0 left-1/2 w-px h-full bg-black/5 pointer-events-none" />
 
@@ -37,8 +38,8 @@ export default function SustainabilitySection() {
                 ))}
             </div>
 
-            <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
+            <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
 
                     {/* Left Side: Storytelling */}
                     <div className="lg:col-span-7">
@@ -46,9 +47,9 @@ export default function SustainabilitySection() {
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="flex items-center gap-6 text-[11px] font-mono text-black/40 font-black uppercase tracking-[0.5em] mb-12"
+                            className="flex items-center gap-2 md:gap-6 text-[9px] md:text-[11px] font-mono text-black/40 font-black uppercase tracking-[0.1em] md:tracking-[0.5em] mb-4 md:mb-12 whitespace-nowrap"
                         >
-                            <span className="h-px w-10 bg-black/10" />
+                            <span className="h-px w-6 md:w-10 bg-black/10" />
                             ECO_SYSTEM_ETHOS
                         </motion.div>
 
@@ -57,7 +58,7 @@ export default function SustainabilitySection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
-                            className="text-5xl font-black tracking-tight text-black lg:text-7xl mb-12 uppercase leading-[0.85]"
+                            className="text-4xl md:text-6xl font-black tracking-tight text-white lg:text-black mb-6 md:mb-12 uppercase leading-none lg:leading-[0.85]"
                         >
                             Designed for Protection. <br />
                             <span className="text-eco italic font-serif font-light lowercase">Sustainability Built-in.</span>
@@ -68,7 +69,7 @@ export default function SustainabilitySection() {
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
-                                className="text-black/80 text-lg font-bold leading-relaxed max-w-sm"
+                                className="text-black/80 text-lg md:text-xl font-medium leading-relaxed max-w-sm"
                             >
                                 Fillezy offers paper-based, recyclable, and compostable cushioning solutions that reduce plastic usage while maintaining industrial-grade protection.
                             </motion.p>
@@ -118,10 +119,11 @@ export default function SustainabilitySection() {
                             className="relative rounded-[3.5rem] overflow-hidden bg-black aspect-square shadow-2xl shadow-black/20 group border border-black/10"
                         >
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
-                            <img
+                            <Image
                                 src="/product/Cushion.webp"
                                 alt="Bio Film Spec"
-                                className="h-full w-full object-cover grayscale opacity-60 transition-transform duration-1000 group-hover:scale-105"
+                                fill
+                                className="object-cover grayscale opacity-60 transition-transform duration-1000 group-hover:scale-105"
                             />
 
                             <div className="absolute inset-0 z-20 p-12 flex flex-col justify-between">
@@ -153,7 +155,7 @@ export default function SustainabilitySection() {
                             ))}
                         </div>
 
-                        <div className="mt-12">
+                        <div className="mt-12 mb-8 md:mb-0">
                             <button
                                 onClick={() => openContactModal("QUOTATION")}
                                 className="inline-flex items-center gap-4 px-10 py-5 bg-black text-white text-xs font-black uppercase tracking-[0.3em] rounded-2xl hover:bg-primary transition-all shadow-xl group/btn"

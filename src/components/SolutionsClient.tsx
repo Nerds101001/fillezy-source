@@ -1,119 +1,69 @@
 "use client";
 
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Settings, Layers, Box, ChevronRight } from "lucide-react";
+import { ArrowRight, Settings, Layers, Box, ChevronRight, Zap } from "lucide-react";
+import ContactModal, { ModalMode } from "./ContactModal";
+import CategoryHero from "@/components/CategoryHero";
+import Image from "next/image";
 
 const solutions = [
     {
+        id: "SYS-M01",
         title: "Machines",
         description: "Industrial-grade air cushion systems. Engineered for speed, reliability, and seamless integration.",
+        features: ["Rapid Production", "IoT Enabled", "Low Maintenance"],
+        cta: "Explore Machines",
         icon: Settings,
         href: "/machines",
-        image: "https://www.fillezy.com/wp-content/uploads/2019/11/2.png",
-        features: ["Rapid Production", "IoT Enabled", "Low Maintenance"]
+        image: "/product/Machines.webp"
     },
     {
-        title: "Materials",
+        id: "MAT-C02",
+        title: "Consumables",
         description: "High-performance consumables. From bio-degradable films to shock-absorbing paper pads.",
+        features: ["Bio-AER Technology", "FSC Certified Paper", "Zero Plastic Option"],
+        cta: "View Consumables",
         icon: Layers,
         href: "/materials",
-        image: "https://www.fillezy.com/wp-content/uploads/2019/11/1-1.png",
-        features: ["Bio-AER Technology", "FSC Certified Paper", "Zero Plastic Options"]
+        image: "/product/Cushion.webp"
     },
     {
+        id: "INT-X03",
         title: "Integrations",
-        description: "Workflow optimization. Overhead bins, winders, and conveyor systems for ergonomic packing.",
+        description: "Custom-engineered packing line integrations. Designed for ergonomic efficiency and high-volume throughput.",
+        features: ["Air Pipe Systems", "Overhead Bins", "Conveyor Hubs"],
+        cta: "View Integrations",
         icon: Box,
         href: "/integrations",
-        image: "https://www.fillezy.com/wp-content/uploads/2019/11/3.png",
-        features: ["Custom Layouts", "Overhead Storage", "Automated Delivery"]
+        image: "/product/Integrations.webp"
     }
 ];
 
 export default function SolutionsClient() {
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
     return (
         <div className="bg-background min-h-screen">
             <Header />
             <main>
-                {/* Hero Section */}
-                <section className="relative pt-32 pb-20 px-6 overflow-hidden grain border-b border-foreground/5">
-                    <div className="mx-auto max-w-7xl relative z-10">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="max-w-4xl"
-                        >
-                            <span className="inline-block py-2 px-4 rounded-full bg-foreground/5 border border-foreground/10 text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-6">
-                                End-to-End Ecosystem
-                            </span>
-                            <h1 className="text-5xl font-black tracking-tighter text-foreground sm:text-7xl lg:text-8xl mb-8 leading-[0.9]">
-                                Engineered <br />
-                                <span className="text-foreground/80">Packaging</span> <span className="text-primary italic font-serif font-light">Solutions.</span>
-                            </h1>
-                            <p className="text-xl text-foreground/60 font-light leading-relaxed max-w-2xl">
-                                A comprehensive suite of machines, materials, and integrations designed to optimize your fulfillment workflow from the ground up.
-                            </p>
-                        </motion.div>
-                    </div>
-                </section>
+                <CategoryHero
+                    title="Engineered"
+                    subtitle="Solutions."
+                    description="A comprehensive suite of machines, materials, and integrations designed to optimize your fulfillment workflow from the ground up."
+                    badgeText="PROTOCOL_DEPLOYED // SOLUTIONS"
+                    icon={<Zap className="text-primary" size={24} />}
+                />
 
                 {/* Categories Grid */}
-                <section className="py-24 bg-background relative">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                <section className="py-24 bg-[#FAFAFA] relative overflow-hidden technical-grid hexa-pattern paper-grain">
+                    <div className="mx-auto max-w-7xl px-5 lg:px-8">
                         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
                             {solutions.map((solution, index) => (
-                                <motion.div
-                                    key={solution.title}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className="group relative flex flex-col justify-between h-[600px] overflow-hidden rounded-[2.5rem] bg-foreground/5 border border-foreground/5 glass hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-                                >
-                                    {/* Background Image / Gradient */}
-                                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90 z-10" />
-                                    <img
-                                        src={solution.image}
-                                        alt={solution.title}
-                                        className="absolute inset-0 h-3/4 w-full object-cover opacity-60 mix-blend-multiply dark:mix-blend-overlay transition-transform duration-700 group-hover:scale-110 grayscale"
-                                    />
-
-                                    {/* Icon Top */}
-                                    <div className="relative z-20 p-8">
-                                        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-background/80 backdrop-blur-md text-primary shadow-lg border border-foreground/5">
-                                            <solution.icon size={28} />
-                                        </div>
-                                    </div>
-
-                                    {/* Content Bottom */}
-                                    <div className="relative z-20 p-8 pt-0 mt-auto">
-                                        <h3 className="text-3xl font-bold uppercase tracking-widest text-foreground mb-4">
-                                            {solution.title}
-                                        </h3>
-                                        <p className="text-foreground/70 font-light leading-relaxed mb-8">
-                                            {solution.description}
-                                        </p>
-
-                                        <ul className="space-y-2 mb-8 border-l-2 border-primary/20 pl-4">
-                                            {solution.features.map(feature => (
-                                                <li key={feature} className="text-xs font-bold uppercase tracking-wider text-foreground/50">
-                                                    {feature}
-                                                </li>
-                                            ))}
-                                        </ul>
-
-                                        <Link
-                                            href={solution.href}
-                                            className="group/btn inline-flex items-center gap-3 rounded-full bg-foreground px-8 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-background transition-all hover:bg-primary hover:text-white"
-                                        >
-                                            Explore {solution.title}
-                                            <ArrowRight size={14} className="transition-transform group-hover/btn:translate-x-1" />
-                                        </Link>
-                                    </div>
-                                </motion.div>
+                                <SolutionCard key={solution.title} solution={solution} index={index} />
                             ))}
                         </div>
                     </div>
@@ -125,16 +75,112 @@ export default function SolutionsClient() {
                         <h2 className="text-3xl font-black text-foreground sm:text-5xl mb-8">
                             Not sure what you need?
                         </h2>
-                        <Link
-                            href="/contact"
+                        <button
+                            onClick={() => setIsContactModalOpen(true)}
                             className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-5 text-xs font-bold uppercase tracking-widest text-white shadow-xl hover:scale-105 transition-all"
                         >
                             Consult an Expert <ChevronRight size={16} />
-                        </Link>
+                        </button>
                     </div>
                 </section>
             </main>
             <Footer />
+
+            <ContactModal
+                isOpen={isContactModalOpen}
+                onClose={() => setIsContactModalOpen(false)}
+                initialMode="QUOTATION"
+            />
         </div>
+    );
+}
+
+function SolutionCard({ solution, index }: { solution: any, index: number }) {
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setMousePosition({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+        });
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="group relative h-[580px] overflow-hidden rounded-[2.5rem] bg-white border border-black/10 flex flex-col transition-all hover:shadow-2xl hover:shadow-black/5"
+        >
+            {/* Technical Header */}
+            <div className="absolute top-0 left-0 w-full p-8 flex justify-between items-start z-30 pointer-events-none">
+                <div className="flex flex-col gap-1">
+                    <span className="text-[9px] font-mono text-black/60 font-black tracking-widest uppercase">ID: {solution.id}</span>
+                </div>
+                <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-background border border-black/10 text-black/60 group-hover:text-primary group-hover:bg-primary/5 group-hover:border-primary/20 transition-all">
+                    <solution.icon size={18} className="opacity-100" />
+                </div>
+            </div>
+
+            {/* Glow Spotlight Effect */}
+            <div
+                className="pointer-events-none absolute -inset-px transition-opacity duration-500 opacity-0 group-hover:opacity-100 z-30"
+                style={{
+                    background: `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,107,0,0.06), transparent 50%)`,
+                }}
+            />
+
+            {/* Image Layer */}
+            <div className="relative h-2/3 w-full overflow-hidden p-4">
+                <div className="h-full w-full rounded-[2rem] overflow-hidden bg-black/5 relative">
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent z-10" />
+                    <Image
+                        src={solution.image}
+                        alt={solution.title}
+                        fill
+                        className="object-cover opacity-60 transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 shadow-inner"
+                    />
+                </div>
+            </div>
+
+            {/* Content Layer */}
+            <div className="px-8 pb-8 flex flex-col flex-grow justify-end relative z-20">
+                <h3 className="text-xl font-black uppercase tracking-tight text-black mb-2">
+                    {solution.title}
+                </h3>
+                <p className="text-black/60 font-medium leading-relaxed mb-4 text-xs">
+                    {solution.description}
+                </p>
+
+                {/* Feature List */}
+                <div className="flex flex-col gap-1.5 mb-6 border-l border-primary/20 pl-4">
+                    {solution.features.map((feature: string) => (
+                        <div key={feature} className="text-[9px] font-mono text-black/40 font-black uppercase tracking-widest">
+                            {feature}
+                        </div>
+                    ))}
+                </div>
+
+                <Link
+                    href={solution.href}
+                    className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.4em] text-black/60 hover:text-primary transition-all group/link"
+                >
+                    {solution.cta} <ArrowRight size={12} className="transition-transform group-hover/link:translate-x-2" />
+                </Link>
+            </div>
+
+            {/* Structural Marker */}
+            <div className="absolute bottom-10 right-10 z-30 pointer-events-none opacity-0 group-hover:opacity-20 transition-opacity">
+                <div className="font-mono text-[60px] font-black tracking-tighter leading-none select-none text-black/20">
+                    0{index + 1}
+                </div>
+            </div>
+        </motion.div>
     );
 }

@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Leaf, Recycle, Wind, Droplets, ShieldCheck, Factory, Globe, ArrowDown, CheckCircle2, Zap } from "lucide-react";
@@ -39,7 +40,7 @@ export default function SustainabilityClient() {
     };
 
     return (
-        <div ref={containerRef} className="bg-white min-h-screen selection:bg-eco selection:text-white">
+        <div ref={containerRef} className="bg-white min-h-screen selection:bg-eco selection:text-white" suppressHydrationWarning>
             <Header />
 
             <main>
@@ -49,10 +50,12 @@ export default function SustainabilityClient() {
                     <motion.div style={{ y }} className="absolute inset-0 z-0">
                         <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white z-10" />
                         <div className="absolute inset-0 dots-pattern opacity-20" />
-                        <img
+                        <Image
                             src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80"
-                            className="w-full h-full object-cover grayscale brightness-110 opacity-70 mix-blend-multiply"
                             alt="Nature Industrial Overlay"
+                            fill
+                            priority
+                            className="object-cover grayscale brightness-110 opacity-70 mix-blend-multiply"
                         />
                     </motion.div>
 
@@ -66,7 +69,7 @@ export default function SustainabilityClient() {
                         >
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-eco/10 border border-eco/20 mb-4">
                                 <Leaf size={12} className="text-eco animate-pulse" />
-                                <span className="text-[10px] font-mono font-black uppercase tracking-[0.4em] text-eco">PROTOCOL: ZERO_WASTE_V1</span>
+                                <span className="text-[9px] md:text-[10px] font-mono font-black uppercase tracking-[0.1em] md:tracking-[0.4em] text-eco whitespace-nowrap">PROTOCOL: ZERO_WASTE_V1</span>
                             </div>
 
                             <h1 className="text-7xl lg:text-[120px] font-black tracking-tighter text-black leading-[0.8] uppercase">
@@ -76,7 +79,7 @@ export default function SustainabilityClient() {
                             </h1>
 
                             <div className="flex flex-col items-center gap-12 pt-12">
-                                <p className="text-xl text-black/60 font-medium max-w-2xl leading-relaxed">
+                                <p className="text-lg md:text-xl text-black/60 font-medium max-w-2xl leading-relaxed">
                                     Engineering the next generation of industrial packaging. We replace plastic with plant-based automation to secure the world's products and the planet's future.
                                 </p>
 
@@ -101,24 +104,24 @@ export default function SustainabilityClient() {
                 </section>
 
                 {/* THE CORE VISION - BENTO STYLE */}
-                <section className="py-32 px-6 bg-white border-t border-black/5">
+                <section className="py-6 md:py-32 px-6 bg-white border-t border-black/5">
                     <div className="mx-auto max-w-7xl">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-24">
                             <div className="lg:col-span-8">
-                                <span className="text-[11px] font-mono font-black uppercase tracking-[0.5em] text-black/40 mb-8 block">VISIONARY_CORE</span>
-                                <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tight leading-[0.9]">
+                                <span className="text-[9px] md:text-[11px] font-mono font-black uppercase tracking-[0.1em] md:tracking-[0.5em] text-black/40 mb-4 md:mb-8 block whitespace-nowrap">VISIONARY_CORE</span>
+                                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-[0.9]">
                                     We don't just package. <br />
                                     We <span className="text-eco italic font-serif font-light lowercase">Restore.</span>
                                 </h2>
                             </div>
                             <div className="lg:col-span-4">
-                                <p className="text-lg text-black/60 font-medium leading-relaxed">
+                                <p className="text-lg md:text-xl text-black/60 font-medium leading-relaxed">
                                     Our industrial-grade paper systems provide exact-fit cushioning, eliminating the need for excessive plastic fillers.
                                 </p>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-4">
                             {metrics.map((m, i) => (
                                 <motion.div
                                     key={i}
@@ -126,14 +129,14 @@ export default function SustainabilityClient() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="p-8 rounded-[2.5rem] bg-[#FAFAFA] border border-black/5 group hover:border-eco/30 transition-all"
+                                    className="p-5 md:p-8 rounded-3xl md:rounded-[2.5rem] bg-[#FAFAFA] border border-black/5 group hover:border-eco/30 transition-all"
                                 >
-                                    <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center mb-10 shadow-sm border border-black/5 group-hover:bg-eco group-hover:text-white transition-all">
-                                        <m.icon size={20} />
+                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white flex items-center justify-center mb-4 md:mb-10 shadow-sm border border-black/5 group-hover:bg-eco group-hover:text-white transition-all">
+                                        <m.icon size={18} className="md:w-5 md:h-5" />
                                     </div>
-                                    <div className="space-y-2">
-                                        <span className="text-[9px] font-mono font-black text-black/30 uppercase tracking-widest">{m.label}</span>
-                                        <div className="text-4xl font-black text-black tracking-tight">{m.value}</div>
+                                    <div className="space-y-1 md:space-y-2">
+                                        <span className="text-[8px] md:text-[9px] font-mono font-black text-black/30 uppercase tracking-widest leading-none">{m.label}</span>
+                                        <div className="text-3xl md:text-4xl font-black text-black tracking-tight">{m.value}</div>
                                     </div>
                                 </motion.div>
                             ))}
@@ -142,7 +145,7 @@ export default function SustainabilityClient() {
                 </section>
 
                 {/* BIO-AER SPOTLIGHT */}
-                <section className="py-32 px-6 bg-black relative overflow-hidden">
+                <section className="py-6 md:py-32 px-6 bg-black relative overflow-hidden">
                     <div className="absolute inset-0 technical-grid opacity-10 pointer-events-none" />
                     <div className="absolute top-0 right-0 w-2/3 h-full bg-eco/10 blur-[150px] -translate-y-1/2 translate-x-1/2" />
 
@@ -153,11 +156,11 @@ export default function SustainabilityClient() {
                                     <Zap size={14} className="text-eco" />
                                     <span className="text-[10px] font-mono font-black text-white uppercase tracking-widest">TECHNOLOGY_BREAKTHROUGH</span>
                                 </div>
-                                <h3 className="text-5xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-none">
+                                <h3 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
                                     Bio-Aer <br />
                                     <span className="text-eco italic">Protocol</span>
                                 </h3>
-                                <div className="space-y-6 text-xl text-white/70 leading-relaxed font-medium">
+                                <div className="space-y-6 text-lg md:text-xl text-white/70 leading-relaxed font-medium">
                                     <p>
                                         Our flagship Bio-Aer material is derived from plant polymers, making it 100% house-compostable. It performs with the same lightweight velocity as plastic air pillows but returns to the earth in weeks.
                                     </p>
@@ -174,14 +177,15 @@ export default function SustainabilityClient() {
 
                             <div className="mt-16 lg:mt-0 relative">
                                 <div className="aspect-square rounded-[3rem] bg-white/5 border border-white/10 overflow-hidden relative group">
-                                    <img
+                                    <Image
                                         src="/product/Bio-Aer.webp"
-                                        className="h-full w-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
                                         alt="Bio-Aer Product"
+                                        fill
+                                        className="object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                                     <div className="absolute bottom-10 left-10">
-                                        <span className="text-[10px] font-mono text-white/40 uppercase tracking-[0.5em] block mb-2">PRODUCT_ID: BIO_X1</span>
+                                        <span className="text-[9px] md:text-[10px] font-mono text-white/40 uppercase tracking-[0.1em] md:tracking-[0.5em] block mb-2 whitespace-nowrap">PRODUCT_ID: BIO_X1</span>
                                         <div className="text-2xl font-black text-white uppercase">COMPOSTABLE_PILOW_v1</div>
                                     </div>
                                 </div>
@@ -192,23 +196,23 @@ export default function SustainabilityClient() {
                 </section>
 
                 {/* QUALITY & CERTIFICATIONS */}
-                <section className="py-32 px-6 bg-[#FAFAFA]">
+                <section className="py-6 md:py-32 px-6 bg-[#FAFAFA]">
                     <div className="mx-auto max-w-7xl">
                         <div className="text-center mb-24">
-                            <span className="text-[11px] font-mono font-black uppercase tracking-[0.5em] text-black/40 mb-6 block">TRUSTED_STANDARDS</span>
-                            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tight">
+                            <span className="text-[9px] md:text-[11px] font-mono font-black uppercase tracking-[0.1em] md:tracking-[0.5em] text-black/40 mb-4 md:mb-6 block whitespace-nowrap">TRUSTED_STANDARDS</span>
+                            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight">
                                 Global <span className="text-eco italic font-serif font-light">Compliance.</span>
                             </h2>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="grid grid-cols-2 gap-3 md:gap-8 lg:grid-cols-4">
                             {certifications.map((cert, i) => (
-                                <div key={i} className="flex flex-col items-center text-center p-10 rounded-[3rem] bg-white border border-black/5 hover:border-eco/30 transition-all group">
-                                    <div className="w-16 h-16 rounded-[2rem] bg-black text-white flex items-center justify-center mb-8 group-hover:bg-eco transition-colors">
-                                        <cert.icon size={28} />
+                                <div key={i} className="flex flex-col items-center text-center p-6 md:p-10 rounded-3xl md:rounded-[3rem] bg-white border border-black/5 hover:border-eco/30 transition-all group">
+                                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl md:rounded-[2rem] bg-black text-white flex items-center justify-center mb-4 md:mb-8 group-hover:bg-eco transition-colors">
+                                        <cert.icon size={24} className="md:w-7 md:h-7" />
                                     </div>
-                                    <h4 className="text-lg font-black uppercase tracking-tight mb-2">{cert.name}</h4>
-                                    <p className="text-[11px] font-mono font-bold text-black/40 uppercase tracking-widest leading-relaxed">
+                                    <h4 className="text-sm md:text-lg font-black uppercase tracking-tight mb-1 md:mb-2 leading-tight">{cert.name}</h4>
+                                    <p className="text-[9px] md:text-[11px] font-mono font-bold text-black/40 uppercase tracking-widest leading-relaxed">
                                         {cert.issuer}
                                     </p>
                                 </div>
@@ -218,7 +222,7 @@ export default function SustainabilityClient() {
                 </section>
 
                 {/* FINAL CTA */}
-                <section className="py-32 bg-eco text-white relative overflow-hidden">
+                <section className="py-6 md:py-32 bg-eco text-white relative overflow-hidden">
                     <div className="absolute inset-0 technical-grid opacity-20 pointer-events-none" />
                     <div className="mx-auto max-w-4xl px-6 text-center relative z-10">
                         <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-12">

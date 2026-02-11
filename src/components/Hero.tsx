@@ -127,7 +127,7 @@ export default function Hero() {
             </div>
 
             {/* Main Content */}
-            <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 pt-12">
+            <div className="relative z-20 flex h-full flex-col items-center justify-center px-4 md:px-6 lg:px-8 pt-12 md:pt-16">
                 <div className="max-w-7xl w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
@@ -147,15 +147,15 @@ export default function Hero() {
                                 initial={{ opacity: 0, y: 40 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-6xl font-black tracking-tighter text-black sm:text-7xl md:text-8xl lg:text-[7.5rem] leading-[0.8] uppercase flex flex-col"
+                                className="text-4xl font-black tracking-tighter text-black sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.5rem] leading-[0.85] md:leading-[0.8] uppercase flex flex-col"
                             >
                                 <span>Smart</span>
                                 <span className="">Packaging.</span>
-                                <div className="mt-6 flex flex-col gap-2">
-                                    <span className="text-xl sm:text-2xl font-mono font-bold tracking-[0.2em] text-black/40 uppercase">
+                                <div className="mt-4 md:mt-6 flex flex-col gap-1 md:gap-2">
+                                    <span className="text-xs sm:text-sm md:text-xl lg:text-2xl font-mono font-bold tracking-[0.15em] md:tracking-[0.2em] text-black/40 uppercase">
                                         [ 100%_DAMAGE_PREVENTION ]
                                     </span>
-                                    <span className="text-primary italic font-serif font-light lowercase tracking-normal text-4xl sm:text-5xl">
+                                    <span className="text-primary italic font-serif font-light lowercase tracking-normal text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                                         Knowledge-Based Protection.
                                     </span>
                                 </div>
@@ -165,15 +165,15 @@ export default function Hero() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.4, duration: 1 }}
-                                className="mt-8 max-w-xl text-lg font-bold leading-relaxed text-black/80"
+                                className="mt-6 md:mt-8 max-w-xl text-sm sm:text-base md:text-lg font-bold leading-relaxed text-black/80"
                             >
                                 Vertically integrated manufacturing of high-precision air and paper cushioning systems. Designed by engineers to eliminate transit damage and optimize global fulfillment.
                             </motion.p>
                         </div>
 
                         {/* Right Side: Features & CTA */}
-                        <div className="lg:col-span-4 flex flex-col items-start lg:items-end justify-center lg:text-right gap-12 pt-12">
-                            <div className="space-y-8">
+                        <div className="lg:col-span-4 flex flex-col items-start lg:items-end justify-center lg:text-right gap-6 md:gap-8 lg:gap-12 pt-6 md:pt-8 lg:pt-12">
+                            <div className="space-y-4 md:space-y-6 lg:space-y-8 w-full">
                                 {[
                                     { icon: Zap, text: "On-Demand Production", label: "0.1 SEC START" },
                                     { icon: Compass, text: "Global Compliance", label: "ISO CERTIFIED" }
@@ -184,30 +184,31 @@ export default function Hero() {
                                         whileHover={{ scale: 1.05, x: -5 }}
                                         transition={{ delay: 0.6 + (i * 0.1) }}
                                         key={item.text}
-                                        className="flex items-center lg:justify-end gap-6 group cursor-pointer"
+                                        className="flex items-center lg:justify-end gap-3 md:gap-4 lg:gap-6 group cursor-pointer"
                                     >
-                                        <div className="hidden lg:block">
-                                            <p className="text-[10px] font-mono text-primary font-bold uppercase tracking-widest">{item.label}</p>
-                                            <h4 className="text-sm font-black uppercase tracking-widest text-black/80">{item.text}</h4>
+                                        <div className="flex-1 lg:flex-none">
+                                            <p className="text-[9px] md:text-[10px] font-mono text-primary font-bold uppercase tracking-widest">{item.label}</p>
+                                            <h4 className="text-xs md:text-sm font-black uppercase tracking-wider md:tracking-widest text-black/80">{item.text}</h4>
                                         </div>
-                                        <div className="h-12 w-12 rounded-2xl bg-black text-white flex items-center justify-center shadow-lg transition-transform group-hover:bg-primary group-hover:rotate-6">
-                                            <item.icon size={20} />
+                                        <div className="h-11 w-11 md:h-12 md:w-12 rounded-xl md:rounded-2xl bg-black text-white flex items-center justify-center shadow-lg transition-transform group-hover:bg-primary group-hover:rotate-6 flex-shrink-0">
+                                            <item.icon size={18} className="md:w-5 md:h-5" />
                                         </div>
                                     </motion.div>
                                 ))}
                             </div>
 
-                            <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full lg:w-auto">
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.8 }}
+                                    className="w-full sm:w-auto"
                                 >
                                     <Link
                                         href="/solutions"
-                                        className="group relative flex items-center justify-center gap-4 overflow-hidden rounded-2xl bg-primary px-10 py-6 text-xs font-black uppercase tracking-[0.3em] text-white transition-all hover:bg-primary-hover hover:scale-[1.02] active:scale-95 shadow-2xl shadow-primary/30"
+                                        className="group relative flex items-center justify-center gap-3 md:gap-4 overflow-hidden rounded-xl md:rounded-2xl bg-primary px-6 md:px-8 lg:px-10 py-4 md:py-5 lg:py-6 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-white transition-all hover:bg-primary-hover hover:scale-[1.02] active:scale-95 shadow-2xl shadow-primary/30 w-full sm:w-auto min-h-[48px]"
                                     >
-                                        Explore Solutions <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                        Explore Solutions <ArrowRight className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:translate-x-1" />
                                     </Link>
                                 </motion.div>
 
@@ -215,19 +216,13 @@ export default function Hero() {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.9 }}
-                                    className="flex flex-col sm:flex-row gap-4"
+                                    className="flex w-full sm:w-auto"
                                 >
                                     <button
                                         onClick={() => openContactModal("QUOTATION")}
-                                        className="group flex items-center justify-center gap-4 rounded-2xl border-2 border-black/10 bg-white px-10 py-6 text-xs font-black uppercase tracking-[0.3em] text-black hover:bg-black hover:text-white transition-all active:scale-95 shadow-sm whitespace-nowrap"
+                                        className="group w-full sm:w-auto flex items-center justify-center gap-3 md:gap-4 rounded-xl md:rounded-2xl border-2 border-black/10 bg-white px-6 md:px-8 lg:px-10 py-4 md:py-5 lg:py-6 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-black hover:bg-black hover:text-white transition-all active:scale-95 shadow-sm whitespace-nowrap min-h-[48px]"
                                     >
                                         Talk to an Expert
-                                    </button>
-                                    <button
-                                        onClick={() => openContactModal("CATALOGUE")}
-                                        className="group flex items-center justify-center gap-4 rounded-2xl border-2 border-primary/20 bg-primary/5 px-10 py-6 text-xs font-black uppercase tracking-[0.3em] text-primary hover:bg-primary hover:text-white transition-all active:scale-95 shadow-sm whitespace-nowrap"
-                                    >
-                                        Download Catalogue
                                     </button>
                                 </motion.div>
                             </div>

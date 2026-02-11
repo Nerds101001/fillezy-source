@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { CheckCircle2, Factory, Zap, Target } from "lucide-react";
+import Image from "next/image";
 import { useRef } from "react";
 
 const features = [
@@ -39,10 +40,12 @@ export default function AboutSection() {
                     <motion.div style={{ scale, opacity }} className="relative">
                         <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full" />
                         <div className="relative aspect-square rounded-[3rem] overflow-hidden border border-foreground/10 shadow-2xl">
-                            <img
+                            <Image
                                 src="/product/Paper Smart machine.webp"
                                 alt="Fillezy Facility"
-                                className="h-full w-full object-cover grayscale dark:brightness-50 transition-all duration-1000"
+                                fill
+                                priority
+                                className="object-cover grayscale dark:brightness-50 transition-all duration-1000"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                         </div>

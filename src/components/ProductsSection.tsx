@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, ShieldCheck, Zap, Globe, MessageSquare } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Zap, Globe } from "lucide-react";
+import Image from "next/image";
 import clsx from "clsx";
 import ContactModal, { ModalMode } from "./ContactModal";
 import { useState } from "react";
@@ -64,8 +65,8 @@ export default function ProductsSection() {
             {/* Decorative background circle */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-            <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+            <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-20 gap-6 md:gap-8">
                     <div className="max-w-2xl">
                         <motion.span
                             initial={{ opacity: 0, x: -20 }}
@@ -80,7 +81,7 @@ export default function ProductsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-5xl font-black tracking-tight text-foreground sm:text-7xl font-sans"
+                            className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight text-foreground font-sans"
                         >
                             The Bento of <br /><span className="text-primary italic font-light font-serif">Protection.</span>
                         </motion.h2>
@@ -96,7 +97,7 @@ export default function ProductsSection() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-8 lg:grid-cols-4 lg:grid-rows-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 lg:grid-cols-4 lg:grid-rows-2">
                     {products.map((product, index) => (
                         <motion.div
                             key={product.title}
@@ -105,7 +106,7 @@ export default function ProductsSection() {
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.7, delay: index * 0.1 }}
                             className={clsx(
-                                "group relative overflow-hidden rounded-[3rem] glass border border-foreground/5 p-12 transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] dark:hover:shadow-primary/10 hover:-translate-y-2",
+                                "group relative overflow-hidden rounded-[2rem] md:rounded-[3rem] glass border border-foreground/5 p-6 md:p-8 lg:p-12 transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] dark:hover:shadow-primary/10 hover:-translate-y-2",
                                 product.colSpan
                             )}
                         >
@@ -123,10 +124,10 @@ export default function ProductsSection() {
                                         </span>
                                         <product.icon size={22} className="text-foreground/20 group-hover:text-primary transition-all duration-500 group-hover:rotate-12" />
                                     </div>
-                                    <h3 className="text-4xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
+                                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
                                         {product.title}
                                     </h3>
-                                    <p className="mt-6 text-foreground/50 font-light leading-relaxed group-hover:text-foreground/70 transition-colors text-lg">
+                                    <p className="mt-4 md:mt-6 text-foreground/50 font-light leading-relaxed group-hover:text-foreground/70 transition-colors text-sm md:text-base lg:text-lg">
                                         {product.description}
                                     </p>
                                 </div>
@@ -148,9 +149,11 @@ export default function ProductsSection() {
                                 </div>
                             </div>
 
-                            <img
+                            <Image
                                 src={product.image}
                                 alt={product.title}
+                                width={600}
+                                height={600}
                                 className={clsx(
                                     "absolute bottom-0 right-0 w-3/4 object-contain opacity-20 transition-all duration-1000 ease-in-out",
                                     "group-hover:scale-105 group-hover:opacity-100 group-hover:-translate-x-8 group-hover:-translate-y-8 translate-x-12 translate-y-12",

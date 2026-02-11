@@ -19,9 +19,9 @@ const locations = [
         city: "Manufacturing",
         country: "Global",
         type: "PROD_HUB",
-        coords: "9_PLANTS_INDIA",
+        coords: "9_PLUS_PLANTS_INDIA",
         id: "NODE-02",
-        info: "9 Manufacturing plants across India supporting global supply chains.",
+        info: "9+ Manufacturing plants across India supporting global supply chains.",
         metric: "1250+ TEAM",
         delay: 0.2
     },
@@ -39,24 +39,24 @@ const locations = [
 
 export default function GlobalPresence() {
     return (
-        <section className="relative py-32 bg-[#0B0F14] overflow-hidden technical-grid industrial-dark-section">
+        <section className="relative py-6 md:py-32 bg-[#0B0F14] overflow-hidden technical-grid industrial-dark-section">
             {/* Architectural Grid Line */}
             <div className="absolute top-0 right-1/4 w-px h-full bg-primary/10 pointer-events-none" />
             <div className="absolute top-1/4 left-0 w-full h-px bg-primary/10 pointer-events-none" />
 
             {/* Technical Labels */}
-            <div className="absolute top-12 left-12 font-mono text-[9px] text-white/20 uppercase tracking-[0.4em] hidden lg:block">
+            <div className="absolute top-12 left-12 font-mono text-[9px] text-white/20 uppercase tracking-[0.1em] md:tracking-[0.4em] hidden lg:block whitespace-nowrap">
                 GLOBAL_OPERATIONS_HUB [ LAT: 28.61, LONG: 77.23 ]
             </div>
 
             <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-12">
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 md:mb-24 gap-12">
                     <div className="max-w-3xl">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="flex items-center gap-4 text-[11px] font-mono text-white/40 font-black uppercase tracking-[0.5em] mb-8"
+                            className="flex items-center gap-2 md:gap-4 text-[9px] md:text-[11px] font-mono text-white/40 font-black uppercase tracking-[0.1em] md:tracking-[0.5em] mb-4 md:mb-8 whitespace-nowrap"
                         >
                             <span className="h-px w-8 bg-primary" />
                             NETWORK_INFRASTRUCTURE
@@ -66,11 +66,11 @@ export default function GlobalPresence() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
-                            className="text-5xl font-black tracking-tight text-white lg:text-7xl uppercase leading-[0.85]"
+                            className="text-4xl md:text-6xl font-black tracking-tight text-white uppercase leading-none lg:leading-[0.85]"
                         >
                             Manufacturing & <br /> <span className="text-primary italic font-serif font-light lowercase">Partner Network</span>
                         </motion.h2>
-                        <p className="text-lg text-white/80 font-bold uppercase tracking-widest mt-4">
+                        <p className="text-lg md:text-xl text-white/80 font-medium uppercase tracking-widest mt-4">
                             Vertically integrated manufacturing supported by a global partner ecosystem.
                         </p>
                     </div>
@@ -81,7 +81,7 @@ export default function GlobalPresence() {
                         </div>
                         <div className="flex items-center gap-2">
                             <span className="h-px w-6 bg-white/10" />
-                            9 manufacturing plants · 1250+ team members · 24×7 support
+                            9+ manufacturing plants · 1250+ team members · 24×7 support
                         </div>
                     </div>
                 </div>

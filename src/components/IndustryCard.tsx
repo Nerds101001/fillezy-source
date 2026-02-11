@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
 
 interface IndustryProps {
@@ -22,10 +23,11 @@ export default function IndustryCard({ industry, index }: { industry: IndustryPr
         >
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
-                <img
+                <Image
                     src={industry.image}
                     alt={industry.title}
-                    className="h-full w-full object-cover opacity-30 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-20"
+                    fill
+                    className="object-cover opacity-30 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-20"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/80 to-transparent z-10" />
             </div>

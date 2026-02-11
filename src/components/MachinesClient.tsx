@@ -3,11 +3,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MachineCard from "@/components/MachineCard";
-import { motion } from "framer-motion";
-import { Download, CheckCircle2 } from "lucide-react";
+import { Download, Zap } from "lucide-react";
 import ContactModal, { ModalMode } from "./ContactModal";
 import { useState } from "react";
-
+import CategoryHero from "@/components/CategoryHero";
 import { machines } from "../data/machines";
 
 export default function MachinesClient() {
@@ -23,34 +22,22 @@ export default function MachinesClient() {
         <div className="bg-background min-h-screen">
             <Header />
             <main>
-                {/* Hero Section */}
-                <section className="relative pt-40 pb-20 px-6 border-b border-foreground/5 bg-foreground/5 grain">
-                    <div className="mx-auto max-w-7xl text-center">
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl font-black tracking-tighter text-foreground sm:text-7xl mb-6 uppercase"
-                        >
-                            Precision <span className="text-primary italic font-serif font-light">Machinery.</span>
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                            className="text-xl text-foreground/60 font-light max-w-2xl mx-auto"
-                        >
-                            High-velocity void fill systems engineered for the modern warehouse.
-                            Seamless integration, zero downtime.
-                        </motion.p>
-                    </div>
-                </section>
+                <CategoryHero
+                    title="Precision"
+                    subtitle="Machinery."
+                    description="High-velocity void fill systems engineered for the modern warehouse. Seamless integration, zero downtime."
+                    badgeText="PROTOCOL_DEPLOYED // MACHINES"
+                    icon={<Zap className="text-primary" size={24} />}
+                />
 
                 {/* Machines List */}
-                <section className="py-24 px-6">
-                    <div className="mx-auto max-w-7xl space-y-12">
-                        {machines.map((machine, index) => (
-                            <MachineCard key={machine.id} machine={machine} index={index} />
-                        ))}
+                <section className="py-24 px-5 lg:px-8">
+                    <div className="mx-auto max-w-7xl">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+                            {machines.map((machine, index) => (
+                                <MachineCard key={machine.id} machine={machine} index={index} />
+                            ))}
+                        </div>
                     </div>
                 </section>
 

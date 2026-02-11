@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Leaf, Recycle, ShieldCheck, Check, MessageSquare, Download, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import ContactModal, { ModalMode } from "./ContactModal";
 import { useState } from "react";
@@ -32,14 +33,15 @@ export default function MaterialCard({ material, index }: { material: MaterialPr
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="group relative overflow-hidden rounded-[2.5rem] glass border border-foreground/5 hover:border-primary/20 transition-all duration-500 hover:shadow-xl"
+            className="group relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem] glass border border-foreground/5 hover:border-primary/20 transition-all duration-500 hover:shadow-xl"
         >
-            <div className="aspect-square relative overflow-hidden bg-foreground/5">
+            <div className="aspect-video md:aspect-square relative overflow-hidden bg-foreground/5">
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10" />
-                <img
+                <Image
                     src={material.image}
                     alt={material.title}
-                    className="h-full w-full object-cover mix-blend-multiply dark:mix-blend-overlay opacity-80 transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                    fill
+                    className="object-cover mix-blend-multiply dark:mix-blend-overlay opacity-80 transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                 />
 
                 <div className="absolute top-6 left-6 z-20 flex flex-col gap-2">
@@ -59,7 +61,7 @@ export default function MaterialCard({ material, index }: { material: MaterialPr
                 )}
             </div>
 
-            <div className="p-8">
+            <div className="p-6 md:p-8">
                 <h3 className="text-2xl font-bold uppercase tracking-tight text-foreground mb-3">
                     {material.title}
                 </h3>

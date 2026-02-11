@@ -3,8 +3,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MaterialCard from "@/components/MaterialCard";
-import { motion } from "framer-motion";
-import { Leaf, Award, Recycle } from "lucide-react";
+import { Leaf, Award, Recycle, Layers } from "lucide-react";
+import CategoryHero from "@/components/CategoryHero";
 
 // Mock Data
 const materials = [
@@ -60,39 +60,17 @@ export default function MaterialsClient() {
         <div className="bg-background min-h-screen">
             <Header />
             <main>
-                {/* Hero Section */}
-                <section className="relative pt-40 pb-20 px-6 border-b border-foreground/5 bg-foreground/5 grain">
-                    <div className="mx-auto max-w-7xl text-center">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 text-green-600 dark:text-green-500 border border-green-500/20 text-[10px] font-bold uppercase tracking-widest mb-6"
-                        >
-                            <Leaf size={14} /> Sustainable Materials Technology
-                        </motion.div>
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl font-black tracking-tighter text-foreground sm:text-7xl mb-6 uppercase"
-                        >
-                            Advanced <br className="hidden sm:block" />
-                            <span className="text-primary italic font-serif font-light">Consumables.</span>
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                            className="text-xl text-foreground/60 font-light max-w-2xl mx-auto"
-                        >
-                            From certified compostable films to heavy-duty kraft paper.
-                            Engineered for maximum protection with minimal environmental impact.
-                        </motion.p>
-                    </div>
-                </section>
+                <CategoryHero
+                    title="Advanced"
+                    subtitle="Consumables."
+                    description="From certified compostable films to heavy-duty kraft paper. Engineered for maximum protection with minimal environmental impact."
+                    badgeText="PROTOCOL_DEPLOYED // MATERIALS"
+                    icon={<Layers className="text-primary" size={24} />}
+                />
 
                 {/* Certifications Bar */}
                 <section className="py-12 border-b border-foreground/5 bg-background">
-                    <div className="mx-auto max-w-7xl px-6 flex flex-wrap justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                    <div className="mx-auto max-w-7xl px-5 lg:px-6 flex flex-wrap justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
                         {/* This would be logos in real app, text for now */}
                         <div className="flex items-center gap-2 font-bold text-foreground/40 uppercase tracking-widest"><Award size={16} /> FSC Certified</div>
                         <div className="flex items-center gap-2 font-bold text-foreground/40 uppercase tracking-widest"><Recycle size={16} /> CPCB Approved</div>
@@ -101,7 +79,7 @@ export default function MaterialsClient() {
                 </section>
 
                 {/* Materials Grid */}
-                <section className="py-24 px-6 bg-background">
+                <section className="py-24 px-5 lg:px-8 bg-background">
                     <div className="mx-auto max-w-7xl">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {materials.map((material, index) => (

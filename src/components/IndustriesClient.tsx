@@ -3,10 +3,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import IndustryCard from "@/components/IndustryCard";
-import { motion } from "framer-motion";
 import { Factory } from "lucide-react";
 import ContactModal, { ModalMode } from "./ContactModal";
 import { useState } from "react";
+import CategoryHero from "@/components/CategoryHero";
 
 const industries = [
     {
@@ -63,39 +63,19 @@ export default function IndustriesClient() {
     };
 
     return (
-        <div className="bg-background min-h-screen">
+        <div className="bg-background min-h-screen" suppressHydrationWarning>
             <Header />
             <main>
-                {/* Hero Section */}
-                <section className="relative pt-40 pb-20 px-6 border-b border-foreground/5 bg-foreground/5 grain">
-                    <div className="mx-auto max-w-7xl text-center">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 text-[10px] font-bold uppercase tracking-widest mb-6"
-                        >
-                            <Factory size={14} /> Sector-Specific Intelligence
-                        </motion.div>
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl font-black tracking-tighter text-foreground sm:text-7xl mb-6 uppercase leading-[0.9]"
-                        >
-                            Tailored <span className="text-primary italic font-serif font-light">Solutions.</span>
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                            className="text-xl text-foreground/60 font-light max-w-2xl mx-auto"
-                        >
-                            Every industry has unique packaging demands. We engineer specific protocols to meet the velocity, protection, and sustainability standards of your sector.
-                        </motion.p>
-                    </div>
-                </section>
+                <CategoryHero
+                    title="Tailored"
+                    subtitle="Solutions."
+                    description="Every industry has unique packaging demands. We engineer specific protocols to meet the velocity, protection, and sustainability standards of your sector."
+                    badgeText="PROTOCOL_DEPLOYED // INDUSTRIES"
+                    icon={<Factory className="text-primary" size={24} />}
+                />
 
                 {/* Industries Grid */}
-                <section className="py-24 px-6 bg-background">
+                <section className="py-24 px-5 lg:px-8 bg-background">
                     <div className="mx-auto max-w-7xl">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {industries.map((industry, index) => (

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Download, Check, MessageSquare } from "lucide-react";
 import ContactModal, { ModalMode } from "./ContactModal";
 import { useState } from "react";
@@ -33,11 +34,12 @@ export default function MachineCard({ machine, index }: { machine: MachineProps;
         >
             <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
                 {/* Image Section */}
-                <div className="relative h-[400px] lg:h-full bg-foreground/5 overflow-hidden">
-                    <img
+                <div className="relative h-[300px] md:h-[400px] lg:h-full bg-foreground/5 overflow-hidden">
+                    <Image
                         src={machine.image}
                         alt={machine.title}
-                        className="h-full w-full object-contain p-12 transition-transform duration-700 group-hover:scale-110 mix-blend-multiply dark:mix-blend-overlay opacity-90"
+                        fill
+                        className="object-contain p-12 transition-transform duration-700 group-hover:scale-110 mix-blend-multiply dark:mix-blend-overlay opacity-90"
                     />
                     <div className="absolute top-8 left-8">
                         <span className="px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-foreground/10 text-[10px] font-bold uppercase tracking-widest text-primary">
@@ -47,9 +49,9 @@ export default function MachineCard({ machine, index }: { machine: MachineProps;
                 </div>
 
                 {/* Content Section */}
-                <div className="p-10 flex flex-col justify-between">
+                <div className="p-6 md:p-10 flex flex-col justify-between">
                     <div>
-                        <h3 className="text-3xl font-black uppercase tracking-tight text-foreground mb-4">
+                        <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-foreground mb-4">
                             {machine.title}
                         </h3>
                         <p className="text-foreground/60 font-light leading-relaxed mb-8">
