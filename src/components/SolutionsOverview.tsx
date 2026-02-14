@@ -104,7 +104,14 @@ export default function SolutionsOverview() {
 
                     <div className="relative z-10 flex flex-col sm:flex-row gap-4">
                         <button
-                            onClick={() => openContactModal("CATALOGUE")}
+                            onClick={() => {
+                                window.dispatchEvent(new CustomEvent('OPEN_CONTACT_MODAL', {
+                                    detail: {
+                                        mode: 'CATALOGUE',
+                                        fileUrl: '/Fillezy-Catalogue-Final.pdf'
+                                    }
+                                }));
+                            }}
                             className="group/btn relative inline-flex items-center gap-4 px-10 py-6 bg-white text-foreground font-black text-xs uppercase tracking-widest rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl"
                         >
                             <Download size={18} className="text-primary group-hover/btn:translate-y-1 transition-transform" />

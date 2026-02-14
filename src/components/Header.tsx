@@ -82,12 +82,14 @@ export default function Header() {
     const [isContactModalOpen, setIsContactModalOpen] = useState(false);
     const [contactMode, setContactMode] = useState<ModalMode>("QUOTATION");
     const [contactProductId, setContactProductId] = useState<string | undefined>(undefined);
+    const [contactFileUrl, setContactFileUrl] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         const handleOpenModal = (e: any) => {
-            const { mode, productId } = e.detail;
+            const { mode, productId, fileUrl } = e.detail;
             setContactMode(mode || "QUOTATION");
             setContactProductId(productId);
+            setContactFileUrl(fileUrl);
             setIsContactModalOpen(true);
         };
         window.addEventListener('OPEN_CONTACT_MODAL', handleOpenModal);
@@ -496,6 +498,7 @@ export default function Header() {
                 onClose={() => setIsContactModalOpen(false)}
                 initialMode={contactMode}
                 initialProductId={contactProductId}
+                fileUrl={contactFileUrl}
             />
         </header>
     );

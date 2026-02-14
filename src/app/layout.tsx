@@ -24,10 +24,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/logo/fill-fav.png', sizes: '32x32', type: 'image/png' },
-      { url: '/logo/fill-fav.png', sizes: '16x16', type: 'image/png' },
+      { url: '/logo/fill-fav.png?v=2', sizes: '32x32', type: 'image/png' },
+      { url: '/logo/fill-fav.png?v=2', sizes: '16x16', type: 'image/png' },
     ],
-    apple: '/logo/fill-fav.png',
+    apple: '/logo/fill-fav.png?v=2',
   },
   openGraph: {
     type: "website",

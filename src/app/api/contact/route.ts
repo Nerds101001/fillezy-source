@@ -52,6 +52,13 @@ export async function POST(req: Request) {
             fileUrl = body.fileUrl;
         }
 
+        // Convert relative URLs to absolute URLs for email links
+        if (fileUrl && fileUrl.startsWith('/')) {
+            const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fillezy.vercel.app';
+            fileUrl = `${baseUrl}${fileUrl}`;
+            console.log('[CONTACT API] Converted relative URL to absolute:', fileUrl);
+        }
+
         const product = allProducts.find(p => p.id === productId);
         const productName = product ? product.title : productId;
         const productCategory = product ? product.category : "N/A";

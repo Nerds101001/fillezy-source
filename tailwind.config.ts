@@ -9,6 +9,9 @@ const config: Config = {
         "./components/**/*.{js,ts,jsx,tsx,mdx}",
         "./app/**/*.{js,ts,jsx,tsx,mdx}",
     ],
+    safelist: [
+        'text-gray-500',  // Prevent purging form label colors
+    ],
     theme: {
         extend: {
             colors: {
