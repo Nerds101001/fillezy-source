@@ -389,7 +389,13 @@ export const allProducts: ProductDetail[] = [
         techId: "CSH-A2",
         description: "High-volume polyethylene void fill pillows for efficient shipping.",
         longDescription: "Fillezy® Air Cushions are the most efficient way to fill large voids. Made from 100% recyclable virgin polymers, these pillows reduce freight costs while providing reliable block-and-brace protection. Featuring a whopping 65 kg/sq cm strength, they are ideal for void fill, interleaving, and shipping container cushioning.",
-        image: "",
+        image: "/product/Fillezy Air Cushion v2.webp",
+        gallery: [
+            "/product/Fillezy Air Cushion v2.webp",
+            "/product/Fillezy Air Cushion Main v2.webp",
+            "/product/Fillezy Air Cushion2 v2.webp",
+            "/product/Fillezy Air Cushion Main 1 v2.webp"
+        ],
         videoUrl: "https://www.youtube.com/embed/UyZrtOo_DC0", // Shared machinery ref or specific cushion video
         category: "Materials",
         specs: [
