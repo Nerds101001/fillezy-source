@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ArrowLeft, Check, Shield, Zap, Box, Activity, Cpu, Gauge, Share2, Download, Terminal, Settings, ChevronRight, Play, FileText, ChevronDown, Copy } from "lucide-react";
+import { ArrowLeft, Check, Shield, Zap, Box, Activity, Cpu, Gauge, Share2, Download, Terminal, Settings, ChevronRight, ChevronLeft, Play, FileText, ChevronDown, Copy } from "lucide-react";
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { ProductDetail, allProducts } from "@/data/allProducts";
@@ -150,7 +150,7 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                                             }}
                                             className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-lg flex items-center justify-center text-foreground/60 hover:text-primary hover:bg-white transition-all opacity-0 group-hover/image:opacity-100 z-20"
                                         >
-                                            <ArrowLeft size={18} />
+                                            <ChevronLeft size={18} />
                                         </button>
                                         <button
                                             onClick={(e) => {
@@ -180,8 +180,8 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                                             key={idx}
                                             onClick={() => setActiveImage(img)}
                                             className={`relative flex-shrink-0 w-20 aspect-square rounded-xl overflow-hidden border-2 transition-all duration-200 ${activeImage === img
-                                                    ? 'border-primary opacity-100'
-                                                    : 'border-transparent opacity-60 hover:opacity-100 hover:border-black/5'
+                                                ? 'border-primary opacity-100'
+                                                : 'border-transparent opacity-60 hover:opacity-100 hover:border-black/5'
                                                 }`}
                                         >
                                             <div className="absolute inset-0 bg-[#F8F8F9]" />

@@ -51,7 +51,7 @@ export const allProducts: ProductDetail[] = [
             "/product/Hexa Paper Application 3.webp",
             "/product/Hexa Paper Application 4.png"
         ],
-        videoUrl: "https://www.youtube.com/embed/UyZrtOo_DC0",
+        videoUrl: "https://www.youtube.com/embed/WjgrvyX6p6A",
         category: "Machines",
         specialOffer: "Free Dispenser with 100 rolls*",
         specs: [

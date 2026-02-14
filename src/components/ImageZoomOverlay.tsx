@@ -30,26 +30,26 @@ export default function ImageZoomOverlay() {
                 onClick={() => setZoomImage(null)}
             >
                 {/* CONTROLS CONTAINER */}
+                {/* CONTROLS (ZOOM) */}
                 <div
-                    className="absolute top-8 right-8 flex items-center gap-4 z-[100000] cursor-auto"
+                    className="absolute top-8 right-24 flex items-center gap-2 bg-white rounded-full p-2 shadow-lg z-[100000] cursor-default"
                     onClick={(e) => e.stopPropagation()}
                 >
-                    <div className="flex items-center gap-2 bg-black/5 rounded-full p-1 shadow-sm border border-black/5">
-                        <button onClick={() => setScale(Math.max(1, scale - 0.5))} className="p-3 hover:bg-white rounded-full transition-colors cursor-pointer"><ZoomOut size={20} /></button>
-                        <span className="text-xs font-mono font-bold w-12 text-center select-none">{Math.round(scale * 100)}%</span>
-                        <button onClick={() => setScale(scale + 0.5)} className="p-3 hover:bg-white rounded-full transition-colors cursor-pointer"><ZoomIn size={20} /></button>
-                    </div>
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setZoomImage(null);
-                        }}
-                        className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center hover:scale-105 transition-transform shadow-xl cursor-pointer"
-                    >
-                        <X size={24} />
-                    </button>
+                    <button onClick={() => setScale(Math.max(1, scale - 0.5))} className="p-2 hover:bg-black/5 rounded-full transition-colors cursor-pointer active:scale-95"><ZoomOut size={20} /></button>
+                    <span className="text-xs font-mono font-bold w-12 text-center select-none text-black">{Math.round(scale * 100)}%</span>
+                    <button onClick={() => setScale(scale + 0.5)} className="p-2 hover:bg-black/5 rounded-full transition-colors cursor-pointer active:scale-95"><ZoomIn size={20} /></button>
                 </div>
+
+                {/* CLOSE BUTTON (SEPARATE) */}
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setZoomImage(null);
+                    }}
+                    className="absolute top-8 right-8 w-12 h-12 rounded-full bg-black text-white flex items-center justify-center hover:scale-105 hover:bg-primary transition-all shadow-xl cursor-pointer z-[100000] active:scale-95"
+                >
+                    <X size={24} />
+                </button>
 
                 <div
                     className="relative w-full h-full overflow-auto flex items-center justify-center"
