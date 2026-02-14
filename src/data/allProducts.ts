@@ -44,7 +44,7 @@ export const allProducts: ProductDetail[] = [
         image: "/product/Fillezy-Hexa-Paper.webp",
         gallery: [
             "/product/Fillezy-Hexa-Paper.webp",
-            "/product/Fillezy Hexa Papers.webp",
+            "/product/Fillezy-Hexa-Papers.webp",
             "/product/Hexa Paper Application.webp",
             "/product/Hexa Paper Application 1.webp",
             "/product/Hexa Paper Application 2.webp",
