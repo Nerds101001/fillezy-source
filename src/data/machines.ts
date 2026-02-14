@@ -65,7 +65,7 @@ export const machines: Machine[] = [
         id: "paper-eco",
         title: "Paper Eco™",
         description: "Sustainable, manual paper dispenser for versatile packing stations. Requires zero electricity and provides instant, eco-friendly void fill.",
-        image: "/product/Paper 01.webp",
+        image: "/product/Fillezy Eco Machine.webp",
         specs: [
             { label: "Operation", value: "Manual Plying" },
             { label: "Power", value: "Zero (No electricity)" },

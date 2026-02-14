@@ -237,7 +237,7 @@ export const allProducts: ProductDetail[] = [
         techId: "ECO-M0",
         description: "Sustainable no-electricity manual dispenser for decentralized stations.",
         longDescription: "The Fillezy® Eco Machine is our answer to sustainable, decentralized packaging needs. This system requires zero electricity, providing instant recycled void fill for low-to-medium volume stations. It effectively fills empty space in a box to prevent your product from moving and getting damaged. Easy to install frame design can be placed at any pack station.",
-        image: "/product/Paper 01.webp",
+        image: "/product/Fillezy Eco Machine.webp",
         category: "Machines",
         specs: [
             { label: "Dimensions", value: "621x621x1500mm" },

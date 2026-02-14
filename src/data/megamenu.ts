@@ -23,7 +23,7 @@ export const megamenuData: MegamenuCategory[] = [
             { id: "paper-shark", name: "Fillezy® Paper Shark Machine", techId: "SHK-M0", image: "/product/Paper Shark.webp", href: "/products/paper-shark" },
             { id: "fillezy-rapid", name: "Fillezy® Rapid Machine", techId: "RAP-M0", image: "/product/Fillezy Rapid.webp", href: "/products/fillezy-rapid" },
             { id: "paper-smart", name: "Fillezy® Paper Smart Machine", techId: "SMT-M0", image: "/product/Paper Smart machine.webp", href: "/products/paper-smart" },
-            { id: "paper-eco", name: "Fillezy® Paper Eco Dispenser", techId: "ECO-M0", image: "/product/Paper 01.webp", href: "/products/paper-eco" }
+            { id: "paper-eco", name: "Fillezy® Paper Eco Dispenser", techId: "ECO-M0", image: "/product/Fillezy Eco Machine.webp", href: "/products/paper-eco" }
         ]
     },
     {
