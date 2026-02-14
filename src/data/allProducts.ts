@@ -454,7 +454,7 @@ export const allProducts: ProductDetail[] = [
             "/product/Fillezy Quilt v2.webp",
             "/product/Rapid Quilt v2.webp",
             "/product/Fillezy Quilt Applications v2.webp",
-            "/product/Fillezy Quilt Application 1 v2.webp"
+            "/product/Fillezy Quilt Applications 1 v2.webp"
         ],
         category: "Materials",
         specs: [
