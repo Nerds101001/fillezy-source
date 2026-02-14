@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ProductDetail, allProducts } from "@/data/allProducts";
 import BrandName from "./BrandName";
 import ContactModal, { ModalMode } from "./ContactModal";
+import ImageZoomOverlay from "./ImageZoomOverlay";
 
 const renderTitle = (title: string) => {
     const parts = title.split("®");
@@ -60,6 +61,9 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                 style={{ scaleX: scrollYProgress }}
             />
 
+            {/* ZOOM MODAL */}
+            <ImageZoomOverlay />
+
             {/* BREADCRUMB / UTILITY NAV - Calibrated clearance */}
             <div className="pt-32 md:pt-44 mb-[15px] relative z-30">
                 <div className="bg-white/90 backdrop-blur-md border-b border-black/5">
@@ -89,11 +93,12 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                     <div className="lg:col-span-8 space-y-12">
 
                         {/* CINEMATIC GALLERY */}
+                        {/* CINEMATIC GALLERY WITH NAV & ZOOM */}
                         <section className="relative group space-y-6">
                             <motion.div
                                 initial={{ opacity: 0, y: 0 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="relative overflow-hidden rounded-[3rem] bg-[#F8F8F9] border border-black/[0.03] aspect-[16/10] flex items-center justify-center shadow-2xl shadow-black/5"
+                                className="relative overflow-hidden rounded-[3rem] bg-[#F8F8F9] border border-black/[0.03] aspect-[16/10] flex items-center justify-center shadow-2xl shadow-black/5 group/image"
                             >
                                 <div className="absolute inset-0 technical-grid opacity-[0.03] pointer-events-none" />
 
@@ -104,9 +109,10 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                                 </div>
 
                                 {/* TECHNICAL CORNER BRACKETS */}
-                                <div className="absolute top-12 left-12 w-8 h-8 border-l-2 border-t-2 border-black/10 group-hover:border-primary/40 transition-colors duration-700" />
-                                <div className="absolute bottom-12 right-12 w-8 h-8 border-r-2 border-b-2 border-black/10 group-hover:border-primary/40 transition-colors duration-700" />
+                                <div className="absolute top-12 left-12 w-8 h-8 border-l-2 border-t-2 border-black/10 group-hover/image:border-primary/40 transition-colors duration-700" />
+                                <div className="absolute bottom-12 right-12 w-8 h-8 border-r-2 border-b-2 border-black/10 group-hover/image:border-primary/40 transition-colors duration-700" />
 
+                                {/* MAIN IMAGE WITH ZOOM CLICK */}
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={activeImage}
@@ -114,7 +120,13 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 1.05 }}
                                         transition={{ duration: 0.5, ease: "easeOut" }}
-                                        className="relative w-[85%] h-[85%]"
+                                        className="relative w-[85%] h-[85%] cursor-zoom-in"
+                                        onClick={() => {
+                                            // Simple Zoom Logic: Open in new tab or modal. For now, we'll use a basic lightbox state if we had one, 
+                                            // but user asked for "zoom option". Let's implement a toggle state for a full-screen overlay.
+                                            // We will add a state 'isZoomOpen' in the component scope.
+                                            window.dispatchEvent(new CustomEvent("OPEN_IMAGE_ZOOM", { detail: { image: activeImage } }));
+                                        }}
                                     >
                                         <Image
                                             src={activeImage}
@@ -126,25 +138,59 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                                     </motion.div>
                                 </AnimatePresence>
 
-                                <div className="absolute bottom-12 right-12 flex flex-col items-end gap-1">
+                                {/* NAVIGATION ARROWS */}
+                                {product.gallery && product.gallery.length > 1 && (
+                                    <>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                const idx = product.gallery!.indexOf(activeImage);
+                                                const prevIdx = idx === 0 ? product.gallery!.length - 1 : idx - 1;
+                                                setActiveImage(product.gallery![prevIdx]);
+                                            }}
+                                            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-lg flex items-center justify-center text-foreground/60 hover:text-primary hover:bg-white transition-all opacity-0 group-hover/image:opacity-100 z-20"
+                                        >
+                                            <ArrowLeft size={18} />
+                                        </button>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                const idx = product.gallery!.indexOf(activeImage);
+                                                const nextIdx = (idx + 1) % product.gallery!.length;
+                                                setActiveImage(product.gallery![nextIdx]);
+                                            }}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-lg flex items-center justify-center text-foreground/60 hover:text-primary hover:bg-white transition-all opacity-0 group-hover/image:opacity-100 z-20"
+                                        >
+                                            <ChevronRight size={18} />
+                                        </button>
+                                    </>
+                                )}
+
+                                <div className="absolute bottom-12 right-12 flex flex-col items-end gap-1 pointer-events-none">
                                     <span className="text-[9px] md:text-[10px] font-mono font-black text-black/20 uppercase tracking-[0.1em] md:tracking-[0.5em] whitespace-nowrap">SYSTEM_VIEW_ACTIVE</span>
                                     <Shield size={20} className="text-primary/40" />
                                 </div>
                             </motion.div>
 
-                            {/* THUMBNAIL STRIP (NEW) */}
+                            {/* THUMBNAIL STRIP (REFINED STYLING) */}
                             {product.gallery && product.gallery.length > 0 && (
-                                <div className="flex gap-4 justify-center">
+                                <div className="flex gap-3 justify-center overflow-x-auto pb-2 px-4 scrollbar-hide">
                                     {product.gallery.map((img, idx) => (
                                         <button
                                             key={idx}
                                             onClick={() => setActiveImage(img)}
-                                            className={`relative w-24 aspect-[4/3] rounded-2xl overflow-hidden border-2 transition-all p-2 bg-[#F8F8F9] ${activeImage === img ? 'border-primary shadow-lg shadow-primary/20 scale-105' : 'border-transparent opacity-50 hover:opacity-100'}`}
+                                            className={`relative flex-shrink-0 w-20 aspect-square rounded-xl overflow-hidden transition-all duration-300 ${activeImage === img
+                                                ? 'ring-2 ring-primary ring-offset-2 scale-105 shadow-lg'
+                                                : 'opacity-60 hover:opacity-100 hover:scale-105 ring-1 ring-black/5'
+                                                }`}
                                         >
-                                            <Image src={img} alt={`${product.title} view ${idx + 1}`} fill className="object-contain mix-blend-multiply transition-all" />
-                                            {activeImage === img && (
-                                                <div className="absolute inset-0 border-2 border-primary rounded-2xl pointer-events-none" />
-                                            )}
+                                            <div className="absolute inset-0 bg-[#F8F8F9]" />
+                                            <Image
+                                                src={img}
+                                                alt={`${product.title} view ${idx + 1}`}
+                                                fill
+                                                className="object-contain mix-blend-multiply p-2"
+                                            />
                                         </button>
                                     ))}
                                 </div>
