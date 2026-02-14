@@ -169,7 +169,7 @@ export const allProducts: ProductDetail[] = [
         techId: "RAP-M0",
         description: "Universal air cushion generator inflating cushions and quilts at 37m/min.",
         longDescription: "The Fillezy® Rapid is a revolutionary universal device capable of producing multiple variants of air cushioning products. Developed by our dedicated R&D team, it inflates all films from 200mm cushions to 800mm wide quilts. Weighing less than 10kg, it is portable, practical, and programmable with 10 presets to suit diverse industrial requirements.",
-        image: "/product/Fillezy Rapid Orange.webp",
+        image: "/product/Fillezy Rapid Orange v2.webp",
         videoUrl: "https://www.youtube.com/embed/UyZrtOo_DC0",
         videoGallery: [
             "https://www.youtube.com/embed/6WY1rIb0EN4",
@@ -187,17 +187,17 @@ export const allProducts: ProductDetail[] = [
         ],
         features: ["RFID Film Recognition", "Patented Thermal Control", "10 Programmable Presets", "Assembled in India // US Tech"],
         gallery: [
-            "/product/Fillezy Rapid Orange.webp",
-            "/product/Fillezy Rapid Red.webp",
-            "/product/Fillezy Rapid Grey.webp",
+            "/product/Fillezy Rapid Orange v2.webp",
+            "/product/Fillezy Rapid Red v2.webp",
+            "/product/Fillezy Rapid Grey v2.webp",
             "/product/Rapid Bubbles.webp",
             "/product/Rapid Film.webp",
             "/product/Rapid Quilt.webp"
         ],
         colorImages: {
-            "Safety Orange": "/product/Fillezy Rapid Orange.webp",
-            "Industrial Red": "/product/Fillezy Rapid Red.webp",
-            "Tech Grey": "/product/Fillezy Rapid Grey.webp"
+            "Safety Orange": "/product/Fillezy Rapid Orange v2.webp",
+            "Industrial Red": "/product/Fillezy Rapid Red v2.webp",
+            "Tech Grey": "/product/Fillezy Rapid Grey v2.webp"
         },
         suitableIndustries: ["E-commerce", "Pharmacy", "Retail Distribution", "Sensitive Instruments"],
         variants: [
@@ -235,8 +235,15 @@ export const allProducts: ProductDetail[] = [
         techId: "SMT-M2",
         description: "Industrial paper pad cushion generator for heavy-duty protection.",
         longDescription: "The Fillezy® Paper-Smart Machine is the industrial standard for generating high-density paper pads. It transforms multi-ply Kraft paper into structural cushions that provide superior shock absorption for heavy automotive and engineering parts. Featuring an automated blade cutter and instant start/stop logic, it maximizes throughput while maintaining 100% compostability.",
-        image: "/product/Fillezy Paper Smart Machine.webp",
-        videoUrl: "https://www.fillezy.com/wp-content/uploads/2020/01/Fillezy-Paper-Smart-Video.mp4",
+        image: "/product/Fillezy Paper Smarts.webp",
+        videoUrl: "https://www.youtube.com/embed/UyZrtOo_DC0", // Placeholder until verified, keeping valid structure
+        gallery: [
+            "/product/Fillezy Paper Smarts.webp",
+            "/product/Fillezy Paper Smarts 1.webp",
+            "/product/Fillezy Paper Smarts 2.webp",
+            "/product/Fillezy Paper Smarts 3.webp",
+            "/product/Fillezy Paper Smarts 4.webp"
+        ],
         category: "Machines",
         specs: [
             { label: "Operation", value: "Instant Start / Stop" },

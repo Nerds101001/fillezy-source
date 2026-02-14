@@ -21,7 +21,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     }
 
     return (
-        <div className="bg-background">
+        <div className="bg-background" suppressHydrationWarning>
             <Header />
             <ProductDetailContent product={product} />
             <Footer />
