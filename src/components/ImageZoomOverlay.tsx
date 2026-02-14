@@ -12,6 +12,14 @@ export default function ImageZoomOverlay() {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setZoomImage(null);
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
+    useEffect(() => {
         setMounted(true);
         const handleOpen = (e: CustomEvent) => {
             setZoomImage(e.detail.image);
