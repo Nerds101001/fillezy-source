@@ -449,10 +449,12 @@ export const allProducts: ProductDetail[] = [
         techId: "QLT-A3",
         description: "Wide-format protection for handbags, accessories, and surface wrapping.",
         longDescription: "Fillezy® Air Quilts are specifically designed for wrapping large surfaces and filling tight spaces in luxury goods like leather bags. The low-pressure pillow logic with air transfer makes these cushions extremely easy to pack into awkward spaces. Our proprietary blend provides outstanding puncture resistance for sensitive transit.",
-        image: "/product/Fillezy Air QUilts v2.webp",
+        image: "/product/Fillezy Quilt v2.webp",
         gallery: [
-            "/product/Fillezy Air QUilts v2.webp",
-            "/product/Rapid Quilt v2.webp"
+            "/product/Fillezy Quilt v2.webp",
+            "/product/Rapid Quilt v2.webp",
+            "/product/Fillezy Quilt Applications v2.webp",
+            "/product/Fillezy Quilt Application 1 v2.webp"
         ],
         category: "Materials",
         specs: [
