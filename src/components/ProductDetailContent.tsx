@@ -441,7 +441,8 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                         </section>
 
                         {/* CINEMATIC VIDEO HUB (NEW) */}
-                        {product.videoUrl && (
+                        {/* CINEMATIC VIDEO HUB (NEW) */}
+                        {(product.videoGallery || product.videoUrl) && (
                             <section className="space-y-6">
                                 <div className="flex items-center gap-3 px-5 md:px-0">
                                     <div className="w-1.5 h-1.5 rounded-full bg-primary" />
@@ -449,13 +450,42 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                                 </div>
                                 <div className="relative aspect-video rounded-[3rem] overflow-hidden bg-black border border-black/5 group shadow-2xl">
                                     <iframe
-                                        src={product.videoUrl}
+                                        src={product.videoGallery ? product.videoGallery[currentVideoIndex] : product.videoUrl}
                                         className="absolute inset-0 w-full h-full grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen
                                     ></iframe>
                                     <div className="absolute inset-0 pointer-events-none border-[1px] border-white/10 rounded-[3rem]" />
-                                    <div className="absolute top-8 right-8 pointer-events-none">
+
+                                    {/* VIDEO CONTROLS */}
+                                    {product.videoGallery && product.videoGallery.length > 1 && (
+                                        <>
+                                            <button
+                                                onClick={() => setCurrentVideoIndex(prev => (prev === 0 ? product.videoGallery!.length - 1 : prev - 1))}
+                                                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-primary transition-all z-20"
+                                            >
+                                                <ChevronLeft size={20} />
+                                            </button>
+                                            <button
+                                                onClick={() => setCurrentVideoIndex(prev => (prev === product.videoGallery!.length - 1 ? 0 : prev + 1))}
+                                                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-primary transition-all z-20"
+                                            >
+                                                <ChevronRight size={20} />
+                                            </button>
+
+                                            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                                                {product.videoGallery.map((_, idx) => (
+                                                    <button
+                                                        key={idx}
+                                                        onClick={() => setCurrentVideoIndex(idx)}
+                                                        className={`w-2 h-2 rounded-full transition-all ${currentVideoIndex === idx ? 'bg-primary w-6' : 'bg-white/30 hover:bg-white/60'}`}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </>
+                                    )}
+
+                                    <div className="absolute top-8 right-8 pointer-events-none z-10">
                                         <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-black/40 backdrop-blur-md border border-white/10">
                                             <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
                                             <span className="text-[8px] font-mono font-black text-white tracking-[0.3em]">REC_LIVE</span>

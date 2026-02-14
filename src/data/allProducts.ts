@@ -22,6 +22,7 @@ export interface ProductDetail {
     image: string;
     gallery?: string[]; // Optional array of additional cinematic images
     videoUrl?: string; // Optional cinematic video URL
+    videoGallery?: string[]; // Optional array of multiple cinematic video URLs
     techId: string;
     category: string;
     specs: TechnicalSpec[];
@@ -168,8 +169,15 @@ export const allProducts: ProductDetail[] = [
         techId: "RAP-M0",
         description: "Universal air cushion generator inflating cushions and quilts at 37m/min.",
         longDescription: "The Fillezy® Rapid is a revolutionary universal device capable of producing multiple variants of air cushioning products. Developed by our dedicated R&D team, it inflates all films from 200mm cushions to 800mm wide quilts. Weighing less than 10kg, it is portable, practical, and programmable with 10 presets to suit diverse industrial requirements.",
-        image: "/product/Fillezy Rapid.webp",
+        image: "/product/Fillezy Rapid Orange.png",
         videoUrl: "https://www.youtube.com/embed/UyZrtOo_DC0",
+        videoGallery: [
+            "https://www.youtube.com/embed/6WY1rIb0EN4",
+            "https://www.youtube.com/embed/xCCLPySnkOg",
+            "https://www.youtube.com/embed/VMBSng_gGG0",
+            "https://www.youtube.com/embed/putyMACb5Bs",
+            "https://www.youtube.com/embed/Kea_HESxJ44"
+        ],
         category: "Machines",
         specs: [
             { label: "Max Speed", value: "37 m/min" },
@@ -179,24 +187,22 @@ export const allProducts: ProductDetail[] = [
         ],
         features: ["RFID Film Recognition", "Patented Thermal Control", "10 Programmable Presets", "Assembled in India // US Tech"],
         gallery: [
-            "/product/Fillezy Rapid.webp",
-            "/product/Fillezy Rapid Red.webp",
-            "/product/Fillezy Rapid Orange.webp",
-            "/product/Fillezy Rapid Grey.webp",
+            "/product/Fillezy Rapid Orange.png",
+            "/product/Fillezy Rapid Red.png",
+            "/product/Fillezy Rapid Grey.png",
             "/product/Rapid Bubbles.webp",
             "/product/Rapid Film.webp",
             "/product/Rapid Quilt.webp"
         ],
         colorImages: {
-            "Standard White": "/product/Fillezy Rapid.webp",
-            "Industrial Red": "/product/Fillezy Rapid Red.webp",
-            "Safety Orange": "/product/Fillezy Rapid Orange.webp",
-            "Tech Grey": "/product/Fillezy Rapid Grey.webp"
+            "Safety Orange": "/product/Fillezy Rapid Orange.png",
+            "Industrial Red": "/product/Fillezy Rapid Red.png",
+            "Tech Grey": "/product/Fillezy Rapid Grey.png"
         },
         suitableIndustries: ["E-commerce", "Pharmacy", "Retail Distribution", "Sensitive Instruments"],
         variants: [
             { label: "Model Variant", options: ["RAPID_X1 (Std)", "RAPID_PRO (Extreme)"] },
-            { label: "Machine Color", options: ["Standard White", "Industrial Red", "Safety Orange", "Tech Grey"] },
+            { label: "Machine Color", options: ["Safety Orange", "Industrial Red", "Tech Grey"] },
             { label: "Integration", options: ["Overhead Bin", "Winder Ready", "Movable Trolley"] }
         ],
         applicationTables: [
