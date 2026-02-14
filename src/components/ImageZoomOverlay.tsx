@@ -63,9 +63,14 @@ export default function ImageZoomOverlay() {
                 <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-[999999]">
                     <motion.div
                         animate={{ scale }}
-                        transition={{ duration: 0.3 }}
-                        className="relative w-full h-full max-w-7xl max-h-[85vh] p-10 pointer-events-auto flex items-center justify-center"
+                        transition={{ duration: 0.1 }}
+                        className="relative w-full h-full max-w-7xl max-h-[85vh] p-10 pointer-events-auto flex items-center justify-center cursor-zoom-in active:cursor-grabbing"
                         onClick={(e) => e.stopPropagation()}
+                        onWheel={(e) => {
+                            e.stopPropagation();
+                            const newScale = scale + (e.deltaY > 0 ? -0.2 : 0.2);
+                            setScale(Math.min(Math.max(1, newScale), 5));
+                        }}
                     >
                         {zoomImage && (
                             <Image
