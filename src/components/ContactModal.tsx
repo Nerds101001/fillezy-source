@@ -289,7 +289,7 @@ export default function ContactModal({ isOpen, onClose, initialMode = "QUOTATION
                                     <form onSubmit={handleSubmit} className="space-y-3 lg:space-y-4">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
                                             <div className="space-y-1 lg:space-y-1.5">
-                                                <label className="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] ml-1">Full Name*</label>
+                                                <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Full Name*</label>
                                                 <input
                                                     required
                                                     type="text"
@@ -300,7 +300,7 @@ export default function ContactModal({ isOpen, onClose, initialMode = "QUOTATION
                                                 />
                                             </div>
                                             <div className="space-y-1 lg:space-y-1.5">
-                                                <label className="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] ml-1">Phone Number*</label>
+                                                <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Phone Number*</label>
                                                 <input
                                                     required
                                                     type="tel"
@@ -313,7 +313,7 @@ export default function ContactModal({ isOpen, onClose, initialMode = "QUOTATION
                                         </div>
 
                                         <div className="space-y-1 lg:space-y-1.5">
-                                            <label className="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] ml-1">Business Email*</label>
+                                            <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Business Email*</label>
                                             <input
                                                 required
                                                 type="email"
@@ -326,7 +326,7 @@ export default function ContactModal({ isOpen, onClose, initialMode = "QUOTATION
 
                                         {!isDownloadMode && (
                                             <div className="space-y-1 lg:space-y-2">
-                                                <label className="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] ml-1">Project Details*</label>
+                                                <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">Project Details*</label>
                                                 <textarea
                                                     required
                                                     rows={2}
@@ -340,7 +340,7 @@ export default function ContactModal({ isOpen, onClose, initialMode = "QUOTATION
 
                                         {!isDownloadMode && (
                                             <div className="space-y-1 lg:space-y-1.5">
-                                                <label className="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] ml-1">System Selection</label>
+                                                <label className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-1">System Selection</label>
                                                 <div className="relative">
                                                     <select
                                                         className="w-full bg-[#F8FAFC] border border-black/5 rounded-xl px-4 py-3 lg:px-6 lg:py-3 text-black font-semibold focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all text-sm appearance-none"

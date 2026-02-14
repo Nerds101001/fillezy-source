@@ -23,7 +23,11 @@ export const metadata: Metadata = {
     canonical: "https://www.fillezy.com",
   },
   icons: {
-    icon: '/logo/favicon.webp',
+    icon: [
+      { url: '/logo/Fillezy Stack.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo/Fillezy Stack.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: '/logo/Fillezy Stack.png',
   },
   openGraph: {
     type: "website",
