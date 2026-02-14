@@ -206,7 +206,7 @@ export const allProducts: ProductDetail[] = [
         techId: "SMT-M2",
         description: "Industrial paper pad cushion generator for heavy-duty protection.",
         longDescription: "The Fillezy® Paper-Smart Machine is the industrial standard for generating high-density paper pads. It transforms multi-ply Kraft paper into structural cushions that provide superior shock absorption for heavy automotive and engineering parts. Featuring an automated blade cutter and instant start/stop logic, it maximizes throughput while maintaining 100% compostability.",
-        image: "/product/Paper smart pad.webp",
+        image: "/product/Fillezy Paper Smart Machine.webp",
         videoUrl: "https://www.fillezy.com/wp-content/uploads/2020/01/Fillezy-Paper-Smart-Video.mp4",
         category: "Machines",
         specs: [
@@ -553,7 +553,13 @@ export const allProducts: ProductDetail[] = [
         techId: "AER-P6",
         description: "Compostable, FSC-certified paper air cushions for green supply chains.",
         longDescription: "Paper-Aer is the premier environmentally friendly alternative to traditional air cushions. Made of flexible recycled paper and FSC-compliant materials, these cushions are fully compostable and biodegradable. The unique inner sealing layer is also made of bio-plastic that degrades naturally, ensuring zero damage to both products and the planet.",
-        image: "/product/Fillezy-Paper-Aer.webp",
+        image: "/product/Aer Paper Cushion.webp",
+        gallery: [
+            "/product/Aer Paper Cushion.webp",
+            "/product/Aer Paper Cushion 1.webp",
+            "/product/Aer Paper Cushion 2.webp",
+            "/product/Aer Paper Cushion 3.webp"
+        ],
         category: "Materials",
         specs: [
             { label: "Eco-Rating", value: "100% Compostable" },
@@ -804,7 +810,7 @@ export const allProducts: ProductDetail[] = [
         techId: "INT-M3",
         description: "Modular material handling bins with high-load 360-degree mobility.",
         longDescription: "Engineered for lean manufacturing environments, Fillezy® Movable Bins provide flexible accumulation and transfer of protective materials. These bins feature a reinforced industrial chassis and high-load casters with 360-degree rotation for effortless maneuverability. Equipped with magnetic locks and optional anti-static coating, they are the standard for mobile fulfillment stations.",
-        image: "/product/FIlezy Handling Systems.webp",
+        image: "/product/Fillezy Bins.webp",
         category: "Integrations",
         specs: [
             { label: "Volume", value: "1.2 Cubic Meters" },
@@ -825,7 +831,7 @@ export const allProducts: ProductDetail[] = [
         techId: "INT-W4",
         description: "Precision winding system for off-line air cushion roll production.",
         longDescription: "The Fillezy® Industrial Winder is a high-speed attachment designed to automate the collection of inflated cushions, quilts, and bubbles. Synchronized with the Fillezy Rapid or Air Master series, it eliminates manual winding by creating perfectly tensioned industrial-grade rolls. This system is essential for regional hubs and centralized production where materials are prepared off-line for station-wide distribution.",
-        image: "/product/FIlezy Handling Systems.webp",
+        image: "/product/Fillezy-Winder.webp",
         category: "Integrations",
         specs: [
             { label: "Winding Speed", value: "Up to 37 m/min" },
