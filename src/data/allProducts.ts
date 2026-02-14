@@ -449,7 +449,11 @@ export const allProducts: ProductDetail[] = [
         techId: "QLT-A3",
         description: "Wide-format protection for handbags, accessories, and surface wrapping.",
         longDescription: "Fillezy® Air Quilts are specifically designed for wrapping large surfaces and filling tight spaces in luxury goods like leather bags. The low-pressure pillow logic with air transfer makes these cushions extremely easy to pack into awkward spaces. Our proprietary blend provides outstanding puncture resistance for sensitive transit.",
-        image: "/product/Fillezy Air QUilts.webp",
+        image: "/product/Fillezy Air QUilts.webp?v=4",
+        gallery: [
+            "/product/Fillezy Air QUilts.webp?v=4",
+            "/product/Rapid Quilt.webp?v=4"
+        ],
         category: "Materials",
         specs: [
             { label: "Roll Length", value: "250 mtr / 500 mtr" },
@@ -501,7 +505,13 @@ export const allProducts: ProductDetail[] = [
         techId: "TUB-A4",
         description: "Individual chamber failsafe technology for bottle and electronics protection.",
         longDescription: "Fillezy® Air Tubes utilize two-way folding air tube technology to offer exceptional corner protection. Each chamber is independently inflated, making it excellent for shielding sharp-edged tin products, bottles, and breakable pottery. The bags hold items perfectly in place, guarding against impact and vibration during high-speed transit.",
-        image: "/product/Fillezy Air Tubes.webp",
+        image: "/product/Fillezy Air Tubes.webp?v=4",
+        gallery: [
+            "/product/Fillezy Air Tubes.webp?v=4",
+            "/product/Fillezy Tube Application.webp?v=4",
+            "/product/Fillezy Tube Application 1.webp?v=4",
+            "/product/Fillezy Tube APplicaitons 2.webp?v=4"
+        ],
         category: "Materials",
         specs: [
             { label: "Folding Type", value: "2-Way Folding Tech" },
