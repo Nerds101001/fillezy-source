@@ -328,7 +328,14 @@ export const allProducts: ProductDetail[] = [
         techId: "BUB-A1",
         description: "Industrial-strength air bubble sheets capable of withstanding 120kg loads.",
         longDescription: "Fillezy® Air Bubbles provide ultra-reliable surface protection. Our proprietary film blend possesses a strength that allows a 120kg load to stand on the bubbles without puncturing. Designed for wrapping, void fill, and corner protection, it is 100% recyclable and available with Rust-X VCI for metal protection.",
-        image: "/product/Air Bubbles.webp",
+        image: "/product/Fillezy_Bubble.webp",
+        videoUrl: "https://www.youtube.com/embed/xCCLPySnkOg",
+        gallery: [
+            "/product/Fillezy_Bubble.webp",
+            "/product/Fillezy Bubble Applications.webp",
+            "/product/Fillezy Bubble Applications1.webp",
+            "/product/Air Bubbles.webp"
+        ],
         category: "Materials",
         specs: [
             { label: "Load Rating", value: "120 kg (No Puncture)" },
