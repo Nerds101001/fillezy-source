@@ -95,11 +95,19 @@ export const allProducts: ProductDetail[] = [
     },
     {
         id: "paper-shark",
-        title: "Fillezy® Paper Shark Machine",
-        techId: "SHK-M0",
-        description: "Ultra-high-speed void fill system delivering 150m/min dispensing velocity.",
-        longDescription: "The Fillezy® Paper Shark is the fastest method for void space filling, dispensing 100% recyclable and compostable paper at up to 150 meters per minute. It is a systematic, high-speed application that secures products to prevent transmit damages. Switching to this eco-friendly option can reduce packaging costs by half compared to traditional bubbles, utilizing pre-perforation technology for easy handling.",
-        image: "/product/Paper Shark.webp",
+        title: "Fillezy® Paper Shark",
+        techId: "SHK-M3",
+        description: "Next-gen high-speed paper cushioning system for rapid fulfillment.",
+        longDescription: "The Fillezy® Paper Shark is designed for speed and versatility. It rapidly converts kraft paper into effective void fill and cushioning, featuring a unique 'Shark' tear-assist mechanism for quick, effortless packing. Ideal for high-volume e-commerce environments requiring sustainable, fast-paced protection.",
+        image: "/product/Paper-Shark.webp",
+        gallery: [
+            "/product/Paper-Shark.webp",
+            "/product/Paper-Shark-1.webp",
+            "/product/Paper-Shark-Application.webp",
+            "/product/Paper-Shark-Application-1.webp",
+            "/product/Paper-Shark-Application-2.webp",
+            "/product/Paper-Shark-Application-3.webp"
+        ],
         category: "Machines",
         specs: [
             { label: "Dimension", value: "621x621x1500mm" },
@@ -235,44 +243,7 @@ export const allProducts: ProductDetail[] = [
             }
         ]
     },
-    {
-        id: "paper-shark",
-        title: "Fillezy® Paper Shark",
-        techId: "SHK-M3",
-        description: "Next-gen high-speed paper cushioning system for rapid fulfillment.",
-        longDescription: "The Fillezy® Paper Shark is designed for speed and versatility. It rapidly converts kraft paper into effective void fill and cushioning, featuring a unique 'Shark' tear-assist mechanism for quick, effortless packing. Ideal for high-volume e-commerce environments requiring sustainable, fast-paced protection.",
-        image: "/product/Paper-Shark.webp",
-        videoUrl: "https://www.youtube.com/embed/UyZrtOo_DC0",
-        category: "Machines",
-        specs: [
-            { label: "Speed", value: "High Velocity" },
-            { label: "Mechanism", value: "Shark-Tear Assist" },
-            { label: "Material", value: "Kraft Paper" },
-            { label: "Operation", value: "Auto/Pedal" }
-        ],
-        features: ["Shark-Tear Technology", "Jam-Free Design", "Compact Footprint", "100% Recyclable Output"],
-        gallery: [
-            "/product/Paper-Shark.webp",
-            "/product/Paper-Shark-1.webp",
-            "/product/Paper-Shark-Application.webp",
-            "/product/Paper-Shark-Application-1.webp",
-            "/product/Paper-Shark-Application-2.webp",
-            "/product/Paper-Shark-Application-3.webp"
-        ],
-        suitableIndustries: ["E-commerce", "3PL Logistics", "Retail Distribution"],
-        applicationTables: [
-            {
-                title: "Technical Matrix: Paper Shark",
-                headers: ["Parameter", "Technical Value"],
-                rows: [
-                    ["Cutting Logic", "Shark-Tear Assist"],
-                    ["Speed", "Rapid Output"],
-                    ["Eco Status", "100% Biodegradable"],
-                    ["Warranty", "Industrial Standard"]
-                ]
-            }
-        ]
-    },
+
     {
         id: "paper-eco",
         title: "Fillezy® Paper Eco Dispenser",
