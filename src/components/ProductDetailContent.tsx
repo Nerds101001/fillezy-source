@@ -535,7 +535,15 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                                     </div>
                                     <div className="space-y-4">
                                         {product.variants.map((variant, i) => (
-                                            <VariantSelector key={i} variant={variant} />
+                                            <VariantSelector
+                                                key={i}
+                                                variant={variant}
+                                                onSelect={(option) => {
+                                                    if (product.colorImages && product.colorImages[option]) {
+                                                        setActiveImage(product.colorImages[option]);
+                                                    }
+                                                }}
+                                            />
                                         ))}
                                     </div>
                                 </div>
@@ -616,7 +624,7 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
     );
 }
 
-function VariantSelector({ variant }: { variant: { label: string, options: string[] } }) {
+function VariantSelector({ variant, onSelect }: { variant: { label: string, options: string[] }, onSelect?: (option: string) => void }) {
     const [selectedOption, setSelectedOption] = useState(variant.options[0]);
     return (
         <div className="space-y-2">
@@ -625,8 +633,11 @@ function VariantSelector({ variant }: { variant: { label: string, options: strin
                 {variant.options.map((opt, j) => (
                     <button
                         key={j}
-                        onClick={() => setSelectedOption(opt)}
-                        className={`px-3 py-1.5 rounded-lg border text-[10px] font-black uppercase transition-all ${selectedOption === opt ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20' : 'bg-white border-black/10 text-foreground/60 hover:border-primary/50'}`}
+                        onClick={() => {
+                            setSelectedOption(opt);
+                            onSelect?.(opt);
+                        }}
+                        className={`px-3 py-1.5 rounded-lg border border-black/10 text-[10px] font-black uppercase transition-all ${selectedOption === opt ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20' : 'bg-white text-foreground/60 hover:border-primary/50'}`}
                     >
                         {opt}
                     </button>

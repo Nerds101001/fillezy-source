@@ -28,6 +28,7 @@ export interface ProductDetail {
     features: string[];
     suitableIndustries?: string[];
     variants?: ProductVariant[];
+    colorImages?: Record<string, string>; // Map variant options to specific images
     moreSpecs?: TechnicalSpec[];
     applicationTables?: ApplicationTable[];
     specialOffer?: string; // High-impact promotional highlight
@@ -179,12 +180,23 @@ export const allProducts: ProductDetail[] = [
         features: ["RFID Film Recognition", "Patented Thermal Control", "10 Programmable Presets", "Assembled in India // US Tech"],
         gallery: [
             "/product/Fillezy Rapid.webp",
-            "/product/Bio Aer Machine.webp",
-            "/product/Fillezy-Paper-Aer.webp"
+            "/product/Fillezy Rapid Red.webp",
+            "/product/Fillezy Rapid Orange.webp",
+            "/product/Fillezy Rapid Grey.webp",
+            "/product/Rapid Bubbles.webp",
+            "/product/Rapid Film.webp",
+            "/product/Rapid Quilt.webp"
         ],
+        colorImages: {
+            "Standard White": "/product/Fillezy Rapid.webp",
+            "Industrial Red": "/product/Fillezy Rapid Red.webp",
+            "Safety Orange": "/product/Fillezy Rapid Orange.webp",
+            "Tech Grey": "/product/Fillezy Rapid Grey.webp"
+        },
         suitableIndustries: ["E-commerce", "Pharmacy", "Retail Distribution", "Sensitive Instruments"],
         variants: [
             { label: "Model Variant", options: ["RAPID_X1 (Std)", "RAPID_PRO (Extreme)"] },
+            { label: "Machine Color", options: ["Standard White", "Industrial Red", "Safety Orange", "Tech Grey"] },
             { label: "Integration", options: ["Overhead Bin", "Winder Ready", "Movable Trolley"] }
         ],
         applicationTables: [
