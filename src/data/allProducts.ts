@@ -54,6 +54,10 @@ export const allProducts: ProductDetail[] = [
             "/product/Hexa Paper Application 4.png"
         ],
         videoUrl: "https://www.youtube.com/embed/WjgrvyX6p6A",
+        videoGallery: [
+            "https://www.youtube.com/embed/WjgrvyX6p6A",
+            "https://www.youtube.com/embed/KlkxCoTnPVI"
+        ],
         category: "Machines",
         specialOffer: "Free Dispenser with 100 rolls*",
         specs: [
@@ -235,9 +239,10 @@ export const allProducts: ProductDetail[] = [
         techId: "SMT-M2",
         description: "Industrial paper pad cushion generator for heavy-duty protection.",
         longDescription: "The Fillezy® Paper-Smart Machine is the industrial standard for generating high-density paper pads. It transforms multi-ply Kraft paper into structural cushions that provide superior shock absorption for heavy automotive and engineering parts. Featuring an automated blade cutter and instant start/stop logic, it maximizes throughput while maintaining 100% compostability.",
-        image: "/product/Fillezy Paper Smarts.webp",
-        videoUrl: "https://www.youtube.com/embed/UyZrtOo_DC0", // Placeholder until verified, keeping valid structure
+        image: "/product/Fillezy Paper Smart Machine.webp",
+        // No video URL as per request
         gallery: [
+            "/product/Fillezy Paper Smart Machine.webp",
             "/product/Fillezy Paper Smarts.webp",
             "/product/Fillezy Paper Smarts 1.webp",
             "/product/Fillezy Paper Smarts 2.webp",
@@ -634,7 +639,14 @@ export const allProducts: ProductDetail[] = [
         techId: "SMT-P7",
         description: "Multi-ply high-absorption paper cushions for medium-to-large cargo.",
         longDescription: "Fillezy® Smart Pads are created from 100% recycled structural material to provide maximum void fill with minimum usage. The unique 'crumpled padding' logic provides industrial-grade shock absorption, supporting loads from 5kg to 50kg. It is the perfect solution for shipping machinery, ceramics, and heavy automotive parts.",
-        image: "/product/Fillezy-Paper-Smart-Pads.webp",
+        image: "/product/Fillezy Paper Smarts.webp",
+        gallery: [
+            "/product/Fillezy Paper Smarts.webp",
+            "/product/Fillezy Paper Smarts 1.webp",
+            "/product/Fillezy Paper Smarts 2.webp",
+            "/product/Fillezy Paper Smarts 3.webp",
+            "/product/Fillezy Paper Smarts 4.webp"
+        ],
         category: "Materials",
         specs: [
             { label: "Load Support", value: "5 kg - 50 kg" },
