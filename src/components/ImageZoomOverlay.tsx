@@ -21,7 +21,6 @@ export default function ImageZoomOverlay() {
     if (!zoomImage) return null;
 
     return (
-    return (
         <AnimatePresence>
             <motion.div
                 initial={{ opacity: 0 }}
@@ -42,7 +41,7 @@ export default function ImageZoomOverlay() {
                             e.stopPropagation();
                             setZoomImage(null);
                         }}
-                        className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center hover:scale-105 transition-transform shadow-xl curser-pointer"
+                        className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center hover:scale-105 transition-transform shadow-xl cursor-pointer"
                     >
                         <X size={24} />
                     </button>
@@ -57,16 +56,17 @@ export default function ImageZoomOverlay() {
                         transition={{ duration: 0.3 }}
                         className="relative w-full h-full max-w-6xl max-h-[90vh]"
                     >
-                        <Image
-                            src={zoomImage}
-                            alt="Zoomed View"
-                            fill
-                            className="object-contain"
-                        />
+                        {zoomImage && (
+                            <Image
+                                src={zoomImage}
+                                alt="Zoomed View"
+                                fill
+                                className="object-contain"
+                            />
+                        )}
                     </motion.div>
                 </div>
             </motion.div>
         </AnimatePresence>
-    );
     );
 }
