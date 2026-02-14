@@ -631,7 +631,7 @@ export const allProducts: ProductDetail[] = [
         description: "Interlocking hexagonal honeycomb wrapping for premium fragile goods.",
         longDescription: "Fillezy® Hexa Paper uses a specialized hexagonal geometry to provide volumetric expansion that is 40% more efficient than standard paper wrapping. This honeycomb structure provides superior cushioning and surface protection, eliminating the need for bubble wrap in luxury and electronics shipping. Made from high-strength FSC Kraft paper.",
         image: "/product/Fillezy Hexa Papers.webp",
-        videoUrl: "https://youtu.be/WjgrvyX6p6A",
+        videoUrl: "https://www.youtube.com/embed/WjgrvyX6p6A",
         category: "Materials",
         specs: [
             { label: "Geometry", value: "Honeycomb Hex" },
@@ -846,6 +846,11 @@ export const allProducts: ProductDetail[] = [
             { label: "Core Standard", value: "76mm Industrial" },
             { label: "Logic", value: "Synchronized Pulse Tech" },
             { label: "Capacity", value: "Full Machine Throttle" }
+        ],
+        gallery: [
+            "/product/Fillezy-Winder.webp",
+            "/product/Fillezy Paper Shark Machine.webp",
+            "/product/Paper-Shark-Machine.webp"
         ],
         features: ["Auto-Stop Induction", "Perfect Tension Logic", "Eliminates Manual Winding", "Heavy-Duty Core Hub"],
         suitableIndustries: ["Regional Distribution Hubs", "Wholesale Packaging", "Centralized Fulfillment"],

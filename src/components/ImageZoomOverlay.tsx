@@ -26,18 +26,22 @@ export default function ImageZoomOverlay() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[9999] bg-white/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
+                className="fixed inset-0 z-[99999] bg-white/95 flex items-center justify-center p-4 md:p-10"
                 onClick={() => setZoomImage(null)}
             >
                 {/* CONTROLS CONTAINER */}
-                <div className="absolute top-8 right-8 flex items-center gap-4 z-[10000]" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex items-center gap-2 bg-black/5 rounded-full p-1">
-                        <button onClick={() => setScale(Math.max(1, scale - 0.5))} className="p-3 hover:bg-white rounded-full transition-colors"><ZoomOut size={20} /></button>
-                        <span className="text-xs font-mono font-bold w-12 text-center">{Math.round(scale * 100)}%</span>
-                        <button onClick={() => setScale(scale + 0.5)} className="p-3 hover:bg-white rounded-full transition-colors"><ZoomIn size={20} /></button>
+                <div
+                    className="absolute top-8 right-8 flex items-center gap-4 z-[100000] cursor-auto"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <div className="flex items-center gap-2 bg-black/5 rounded-full p-1 shadow-sm border border-black/5">
+                        <button onClick={() => setScale(Math.max(1, scale - 0.5))} className="p-3 hover:bg-white rounded-full transition-colors cursor-pointer"><ZoomOut size={20} /></button>
+                        <span className="text-xs font-mono font-bold w-12 text-center select-none">{Math.round(scale * 100)}%</span>
+                        <button onClick={() => setScale(scale + 0.5)} className="p-3 hover:bg-white rounded-full transition-colors cursor-pointer"><ZoomIn size={20} /></button>
                     </div>
                     <button
                         onClick={(e) => {
+                            e.preventDefault();
                             e.stopPropagation();
                             setZoomImage(null);
                         }}
