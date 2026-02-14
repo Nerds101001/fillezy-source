@@ -179,9 +179,9 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
                                         <button
                                             key={idx}
                                             onClick={() => setActiveImage(img)}
-                                            className={`relative flex-shrink-0 w-20 aspect-square rounded-xl overflow-hidden transition-all duration-300 ${activeImage === img
-                                                ? 'ring-2 ring-primary ring-offset-2 scale-105 shadow-lg'
-                                                : 'opacity-60 hover:opacity-100 hover:scale-105 ring-1 ring-black/5'
+                                            className={`relative flex-shrink-0 w-20 aspect-square rounded-xl overflow-hidden border-2 transition-all duration-200 ${activeImage === img
+                                                    ? 'border-primary opacity-100'
+                                                    : 'border-transparent opacity-60 hover:opacity-100 hover:border-black/5'
                                                 }`}
                                         >
                                             <div className="absolute inset-0 bg-[#F8F8F9]" />

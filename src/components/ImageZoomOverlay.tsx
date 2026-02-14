@@ -21,23 +21,28 @@ export default function ImageZoomOverlay() {
     if (!zoomImage) return null;
 
     return (
+    return (
         <AnimatePresence>
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[9999] bg-white/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-10"
+                className="fixed inset-0 z-[9999] bg-white/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
                 onClick={() => setZoomImage(null)}
             >
-                <div className="absolute top-8 right-8 flex items-center gap-4 z-50">
-                    <div className="flex items-center gap-2 bg-black/5 rounded-full p-1" onClick={(e) => e.stopPropagation()}>
+                {/* CONTROLS CONTAINER */}
+                <div className="absolute top-8 right-8 flex items-center gap-4 z-[10000]" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center gap-2 bg-black/5 rounded-full p-1">
                         <button onClick={() => setScale(Math.max(1, scale - 0.5))} className="p-3 hover:bg-white rounded-full transition-colors"><ZoomOut size={20} /></button>
-                        <span className="text-xs font-mono font-bold w-8 text-center">{Math.round(scale * 100)}%</span>
+                        <span className="text-xs font-mono font-bold w-12 text-center">{Math.round(scale * 100)}%</span>
                         <button onClick={() => setScale(scale + 0.5)} className="p-3 hover:bg-white rounded-full transition-colors"><ZoomIn size={20} /></button>
                     </div>
                     <button
-                        onClick={() => setZoomImage(null)}
-                        className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 transition-transform shadow-xl"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setZoomImage(null);
+                        }}
+                        className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center hover:scale-105 transition-transform shadow-xl curser-pointer"
                     >
                         <X size={24} />
                     </button>
@@ -49,7 +54,8 @@ export default function ImageZoomOverlay() {
                 >
                     <motion.div
                         animate={{ scale }}
-                        className="relative w-full h-full max-w-5xl max-h-[85vh]"
+                        transition={{ duration: 0.3 }}
+                        className="relative w-full h-full max-w-6xl max-h-[90vh]"
                     >
                         <Image
                             src={zoomImage}
@@ -61,5 +67,6 @@ export default function ImageZoomOverlay() {
                 </div>
             </motion.div>
         </AnimatePresence>
+    );
     );
 }

@@ -114,8 +114,26 @@ export default function CategoryPageLayout({
                                             src={product.image}
                                             alt={product.title}
                                             fill
-                                            className="object-contain p-12 lg:p-20 relative z-20 transition-transform duration-1000 group-hover:scale-105 group-hover:-rotate-3 mix-blend-multiply dark:mix-blend-normal"
+                                            className="object-contain p-12 lg:p-20 relative z-20 transition-all duration-500 group-hover:opacity-0 mix-blend-multiply dark:mix-blend-normal"
                                         />
+
+                                        {/* SECOND IMAGE ON HOVER */}
+                                        {product.gallery && product.gallery[1] ? (
+                                            <Image
+                                                src={product.gallery[1]}
+                                                alt={`${product.title} - view 2`}
+                                                fill
+                                                className="object-contain p-12 lg:p-20 relative z-20 transition-all duration-500 opacity-0 group-hover:opacity-100 scale-105 mix-blend-multiply dark:mix-blend-normal absolute top-0 left-0"
+                                            />
+                                        ) : (
+                                            // Fallback if no second image, just show main image with slight zoom
+                                            <Image
+                                                src={product.image}
+                                                alt={product.title}
+                                                fill
+                                                className="object-contain p-12 lg:p-20 relative z-20 transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105 mix-blend-multiply dark:mix-blend-normal absolute top-0 left-0"
+                                            />
+                                        )}
 
                                         {/* Floating Badge */}
                                         <div className="absolute top-8 left-8 z-30">
