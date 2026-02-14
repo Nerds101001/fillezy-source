@@ -334,7 +334,8 @@ export const allProducts: ProductDetail[] = [
             "/product/Fillezy_Bubble.webp",
             "/product/Fillezy Bubble Applications.webp",
             "/product/Fillezy Bubble Applications1.webp",
-            "/product/Air Bubbles.webp"
+            "/product/Air Bubbles.webp",
+            "/product/Rapid Bubbles.webp"
         ],
         category: "Materials",
         specs: [
