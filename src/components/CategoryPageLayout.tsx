@@ -123,7 +123,7 @@ export default function CategoryPageLayout({
                                                 src={product.gallery[1]}
                                                 alt={`${product.title} - view 2`}
                                                 fill
-                                                className="object-contain p-12 lg:p-20 relative z-20 transition-all duration-500 opacity-0 group-hover:opacity-100 scale-105 mix-blend-multiply dark:mix-blend-normal absolute top-0 left-0"
+                                                className="object-contain p-12 lg:p-20 relative z-30 transition-all duration-500 opacity-0 group-hover:opacity-100 scale-105 mix-blend-multiply dark:mix-blend-normal absolute top-0 left-0"
                                             />
                                         ) : (
                                             // Fallback if no second image, just show main image with slight zoom
