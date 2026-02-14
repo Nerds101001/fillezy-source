@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft, Check, Shield, Zap, Box, Activity, Cpu, Gauge, Share2, Download, Terminal, Settings, ChevronRight, ChevronLeft, Play, FileText, ChevronDown, Copy } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ProductDetail, allProducts } from "@/data/allProducts";
 import BrandName from "./BrandName";
