@@ -45,7 +45,12 @@ export const allProducts: ProductDetail[] = [
         gallery: [
             "/product/Fillezy-Hexa-Paper.webp",
             "/product/Fillezy Hexa Papers.webp",
-            "/product/Hexa Pack (2).webp"
+            "/product/Hexa Pack (2).webp",
+            "/product/Hexa Paper Application.webp",
+            "/product/Hexa Paper Application 1.webp",
+            "/product/Hexa Paper Application 2.webp",
+            "/product/Hexa Paper Application 3.webp",
+            "/product/Hexa Paper Application 4.png"
         ],
         videoUrl: "https://www.youtube.com/embed/UyZrtOo_DC0",
         category: "Machines",
@@ -639,7 +644,12 @@ export const allProducts: ProductDetail[] = [
         gallery: [
             "/product/Fillezy Hexa Papers.webp",
             "/product/Fillezy-Hexa-Paper.webp",
-            "/product/Hexa Pack (2).webp"
+            "/product/Hexa Pack (2).webp",
+            "/product/Hexa Paper Application.webp",
+            "/product/Hexa Paper Application 1.webp",
+            "/product/Hexa Paper Application 2.webp",
+            "/product/Hexa Paper Application 3.webp",
+            "/product/Hexa Paper Application 4.png"
         ],
         suitableIndustries: ["Luxury Retail", "Fragile Artworks", "Eco-Cosmetics", "Gift Packaging"],
         applicationTables: [
