@@ -24,10 +24,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/logo/Fillezy Stack.png', sizes: '32x32', type: 'image/png' },
-      { url: '/logo/Fillezy Stack.png', sizes: '16x16', type: 'image/png' },
+      { url: '/logo/fill-fav.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo/fill-fav.png', sizes: '16x16', type: 'image/png' },
     ],
-    apple: '/logo/Fillezy Stack.png',
+    apple: '/logo/fill-fav.png',
   },
   openGraph: {
     type: "website",
