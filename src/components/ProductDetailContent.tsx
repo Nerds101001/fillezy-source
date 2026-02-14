@@ -32,6 +32,13 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
     const containerRef = useRef<HTMLDivElement>(null);
     const [activeTable, setActiveTable] = useState<number | null>(0);
     const [activeImage, setActiveImage] = useState(product.image);
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+    // Reset states when product changes
+    useEffect(() => {
+        setActiveImage(product.image);
+        setCurrentVideoIndex(0);
+    }, [product.id, product.image]);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"]

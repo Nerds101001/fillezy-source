@@ -169,7 +169,7 @@ export const allProducts: ProductDetail[] = [
         techId: "RAP-M0",
         description: "Universal air cushion generator inflating cushions and quilts at 37m/min.",
         longDescription: "The Fillezy® Rapid is a revolutionary universal device capable of producing multiple variants of air cushioning products. Developed by our dedicated R&D team, it inflates all films from 200mm cushions to 800mm wide quilts. Weighing less than 10kg, it is portable, practical, and programmable with 10 presets to suit diverse industrial requirements.",
-        image: "/product/Fillezy Rapid Orange.png",
+        image: "/product/Fillezy Rapid Orange.webp",
         videoUrl: "https://www.youtube.com/embed/UyZrtOo_DC0",
         videoGallery: [
             "https://www.youtube.com/embed/6WY1rIb0EN4",
@@ -187,17 +187,17 @@ export const allProducts: ProductDetail[] = [
         ],
         features: ["RFID Film Recognition", "Patented Thermal Control", "10 Programmable Presets", "Assembled in India // US Tech"],
         gallery: [
-            "/product/Fillezy Rapid Orange.png",
-            "/product/Fillezy Rapid Red.png",
-            "/product/Fillezy Rapid Grey.png",
+            "/product/Fillezy Rapid Orange.webp",
+            "/product/Fillezy Rapid Red.webp",
+            "/product/Fillezy Rapid Grey.webp",
             "/product/Rapid Bubbles.webp",
             "/product/Rapid Film.webp",
             "/product/Rapid Quilt.webp"
         ],
         colorImages: {
-            "Safety Orange": "/product/Fillezy Rapid Orange.png",
-            "Industrial Red": "/product/Fillezy Rapid Red.png",
-            "Tech Grey": "/product/Fillezy Rapid Grey.png"
+            "Safety Orange": "/product/Fillezy Rapid Orange.webp",
+            "Industrial Red": "/product/Fillezy Rapid Red.webp",
+            "Tech Grey": "/product/Fillezy Rapid Grey.webp"
         },
         suitableIndustries: ["E-commerce", "Pharmacy", "Retail Distribution", "Sensitive Instruments"],
         variants: [
