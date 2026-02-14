@@ -247,6 +247,13 @@ export const allProducts: ProductDetail[] = [
         ],
         suitableIndustries: ["E-commerce Fulfillment", "Warehouse Logistics", "Decentralized Packing Stations", "SME Shipping"],
         features: ["Energy-Zero Operation", "Rapid Feed Logic", "Maintenance-Free Chassis", "100% Recyclable Paper"],
+        gallery: [
+            "/product/Fillezy Eco Machine.webp",
+            "/product/Eco Paper 1.webp",
+            "/product/Eco Paper 2.webp",
+            "/product/Eco Paper 3.webp",
+            "/product/Eco Paper 4.webp"
+        ],
         applicationTables: [
             {
                 title: "Technical Matrix: Eco Specifications",
@@ -623,6 +630,11 @@ export const allProducts: ProductDetail[] = [
             { label: "Certification", value: "FSC Certified Source" }
         ],
         features: ["Interlocking Hex Protocol", "No Adhesive Required", "40% Volumetric Efficiency", "Zero Plastic Alternative"],
+        gallery: [
+            "/product/Fillezy Hexa Papers.webp",
+            "/product/Fillezy-Hexa-Paper.webp",
+            "/product/Hexa Pack (2).webp"
+        ],
         suitableIndustries: ["Luxury Retail", "Fragile Artworks", "Eco-Cosmetics", "Gift Packaging"],
         applicationTables: [
             {
