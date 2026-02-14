@@ -102,7 +102,6 @@ export const allProducts: ProductDetail[] = [
         image: "/product/Paper-Shark.webp",
         gallery: [
             "/product/Paper-Shark.webp",
-            "/product/Paper-Shark-1.webp",
             "/product/Paper-Shark-Application.webp",
             "/product/Paper-Shark-Application-1.webp",
             "/product/Paper-Shark-Application-2.webp",
